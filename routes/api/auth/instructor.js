@@ -4,9 +4,21 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 
+const auth = require('../../../middlewares/auth');
+
 const Instructor = require('../../../models/Instructor');
 
 const router = express.Router();
+
+router.get('/', auth, async (req, res) => {
+	try {
+		const instructor = await Instructor.findById(req.instructor.id).select('-password');
+
+		res.status(200).json({ instructor });
+	} catch (err) {
+		res.status(500).json({ errors: [{ msg: 'server error' }] });
+	}
+});
 
 // @route		POST: api/instructors
 // @desc		Register new instructor

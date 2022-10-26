@@ -1,0 +1,90 @@
+const express = require('express');
+const { check, validationResult } = require('express-validator');
+
+const auth = require('../../middlewares/auth');
+
+const Course = require('../../models/Course');
+
+const router = express.Router();
+
+router.post(
+	'/',
+	[
+		auth,
+		[
+			check('code', 'code is required').not().isEmpty(),
+			check('name', 'name is required').not().isEmpty(),
+			check('credits', 'credits are required').isNumeric().not().isEmpty()
+		]
+	],
+	async (req, res) => {
+		const errors = validationResult(req);
+		if (!errors.isEmpty()) {
+			return res.status(422).json({ errors: errors.array() });
+		}
+
+		const { code, name, credits } = req.body;
+
+		try {
+			const course = new Course({
+				code,
+				name,
+				credits,
+				instructor: req.instructor.id
+			});
+
+			await course.save();
+
+			res.status(201).json({ msg: 'course created', course });
+		} catch (err) {
+			if ((err.code === 11000 && 'code' in err.keyPattern) || 'name' in err.keyPattern) {
+				return res.status(409).json({ errors: [{ msg: 'course already exists' }] });
+			}
+
+			res.status(500).json({ errors: [{ msg: 'server error' }] });
+		}
+	}
+);
+
+router.put(
+	'/:course_id',
+	[
+		auth,
+		[
+			check('title', 'title is required').not().isEmpty(),
+			check('deadline', 'deadline is required').not().isEmpty(),
+			check('maxMarks', 'maxMarks is required').not().isEmpty()
+		]
+	],
+	async (req, res) => {
+		const errors = validationResult(req);
+		if (!errors.isEmpty()) {
+			return res.status(422).json({ errors: errors.array() });
+		}
+
+		const { title, deadline, maxMarks } = req.body;
+
+		try {
+			let course = await Course.findById(req.params.course_id);
+			if (!course) {
+				return res.status(404).json({ errors: [{ msg: 'course not found' }] });
+			}
+
+			course = await Course.findByIdAndUpdate(
+				req.params.course_id,
+				{ $push: { assignments: { title, deadline, maxMarks } } },
+				{ new: true }
+			);
+
+			res.status(201).json({ msg: 'assignment created', course });
+		} catch (err) {
+			if (err.kind === 'ObjectId') {
+				return res.status(404).json({ errors: [{ msg: 'course not found' }] });
+			}
+
+			res.status(500).json({ errors: [{ msg: 'server error' }] });
+		}
+	}
+);
+
+module.exports = router;

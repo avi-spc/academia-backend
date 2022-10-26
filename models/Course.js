@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const CourseSchema = new mongoose.Schema(
 	{
 		code: {
-			type: Number,
+			type: String,
 			required: true,
 			unique: true
 		},
@@ -17,7 +17,8 @@ const CourseSchema = new mongoose.Schema(
 			required: true
 		},
 		instructor: {
-			type: mongoose.Schema.Types.ObjectId
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'instructor'
 		},
 		studyMaterial: {
 			notes: [
@@ -47,16 +48,19 @@ const CourseSchema = new mongoose.Schema(
 		assignments: [
 			{
 				title: {
-					type: String
+					type: String,
+					required: true
 				},
 				documentId: {
 					type: mongoose.Schema.Types.ObjectId
 				},
 				deadline: {
-					type: Date
+					type: Date,
+					required: true
 				},
 				maxMarks: {
-					type: Number
+					type: Number,
+					required: true
 				}
 			}
 		],

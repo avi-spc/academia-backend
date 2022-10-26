@@ -24,7 +24,8 @@ const CourseSchema = new mongoose.Schema(
 			notes: [
 				{
 					title: {
-						type: String
+						type: String,
+						required: true
 					},
 					documentId: {
 						type: mongoose.Schema.Types.ObjectId
@@ -66,13 +67,11 @@ const CourseSchema = new mongoose.Schema(
 		],
 		project: {
 			title: {
+				type: String
+			},
+			documentId: {
 				type: mongoose.Schema.Types.ObjectId
 			},
-			requirements: [
-				{
-					type: mongoose.Schema.Types.String
-				}
-			],
 			deadline: {
 				type: Date
 			}

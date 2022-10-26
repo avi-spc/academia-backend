@@ -10,6 +10,9 @@ const Instructor = require('../../../models/Instructor');
 
 const router = express.Router();
 
+// @route		GET: api/instructors
+// @desc		Retrieve authenticated instructor
+// @access		Private
 router.get('/', auth, async (req, res) => {
 	try {
 		const instructor = await Instructor.findById(req.instructor.id).select('-password');

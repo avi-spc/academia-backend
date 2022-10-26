@@ -4,7 +4,13 @@ const ConnectDB = require('./config/db');
 
 const app = express();
 
+app.use(express.json({ extended: false }));
+
 ConnectDB();
+
+app.get('/', (req, res) => res.send('API running'));
+
+app.use('/api/instructors', require('./routes/api/auth/instructor'));
 
 const PORT = process.env.PORT || 5000;
 

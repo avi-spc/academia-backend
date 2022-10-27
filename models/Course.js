@@ -66,6 +66,9 @@ const CourseSchema = new mongoose.Schema(
 			}
 		],
 		project: {
+			_id: {
+				type: mongoose.Schema.Types.ObjectId
+			},
 			title: {
 				type: String
 			},

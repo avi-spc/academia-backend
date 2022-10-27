@@ -24,9 +24,7 @@ const PerformanceSchema = new mongoose.Schema(
 						marksObtained: {
 							type: Number
 						},
-						isSubmitted: {
-							type: Boolean
-						},
+
 						remarks: {
 							type: String
 						},
@@ -51,14 +49,15 @@ const PerformanceSchema = new mongoose.Schema(
 					},
 					team: [
 						{
-							studentId: {
+							student: {
 								type: mongoose.Schema.Types.ObjectId,
 								ref: 'student'
-							}
+							},
+							_id: false
 						}
 					],
-					isSubmitted: {
-						type: Boolean
+					marksObtained: {
+						type: Number
 					},
 					remarks: {
 						type: String

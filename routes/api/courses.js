@@ -1,3 +1,4 @@
+const { mongoose } = require('mongoose');
 const express = require('express');
 const { check, validationResult } = require('express-validator');
 
@@ -191,7 +192,7 @@ router.put(
 
 			course = await Course.findByIdAndUpdate(
 				req.params.course_id,
-				{ $set: { project: { title, deadline } } },
+				{ $set: { project: { _id: new mongoose.Types.ObjectId(), title, deadline } } },
 				{ new: true }
 			);
 

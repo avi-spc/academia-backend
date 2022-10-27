@@ -15,7 +15,7 @@ const router = express.Router();
 // @access		Private
 router.get('/', auth, async (req, res) => {
 	try {
-		const instructor = await Instructor.findById(req.instructor.id).select('-password');
+		const instructor = await Instructor.findById(req.account.id).select('-password');
 
 		res.status(200).json({ instructor });
 	} catch (err) {
@@ -50,7 +50,7 @@ router.post(
 			await instructor.save();
 
 			const payload = {
-				instructor: {
+				account: {
 					id: instructor.id
 				}
 			};

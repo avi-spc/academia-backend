@@ -11,7 +11,9 @@ ConnectDB();
 app.get('/', (req, res) => res.send('API running'));
 
 app.use('/api/instructors', require('./routes/api/auth/instructor'));
+app.use('/api/students', require('./routes/api/auth/student'));
 app.use('/api/courses', require('./routes/api/courses'));
+app.use('/api/performance', require('./routes/api/performance'));
 
 const PORT = process.env.PORT || 5000;
 

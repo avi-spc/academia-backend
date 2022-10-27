@@ -66,7 +66,7 @@ router.post(
 				code,
 				name,
 				credits,
-				instructor: req.instructor.id
+				instructor: req.account.id
 			});
 
 			await course.save();

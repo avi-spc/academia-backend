@@ -4,7 +4,8 @@ const PerformanceSchema = new mongoose.Schema(
 	{
 		studentId: {
 			type: mongoose.Schema.Types.ObjectId,
-			ref: 'student'
+			ref: 'student',
+			required: true
 		},
 		performance: [
 			{

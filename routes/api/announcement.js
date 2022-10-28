@@ -7,7 +7,7 @@ const Announcement = require('../../models/Announcement');
 
 const router = express.Router();
 
-// @route		POST: /api/announcements/:course_id
+// @route		POST: api/announcements/:course_id
 // @desc		Create an announcement
 // @access		Private
 router.post(
@@ -45,7 +45,7 @@ router.post(
 	}
 );
 
-// @route		GET: /api/announcements/:course_id
+// @route		GET: api/announcements/:course_id
 // @desc		Retrieve all announcements for a course
 // @access		Private
 router.get('/:course_id', auth, async (req, res) => {
@@ -65,7 +65,7 @@ router.get('/:course_id', auth, async (req, res) => {
 	}
 });
 
-// @route		GET: /api/announcements/:course_id/:announcement_id'
+// @route		GET: api/announcements/:course_id/:announcement_id'
 // @desc		Retrieve announcements by id
 // @access		Private
 router.get('/:course_id/:announcement_id', auth, async (req, res) => {
@@ -80,6 +80,27 @@ router.get('/:course_id/:announcement_id', auth, async (req, res) => {
 		);
 
 		res.status(200).json({ announcement });
+	} catch (err) {
+		if (err.kind === 'ObjectId') {
+			return res.status(404).json({ errors: [{ msg: 'course not found' }] });
+		}
+
+		res.status(500).json({ errors: [{ msg: 'server error' }] });
+	}
+});
+
+// @route		DELETE: api/announcements/:course_id/:announcement_id
+// @desc		Delete an announcement
+// @access		Private
+router.delete('/:course_id/:announcement_id', auth, async (req, res) => {
+	try {
+		const announcements = await Announcement.findOneAndUpdate(
+			{ course: req.params.course_id },
+			{ $pull: { announcements: { _id: req.params.announcement_id } } },
+			{ new: true }
+		);
+
+		res.status(200).json({ msg: 'announcement deleted', announcements });
 	} catch (err) {
 		if (err.kind === 'ObjectId') {
 			return res.status(404).json({ errors: [{ msg: 'course not found' }] });

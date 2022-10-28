@@ -177,6 +177,31 @@ router.put(
 	}
 );
 
+// @route		DELETE: api/courses/material/:course_id/:notes_id
+// @desc		Remove study material from course
+// @access		Private
+router.delete('/material/:course_id/:notes_id', auth, async (req, res) => {
+	try {
+		const course = await Course.findByIdAndUpdate(
+			req.params.course_id,
+			{ $pull: { 'studyMaterial.notes': { _id: req.params.notes_id } } },
+			{ new: true }
+		);
+
+		if (!course) {
+			return res.status(404).json({ errors: [{ msg: 'course not found' }] });
+		}
+
+		res.status(200).json({ msg: 'study material delted', course });
+	} catch (err) {
+		if (err.kind === 'ObjectId') {
+			return res.status(404).json({ errors: [{ msg: 'course not found' }] });
+		}
+
+		res.status(500).json({ errors: [{ msg: 'server error' }] });
+	}
+});
+
 // @route		PUT: api/courses/project/:course_id
 // @desc		Add project to course
 // @access		Private

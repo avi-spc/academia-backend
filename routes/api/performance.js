@@ -3,6 +3,7 @@ const { check, validationResult } = require('express-validator');
 
 const auth = require('../../middlewares/auth');
 
+const Course = require('../../models/Course');
 const Student = require('../../models/Student');
 const Performance = require('../../models/Performance');
 
@@ -95,6 +96,16 @@ router.get('/assignment/:assignment_id', auth, async (req, res) => {
 // @access		Private
 router.post('/assignment/:course_id/:assignment_id', auth, async (req, res) => {
 	try {
+		const course = await Course.findById(req.params.course_id);
+
+		const assignment = course.assignments.find((assignment) => {
+			return assignment._id.toString() === req.params.assignment_id;
+		});
+
+		if (!(new Date(assignment.deadline) > Date.now())) {
+			return res.status(400).json({ errors: [{ msg: "can't submit past deadline" }] });
+		}
+
 		const performance = await Performance.findOneAndUpdate(
 			{
 				studentId: req.account.id,
@@ -123,12 +134,31 @@ router.post('/assignment/:course_id/:assignment_id', auth, async (req, res) => {
 // @access		Private
 router.delete('/assignment/:course_id/:assignment_id', auth, async (req, res) => {
 	try {
+		const course = await Course.findById(req.params.course_id);
+
+		const assignment = course.assignments.find((assignment) => {
+			return assignment._id.toString() === req.params.assignment_id;
+		});
+
+		if (!(new Date(assignment.deadline) > Date.now())) {
+			return res.status(400).json({ errors: [{ msg: "can't withdraw past deadline" }] });
+		}
+
 		const performance = await Performance.findOneAndUpdate(
 			{
 				studentId: req.account.id,
 				performance: { $elemMatch: { course: req.params.course_id } }
 			},
-			{ $pull: { 'performance.$.assignments': { id: req.params.assignment_id } } },
+			{
+				$pull: {
+					'performance.$.assignments': {
+						$and: [
+							{ id: req.params.assignment_id },
+							{ marksObtained: { $exists: false } }
+						]
+					}
+				}
+			},
 			{ new: true }
 		);
 
@@ -271,6 +301,12 @@ router.post(
 		const { title, synopsis } = req.body;
 
 		try {
+			const course = await Course.findById(req.params.course_id);
+
+			if (!(new Date(course.project.deadline) > Date.now())) {
+				return res.status(400).json({ errors: [{ msg: "can't submit past deadline" }] });
+			}
+
 			const performance = await Performance.findOneAndUpdate(
 				{
 					studentId: req.account.id,
@@ -304,10 +340,21 @@ router.post(
 // @access		Private
 router.delete('/project/:course_id', auth, async (req, res) => {
 	try {
+		const course = await Course.findById(req.params.course_id);
+
+		if (!(new Date(course.project.deadline) > Date.now())) {
+			return res.status(400).json({ errors: [{ msg: "can't withdraw past deadline" }] });
+		}
+
 		const performance = await Performance.findOneAndUpdate(
 			{
 				studentId: req.account.id,
-				performance: { $elemMatch: { course: req.params.course_id } }
+				performance: {
+					$elemMatch: {
+						course: req.params.course_id,
+						'project.marksObtained': { $exists: false }
+					}
+				}
 			},
 			{
 				$set: { 'performance.$.project': null }

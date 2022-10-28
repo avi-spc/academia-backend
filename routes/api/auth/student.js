@@ -73,4 +73,47 @@ router.post(
 	}
 );
 
+// @route		POST: api/students
+// @desc		Login student account
+// @access		Public
+router.post(
+	'/login',
+	[
+		check('instituteId', 'id is required').not().isEmpty(),
+		check('password', 'password must be of 6 or more characters').not().isEmpty()
+	],
+	async (req, res) => {
+		const errors = validationResult(req);
+		if (!errors.isEmpty()) {
+			return res.status(422).json({ errors: errors.array() });
+		}
+
+		const { instituteId, password } = req.body;
+
+		try {
+			const student = await Student.findOne({ instituteId });
+			if (!student) {
+				return res.status(404).json({ errors: [{ msg: 'invalid credentials' }] });
+			}
+
+			const hasPasswordsMatched = await bcrypt.compare(password, student.password);
+			if (!hasPasswordsMatched) {
+				return res.status(404).json({ errors: [{ msg: 'invalid credentials' }] });
+			}
+
+			const payload = {
+				account: {
+					id: student.id
+				}
+			};
+
+			jwt.sign(payload, config.get('jwtSecret'), { expiresIn: 360000 }, (err, token) =>
+				err ? res.json({ err }) : res.status(201).json({ msg: 'student created', token })
+			);
+		} catch (err) {
+			res.status(500).json({ errors: [{ msg: 'server error' }] });
+		}
+	}
+);
+
 module.exports = router;

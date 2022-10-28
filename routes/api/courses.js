@@ -5,6 +5,8 @@ const { check, validationResult } = require('express-validator');
 const auth = require('../../middlewares/auth');
 
 const Course = require('../../models/Course');
+const Announcement = require('../../models/Announcement');
+const Discussion = require('../../models/Discussion');
 
 const router = express.Router();
 
@@ -71,6 +73,17 @@ router.post(
 			});
 
 			await course.save();
+
+			const announcement = new Announcement({
+				course: course.id
+			});
+
+			const discussion = new Discussion({
+				course: course.id
+			});
+
+			await announcement.save();
+			await discussion.save();
 
 			res.status(201).json({ msg: 'course created', course });
 		} catch (err) {

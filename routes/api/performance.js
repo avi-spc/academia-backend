@@ -57,16 +57,49 @@ router.post(
 // @access		Private
 router.delete('/:course_id', auth, async (req, res) => {
 	try {
-		const student = await Student.findByIdAndUpdate(
+		const student = await Performance.findOneAndUpdate(
+			{ studentId: req.account.id },
+			{ $pull: { performance: { course: req.params.course_id } } },
+			{ new: true }
+		);
+
+		await Student.findByIdAndUpdate(
 			req.account.id,
 			{ $pull: { coursesEnrolled: { course: req.params.course_id } } },
 			{ new: true }
 		);
 
 		await Performance.findOneAndUpdate(
-			{ studentId: req.account.id },
-			{ $pull: { performance: { course: req.params.course_id } } },
+			{
+				studentId: { $ne: req.account.id },
+				performance: {
+					$elemMatch: {
+						course: req.params.course_id,
+						'project.team': { $elemMatch: { student: req.account.id } }
+					}
+				}
+			},
+			{
+				$set: { 'performance.$.project.isTeamLeader': true }
+			},
 			{ new: true }
+		);
+
+		await Performance.updateMany(
+			{
+				performance: {
+					$elemMatch: {
+						course: req.params.course_id,
+						'project.team': { $elemMatch: { student: req.account.id } }
+					}
+				}
+			},
+			{
+				$pull: {
+					'performance.$.project.team': { student: req.account.id }
+				}
+			},
+			{ new: true, multi: true }
 		);
 
 		res.status(200).json({ msg: 'unenrolled course', student });
@@ -439,6 +472,14 @@ router.put(
 		const { teamMember } = req.body;
 
 		try {
+			const course = await Course.findById(req.params.course_id);
+
+			if (!(new Date(course.project.deadline) > Date.now())) {
+				return res
+					.status(400)
+					.json({ errors: [{ msg: "can't add team member past deadline" }] });
+			}
+
 			const teamLeader = await Performance.findOneAndUpdate(
 				{
 					studentId: req.account.id,
@@ -510,6 +551,14 @@ router.put(
 // @access		Private
 router.delete('/project/:course_id/:teamMember_id', auth, async (req, res) => {
 	try {
+		const course = await Course.findById(req.params.course_id);
+
+		if (!(new Date(course.project.deadline) > Date.now())) {
+			return res
+				.status(400)
+				.json({ errors: [{ msg: "can't remove team member past deadline" }] });
+		}
+
 		const teamLeader = await Performance.findOne({
 			studentId: req.account.id,
 			performance: {

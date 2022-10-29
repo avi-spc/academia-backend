@@ -8,6 +8,7 @@ const Announcement = require('../../models/Announcement');
 const Course = require('../../models/Course');
 const Discussion = require('../../models/Discussion');
 const Instructor = require('../../models/Instructor');
+const Performance = require('../../models/Performance');
 
 const router = express.Router();
 
@@ -147,6 +148,42 @@ router.put(
 	}
 );
 
+// @route		DELETE: api/courses/assignments/:course_id/:assignment_id
+// @desc		Remove assignment from course
+// @access		Private
+router.delete('/assignments/:course_id/:assignment_id', auth, async (req, res) => {
+	try {
+		const course = await Course.findOneAndUpdate(
+			{
+				_id: req.params.course_id,
+				instructor: req.account.id,
+				assignments: { $elemMatch: { _id: req.params.assignment_id } }
+			},
+			{ $pull: { assignments: { _id: req.params.assignment_id } } },
+			{ new: true }
+		);
+
+		await Performance.updateMany(
+			{ performance: { $elemMatch: { course: req.params.course_id } } },
+			{
+				$pull: {
+					'performance.$.assignments': { id: req.params.assignment_id }
+				}
+			},
+			{ new: true }
+		);
+
+		res.status(200).json({ msg: 'assignment removed', course });
+	} catch (err) {
+		console.log(err);
+		if (err.kind === 'ObjectId') {
+			return res.status(404).json({ errors: [{ msg: 'course not found' }] });
+		}
+
+		res.status(500).json({ errors: [{ msg: 'server error' }] });
+	}
+});
+
 // @route		PUT: api/courses/material/:course_id
 // @desc		Add study material to course
 // @access		Private
@@ -253,4 +290,39 @@ router.put(
 	}
 );
 
+// @route		DELETE: api/courses/project/:course_id
+// @desc		Remove project from course
+// @access		Private
+router.delete('/project/:course_id', auth, async (req, res) => {
+	try {
+		const course = await Course.findOneAndUpdate(
+			{
+				_id: req.params.course_id,
+				instructor: req.account.id,
+				'project._id': { $exists: true }
+			},
+			{ $set: { project: {} } },
+			{ new: true }
+		);
+
+		await Performance.updateMany(
+			{ performance: { $elemMatch: { course: req.params.course_id } } },
+			{
+				$set: {
+					'performance.$.project': {}
+				}
+			},
+			{ new: true }
+		);
+
+		res.status(200).json({ msg: 'project removed', course });
+	} catch (err) {
+		console.log(err);
+		if (err.kind === 'ObjectId') {
+			return res.status(404).json({ errors: [{ msg: 'course not found' }] });
+		}
+
+		res.status(500).json({ errors: [{ msg: 'server error' }] });
+	}
+});
 module.exports = router;

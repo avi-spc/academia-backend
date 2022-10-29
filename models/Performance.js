@@ -56,6 +56,10 @@ const PerformanceSchema = new mongoose.Schema(
 							_id: false
 						}
 					],
+					isTeamLeader: {
+						type: Boolean,
+						default: false
+					},
 					marksObtained: {
 						type: Number
 					},

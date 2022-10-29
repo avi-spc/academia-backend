@@ -6,6 +6,7 @@ const config = require('config');
 
 const auth = require('../../../middlewares/auth');
 
+const Course = require('../../../models/Course');
 const Instructor = require('../../../models/Instructor');
 
 const router = express.Router();
@@ -110,5 +111,46 @@ router.post(
 		}
 	}
 );
+
+// @route		GET: api/instructors/courses
+// @desc		Retrieve all courses by loggedIn instructor
+// @access		Private
+router.get('/courses', auth, async (req, res) => {
+	try {
+		const courses = await Course.find({ instructor: req.account.id }).sort({
+			createdAt: 'desc'
+		});
+
+		res.status(200).json({ courses });
+	} catch (err) {
+		res.status(500).json({ errors: [{ msg: 'server error' }] });
+	}
+});
+
+// @route		GET: api/instructors/courses/:course_id
+// @desc		Retrieve course by id by loggedIn instructor
+// @access		Private
+router.get('/courses/:course_id', auth, async (req, res) => {
+	try {
+		const course = await Course.findOne({
+			_id: req.params.course_id,
+			instructor: req.account.id
+		});
+
+		if (!course) {
+			return res
+				.status(404)
+				.json({ errors: [{ msg: "course either doesn't exist or not owned by you" }] });
+		}
+
+		res.status(200).json({ course });
+	} catch (err) {
+		if (err.kind === 'ObjectId') {
+			return res.status(404).json({ errors: [{ msg: 'course not found' }] });
+		}
+
+		res.status(500).json({ errors: [{ msg: 'server error' }] });
+	}
+});
 
 module.exports = router;

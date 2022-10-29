@@ -4,9 +4,10 @@ const { check, validationResult } = require('express-validator');
 
 const auth = require('../../middlewares/auth');
 
-const Course = require('../../models/Course');
 const Announcement = require('../../models/Announcement');
+const Course = require('../../models/Course');
 const Discussion = require('../../models/Discussion');
+const Instructor = require('../../models/Instructor');
 
 const router = express.Router();
 
@@ -73,6 +74,12 @@ router.post(
 			});
 
 			await course.save();
+
+			await Instructor.findByIdAndUpdate(
+				req.account.id,
+				{ $addToSet: { coursesIncharge: { course: course.id } } },
+				{ new: true }
+			);
 
 			const announcement = new Announcement({
 				course: course.id

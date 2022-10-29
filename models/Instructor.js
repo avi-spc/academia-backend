@@ -20,7 +20,16 @@ const InstructorSchema = new mongoose.Schema(
 		},
 		specialization: {
 			type: String
-		}
+		},
+		coursesIncharge: [
+			{
+				course: {
+					type: mongoose.Schema.Types.ObjectId,
+					ref: 'course'
+				},
+				_id: false
+			}
+		]
 	},
 	{
 		timestamps: true

@@ -116,4 +116,23 @@ router.post(
 	}
 );
 
+// @route		GET: api/students//:course_id
+// @desc		Retrieve all students enrolled into a particular course
+// @access		Private
+router.get('/:course_id', auth, async (req, res) => {
+	try {
+		const students = await Student.find({
+			coursesEnrolled: { $elemMatch: { course: req.params.course_id } }
+		});
+
+		res.status(200).json({ students });
+	} catch (err) {
+		if (err.kind === 'ObjectId') {
+			return res.status(404).json({ errors: [{ msg: 'course not found' }] });
+		}
+
+		res.status(500).json({ errors: [{ msg: 'server error' }] });
+	}
+});
+
 module.exports = router;

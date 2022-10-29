@@ -23,8 +23,10 @@ const StudentSchema = new mongoose.Schema(
 		},
 		coursesEnrolled: [
 			{
-				type: mongoose.Schema.Types.ObjectId,
-				ref: 'course'
+				course: {
+					type: mongoose.Schema.Types.ObjectId,
+					ref: 'course'
+				}
 			}
 		]
 	},

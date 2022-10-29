@@ -30,7 +30,7 @@ router.post(
 
 			const student = await Student.findByIdAndUpdate(
 				req.account.id,
-				{ $push: { coursesEnrolled: req.params.course_id } },
+				{ $push: { coursesEnrolled: { course: req.params.course_id } } },
 				{ new: true }
 			);
 
@@ -58,11 +58,17 @@ router.delete('/:course_id', auth, async (req, res) => {
 	try {
 		const student = await Student.findByIdAndUpdate(
 			req.account.id,
-			{ $pull: { coursesEnrolled: req.params.course_id } },
+			{ $pull: { coursesEnrolled: { course: req.params.course_id } } },
 			{ new: true }
 		);
 
-		res.status(201).json({ msg: 'enrolled course', student });
+		await Performance.findOneAndUpdate(
+			{ studentId: req.account.id },
+			{ $pull: { performance: { course: req.params.course_id } } },
+			{ new: true }
+		);
+
+		res.status(200).json({ msg: 'unenrolled course', student });
 	} catch (err) {
 		if (err.kind === 'ObjectId') {
 			return res.status(404).json({ errors: [{ msg: 'course not found' }] });
@@ -279,6 +285,21 @@ router.put(
 		}
 	}
 );
+
+// @route		GET: api/performance/project
+// @desc		Retrieve all students who have submitted the course project
+// @access		Private
+router.get('/project', auth, async (req, res) => {
+	try {
+		const studentsSubmitted = await Performance.find({
+			'performance.project.id': { $exists: true }
+		});
+
+		res.status(200).json({ studentsSubmitted });
+	} catch (err) {
+		res.status(500).json({ errors: [{ msg: 'server error' }] });
+	}
+});
 
 // @route		POST: api/performance/project/:course_id/:project_id
 // @desc		Submit project details

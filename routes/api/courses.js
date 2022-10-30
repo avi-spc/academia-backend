@@ -3,6 +3,7 @@ const express = require('express');
 const { check, validationResult } = require('express-validator');
 
 const auth = require('../../middlewares/auth');
+const { SubmissionStream } = require('../../config/db');
 
 const Announcement = require('../../models/Announcement');
 const Course = require('../../models/Course');
@@ -113,6 +114,7 @@ router.put(
 		auth,
 		[
 			check('title', 'title is required').not().isEmpty(),
+			check('documentId', 'document is required').not().isEmpty(),
 			check('deadline', 'deadline is required').not().isEmpty(),
 			check('maxMarks', 'maxMarks is required').not().isEmpty()
 		]
@@ -123,7 +125,7 @@ router.put(
 			return res.status(422).json({ errors: errors.array() });
 		}
 
-		const { title, deadline, maxMarks } = req.body;
+		const { title, documentId, deadline, maxMarks } = req.body;
 
 		try {
 			let course = await Course.findById(req.params.course_id);
@@ -133,7 +135,7 @@ router.put(
 
 			course = await Course.findByIdAndUpdate(
 				req.params.course_id,
-				{ $push: { assignments: { title, deadline, maxMarks } } },
+				{ $push: { assignments: { title, documentId, deadline, maxMarks } } },
 				{ new: true }
 			);
 
@@ -153,7 +155,20 @@ router.put(
 // @access		Private
 router.delete('/assignments/:course_id/:assignment_id', auth, async (req, res) => {
 	try {
-		const course = await Course.findOneAndUpdate(
+		let course = await Course.findOne({
+			_id: req.params.course_id,
+			instructor: req.account.id
+		});
+
+		const assignment = course.assignments.find(
+			(assignment) => assignment._id.toString() === req.params.assignment_id
+		);
+
+		if (!assignment) {
+			return res.status(404).json({ errors: [{ msg: 'assignment not found' }] });
+		}
+
+		course = await Course.findOneAndUpdate(
 			{
 				_id: req.params.course_id,
 				instructor: req.account.id,
@@ -162,6 +177,14 @@ router.delete('/assignments/:course_id/:assignment_id', auth, async (req, res) =
 			{ $pull: { assignments: { _id: req.params.assignment_id } } },
 			{ new: true }
 		);
+
+		await SubmissionStream().delete(assignment.documentId, (err, result) => {
+			if (err) {
+				return res.status(404).json({
+					errors: [{ msg: err }]
+				});
+			}
+		});
 
 		await Performance.updateMany(
 			{ performance: { $elemMatch: { course: req.params.course_id } } },
@@ -189,14 +212,20 @@ router.delete('/assignments/:course_id/:assignment_id', auth, async (req, res) =
 // @access		Private
 router.put(
 	'/material/:course_id',
-	[auth, [check('title', 'title is required').not().isEmpty()]],
+	[
+		auth,
+		[
+			check('title', 'title is required').not().isEmpty(),
+			check('documentId', 'document is required').not().isEmpty()
+		]
+	],
 	async (req, res) => {
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
 			return res.status(422).json({ errors: errors.array() });
 		}
 
-		const { title } = req.body;
+		const { title, documentId } = req.body;
 
 		try {
 			let course = await Course.findById(req.params.course_id);
@@ -206,7 +235,7 @@ router.put(
 
 			course = await Course.findByIdAndUpdate(
 				req.params.course_id,
-				{ $push: { 'studyMaterial.notes': { title } } },
+				{ $push: { 'studyMaterial.notes': { title, documentId } } },
 				{ new: true }
 			);
 
@@ -226,7 +255,20 @@ router.put(
 // @access		Private
 router.delete('/material/:course_id/:notes_id', auth, async (req, res) => {
 	try {
-		const course = await Course.findByIdAndUpdate(
+		let course = await Course.findOne({
+			_id: req.params.course_id,
+			instructor: req.account.id
+		});
+
+		const notes = course.studyMaterial.notes.find(
+			(notes) => notes._id.toString() === req.params.notes_id
+		);
+
+		if (!notes) {
+			return res.status(404).json({ errors: [{ msg: 'note not found' }] });
+		}
+
+		course = await Course.findByIdAndUpdate(
 			req.params.course_id,
 			{ $pull: { 'studyMaterial.notes': { _id: req.params.notes_id } } },
 			{ new: true }
@@ -235,6 +277,14 @@ router.delete('/material/:course_id/:notes_id', auth, async (req, res) => {
 		if (!course) {
 			return res.status(404).json({ errors: [{ msg: 'course not found' }] });
 		}
+
+		await SubmissionStream().delete(notes.documentId, (err, result) => {
+			if (err) {
+				return res.status(404).json({
+					errors: [{ msg: err }]
+				});
+			}
+		});
 
 		res.status(200).json({ msg: 'study material delted', course });
 	} catch (err) {
@@ -255,6 +305,7 @@ router.put(
 		auth,
 		[
 			check('title', 'title is required').not().isEmpty(),
+			check('documentId', 'document is required').not().isEmpty(),
 			check('deadline', 'deadline is required').not().isEmpty()
 		]
 	],
@@ -264,7 +315,7 @@ router.put(
 			return res.status(422).json({ errors: errors.array() });
 		}
 
-		const { title, deadline } = req.body;
+		const { title, documentId, deadline } = req.body;
 
 		try {
 			let course = await Course.findById(req.params.course_id);
@@ -274,7 +325,11 @@ router.put(
 
 			course = await Course.findByIdAndUpdate(
 				req.params.course_id,
-				{ $set: { project: { _id: new mongoose.Types.ObjectId(), title, deadline } } },
+				{
+					$set: {
+						project: { _id: new mongoose.Types.ObjectId(), title, deadline, documentId }
+					}
+				},
 				{ new: true }
 			);
 
@@ -295,7 +350,25 @@ router.put(
 // @access		Private
 router.delete('/project/:course_id', auth, async (req, res) => {
 	try {
-		const course = await Course.findOneAndUpdate(
+		let course = await Course.findOne({
+			_id: req.params.course_id,
+			instructor: req.account.id
+		});
+
+		if (!course) {
+			return res.status(404).json({ errors: [{ msg: 'course not found' }] });
+		}
+
+		await SubmissionStream().delete(course.project.documentId, (err, result) => {
+			if (err) {
+				console.log(err);
+				return res.status(404).json({
+					errors: [{ msg: err }]
+				});
+			}
+		});
+
+		course = await Course.findOneAndUpdate(
 			{
 				_id: req.params.course_id,
 				instructor: req.account.id,

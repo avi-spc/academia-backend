@@ -1,12 +1,14 @@
 const express = require('express');
 const { check, validationResult } = require('express-validator');
+const mongoose = require('mongoose');
 
 const auth = require('../../middlewares/auth');
+const fileUploadHandler = require('../../middlewares/fileUpload');
+const { SubmissionStream } = require('../../config/db');
 
 const Course = require('../../models/Course');
 const Student = require('../../models/Student');
 const Performance = require('../../models/Performance');
-const { default: mongoose } = require('mongoose');
 
 const router = express.Router();
 
@@ -134,45 +136,61 @@ router.get('/assignment/:assignment_id', auth, async (req, res) => {
 // @route		POST: api/performance/assignment/:course_id/:assignment_id
 // @desc		Submit an assignment
 // @access		Private
-router.post('/assignment/:course_id/:assignment_id', auth, async (req, res) => {
-	try {
-		const course = await Course.findById(req.params.course_id);
-
-		const assignment = course.assignments.find((assignment) => {
-			return assignment._id.toString() === req.params.assignment_id;
-		});
-
-		if (!(new Date(assignment.deadline) > Date.now())) {
-			return res.status(400).json({ errors: [{ msg: "can't submit past deadline" }] });
+router.post(
+	'/assignment/:course_id/:assignment_id',
+	[auth, [check('documentId', 'document is required').not().isEmpty()]],
+	async (req, res) => {
+		const errors = validationResult(req);
+		if (!errors.isEmpty()) {
+			return res.status(422).json({ errors: errors.array() });
 		}
 
-		const performance = await Performance.findOneAndUpdate(
-			{
-				studentId: req.account.id,
-				performance: { $elemMatch: { course: req.params.course_id } }
-			},
-			{ $push: { 'performance.$.assignments': { id: req.params.assignment_id } } },
-			{ new: true }
-		);
+		const { documentId } = req.body;
 
-		res.status(201).json({ msg: 'submitted assignment', performance });
-	} catch (err) {
-		if (err.kind === 'ObjectId' && err.path === 'assignments') {
-			return res.status(404).json({ errors: [{ msg: 'assignment not found' }] });
+		try {
+			const course = await Course.findById(req.params.course_id);
+
+			const assignment = course.assignments.find((assignment) => {
+				return assignment._id.toString() === req.params.assignment_id;
+			});
+
+			if (!(new Date(assignment.deadline) > Date.now())) {
+				return res.status(400).json({ errors: [{ msg: "can't submit past deadline" }] });
+			}
+
+			const performance = await Performance.findOneAndUpdate(
+				{
+					studentId: req.account.id,
+					performance: { $elemMatch: { course: req.params.course_id } }
+				},
+				{
+					$push: {
+						'performance.$.assignments': { id: req.params.assignment_id, documentId }
+					}
+				},
+				{ new: true }
+			);
+
+			res.status(201).json({ msg: 'submitted assignment', performance });
+		} catch (err) {
+			console.log(err);
+			if (err.kind === 'ObjectId' && err.path === 'assignments') {
+				return res.status(404).json({ errors: [{ msg: 'assignment not found' }] });
+			}
+
+			if (err.kind === 'ObjectId' && err.path === 'course') {
+				return res.status(404).json({ errors: [{ msg: 'course not found' }] });
+			}
+
+			res.status(500).json({ errors: [{ msg: 'server error' }] });
 		}
-
-		if (err.kind === 'ObjectId' && err.path === 'course') {
-			return res.status(404).json({ errors: [{ msg: 'course not found' }] });
-		}
-
-		res.status(500).json({ errors: [{ msg: 'server error' }] });
 	}
-});
+);
 
 // @route		DELETE: api/performance/assignment/:course_id/:assignment_id
 // @desc		Unsubmit an assignment
 // @access		Private
-router.delete('/assignment/:course_id/:assignment_id', auth, async (req, res) => {
+router.delete('/assignment/:course_id/:assignment_id/:document_id', auth, async (req, res) => {
 	try {
 		const course = await Course.findById(req.params.course_id);
 
@@ -200,6 +218,17 @@ router.delete('/assignment/:course_id/:assignment_id', auth, async (req, res) =>
 				}
 			},
 			{ new: true }
+		);
+
+		await SubmissionStream().delete(
+			mongoose.Types.ObjectId(req.params.document_id),
+			(err, result) => {
+				if (err) {
+					return res.status(404).json({
+						errors: [{ msg: err }]
+					});
+				}
+			}
 		);
 
 		res.status(200).json({ msg: 'unsubmitted assignment', performance });
@@ -344,6 +373,7 @@ router.post(
 		auth,
 		[
 			check('title', 'title is required').not().isEmpty(),
+			check('documentId', 'document is required').not().isEmpty(),
 			check('synopsis', 'synopsis is required').not().isEmpty()
 		]
 	],
@@ -353,7 +383,7 @@ router.post(
 			return res.status(422).json({ errors: errors.array() });
 		}
 
-		const { title, synopsis } = req.body;
+		const { title, synopsis, documentId } = req.body;
 
 		try {
 			const course = await Course.findById(req.params.course_id);
@@ -373,6 +403,7 @@ router.post(
 							id: req.params.project_id,
 							title,
 							synopsis,
+							documentId,
 							isTeamLeader: true,
 							team: [{ student: req.account.id }]
 						}
@@ -399,7 +430,7 @@ router.post(
 // @route		DELETE: api/performance/project/:course_id/:project_id
 // @desc		Unsubmit project details
 // @access		Private
-router.delete('/project/:course_id', auth, async (req, res) => {
+router.delete('/project/:course_id/:document_id', auth, async (req, res) => {
 	try {
 		const course = await Course.findById(req.params.course_id);
 
@@ -427,6 +458,17 @@ router.delete('/project/:course_id', auth, async (req, res) => {
 		if (!teamLeader) {
 			return res.status(403).json({ errors: [{ msg: 'forbidden' }] });
 		}
+
+		await SubmissionStream().delete(
+			mongoose.Types.ObjectId(req.params.document_id),
+			(err, result) => {
+				if (err) {
+					return res.status(404).json({
+						errors: [{ msg: err }]
+					});
+				}
+			}
+		);
 
 		await Performance.updateMany(
 			{
@@ -696,5 +738,39 @@ router.put(
 		}
 	}
 );
+
+// @route		POST: api/performance/submissions/file
+// @desc		Upload file
+// @access		Private
+router.post('/submissions/file', [auth, fileUploadHandler], async (req, res) => {
+	try {
+		if (!req.file) {
+			return res.status(422).json({ errors: [{ msg: 'file is required' }] });
+		}
+
+		res.status(200).json({ documentId: req.file.id });
+	} catch (err) {
+		res.status(500).json({
+			errors: [{ msg: err }]
+		});
+	}
+});
+
+// router.get('/submissions/file/:file_id', async (req, res) => {
+// 	try {
+// 		const files = await SubmissionStream()
+// 			.find({ _id: mongoose.Types.ObjectId(req.params.file_id) })
+// 			.toArray();
+
+// 		const stream = SubmissionStream().openDownloadStreamByName(files[0].filename);
+
+// 		stream.pipe(fs.createWriteStream('./outputFile.zip'));
+// 	} catch (err) {
+// 		console.log(err);
+// 		res.status(500).json({
+// 			errors: [{ msg: err }]
+// 		});
+// 	}
+// });
 
 module.exports = router;

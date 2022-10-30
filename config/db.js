@@ -10,4 +10,16 @@ const ConnectDB = async () => {
 	}
 };
 
-module.exports = ConnectDB;
+let bucketSubmission;
+
+mongoose.connection.once('open', () => {
+	bucketSubmission = new mongoose.mongo.GridFSBucket(mongoose.connection.db, {
+		bucketName: 'submission'
+	});
+});
+
+const SubmissionStream = () => {
+	return bucketSubmission;
+};
+
+module.exports = { ConnectDB, SubmissionStream };

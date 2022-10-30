@@ -38,7 +38,7 @@ router.post(
 			);
 
 			await Performance.findOneAndUpdate(
-				{ studentId: req.account.id },
+				{ student: req.account.id },
 				{ $push: { performance: { course: req.params.course_id } } },
 				{ new: true }
 			);
@@ -60,7 +60,7 @@ router.post(
 router.delete('/:course_id', auth, async (req, res) => {
 	try {
 		const student = await Performance.findOneAndUpdate(
-			{ studentId: req.account.id },
+			{ student: req.account.id },
 			{ $pull: { performance: { course: req.params.course_id } } },
 			{ new: true }
 		);
@@ -73,7 +73,7 @@ router.delete('/:course_id', auth, async (req, res) => {
 
 		await Performance.findOneAndUpdate(
 			{
-				studentId: { $ne: req.account.id },
+				student: { $ne: req.account.id },
 				performance: {
 					$elemMatch: {
 						course: req.params.course_id,
@@ -108,6 +108,25 @@ router.delete('/:course_id', auth, async (req, res) => {
 	} catch (err) {
 		if (err.kind === 'ObjectId') {
 			return res.status(404).json({ errors: [{ msg: 'course not found' }] });
+		}
+
+		res.status(500).json({ errors: [{ msg: 'server error' }] });
+	}
+});
+
+// @route		GET: api/performance/student/:student_id
+// @desc		Retrieve performace for a particular student
+// @access		Private
+router.get('/student/:student_id', auth, async (req, res) => {
+	try {
+		const studentPerformance = await Performance.find({
+			student: req.params.student_id
+		});
+
+		res.status(200).json({ studentPerformance });
+	} catch (err) {
+		if (err.kind === 'ObjectId') {
+			return res.status(404).json({ errors: [{ msg: 'student not found' }] });
 		}
 
 		res.status(500).json({ errors: [{ msg: 'server error' }] });
@@ -160,7 +179,7 @@ router.post(
 
 			const performance = await Performance.findOneAndUpdate(
 				{
-					studentId: req.account.id,
+					student: req.account.id,
 					performance: { $elemMatch: { course: req.params.course_id } }
 				},
 				{
@@ -204,7 +223,7 @@ router.delete('/assignment/:course_id/:assignment_id/:document_id', auth, async 
 
 		const performance = await Performance.findOneAndUpdate(
 			{
-				studentId: req.account.id,
+				student: req.account.id,
 				performance: { $elemMatch: { course: req.params.course_id } }
 			},
 			{
@@ -271,7 +290,7 @@ router.put(
 
 			const performance = await Performance.findOneAndUpdate(
 				{
-					studentId: req.params.student_id,
+					student: req.params.student_id,
 					performance: { $elemMatch: { course: req.params.course_id } }
 				},
 				{
@@ -284,7 +303,7 @@ router.put(
 
 			res.status(201).json({ msg: 'assignment graded', performance });
 		} catch (err) {
-			if (err.kind === 'ObjectId' && err.path === 'studentId') {
+			if (err.kind === 'ObjectId' && err.path === 'student') {
 				return res.status(404).json({ errors: [{ msg: 'student not found' }] });
 			}
 
@@ -323,7 +342,7 @@ router.put(
 
 			const performance = await Performance.findOneAndUpdate(
 				{
-					studentId: req.params.student_id,
+					student: req.params.student_id,
 					performance: { $elemMatch: { course: req.params.course_id } }
 				},
 				{
@@ -336,7 +355,7 @@ router.put(
 
 			res.status(201).json({ msg: 'remark added for assignment', performance });
 		} catch (err) {
-			if (err.kind === 'ObjectId' && err.path === 'studentId') {
+			if (err.kind === 'ObjectId' && err.path === 'student') {
 				return res.status(404).json({ errors: [{ msg: 'student not found' }] });
 			}
 
@@ -394,7 +413,7 @@ router.post(
 
 			const performance = await Performance.findOneAndUpdate(
 				{
-					studentId: req.account.id,
+					student: req.account.id,
 					performance: { $elemMatch: { course: req.params.course_id } }
 				},
 				{
@@ -440,7 +459,7 @@ router.delete('/project/:course_id/:document_id', auth, async (req, res) => {
 
 		const teamLeader = await Performance.findOneAndUpdate(
 			{
-				studentId: req.account.id,
+				student: req.account.id,
 				performance: {
 					$elemMatch: {
 						course: req.params.course_id,
@@ -524,7 +543,7 @@ router.put(
 
 			const teamLeader = await Performance.findOneAndUpdate(
 				{
-					studentId: req.account.id,
+					student: req.account.id,
 					performance: {
 						$elemMatch: { course: req.params.course_id, 'project.isTeamLeader': true }
 					}
@@ -559,7 +578,7 @@ router.put(
 
 			await Performance.findOneAndUpdate(
 				{
-					studentId: teamMember,
+					student: teamMember,
 					performance: { $elemMatch: { course: req.params.course_id } }
 				},
 				{
@@ -602,7 +621,7 @@ router.delete('/project/:course_id/:teamMember_id', auth, async (req, res) => {
 		}
 
 		const teamLeader = await Performance.findOne({
-			studentId: req.account.id,
+			student: req.account.id,
 			performance: {
 				$elemMatch: { course: req.params.course_id, 'project.isTeamLeader': true }
 			}
@@ -630,7 +649,7 @@ router.delete('/project/:course_id/:teamMember_id', auth, async (req, res) => {
 
 		await Performance.findOneAndUpdate(
 			{
-				studentId: req.params.teamMember_id,
+				student: req.params.teamMember_id,
 				performance: {
 					$elemMatch: { course: req.params.course_id }
 				}
@@ -670,7 +689,7 @@ router.put(
 		try {
 			const performance = await Performance.findOneAndUpdate(
 				{
-					studentId: req.params.student_id,
+					student: req.params.student_id,
 					performance: { $elemMatch: { course: req.params.course_id } }
 				},
 				{
@@ -683,7 +702,7 @@ router.put(
 
 			res.status(201).json({ msg: 'project graded', performance });
 		} catch (err) {
-			if (err.kind === 'ObjectId' && err.path === 'studentId') {
+			if (err.kind === 'ObjectId' && err.path === 'student') {
 				return res.status(404).json({ errors: [{ msg: 'student not found' }] });
 			}
 
@@ -713,7 +732,7 @@ router.put(
 		try {
 			const performance = await Performance.findOneAndUpdate(
 				{
-					studentId: req.params.student_id,
+					student: req.params.student_id,
 					performance: { $elemMatch: { course: req.params.course_id } }
 				},
 				{
@@ -726,7 +745,7 @@ router.put(
 
 			res.status(201).json({ msg: 'project graded', performance });
 		} catch (err) {
-			if (err.kind === 'ObjectId' && err.path === 'studentId') {
+			if (err.kind === 'ObjectId' && err.path === 'student') {
 				return res.status(404).json({ errors: [{ msg: 'student not found' }] });
 			}
 

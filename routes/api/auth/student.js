@@ -50,7 +50,7 @@ router.post(
 
 			await student.save();
 
-			const performance = new Performance({ studentId: student.id });
+			const performance = new Performance({ student: student.id });
 
 			await performance.save();
 

@@ -5,7 +5,9 @@
 	"main": "server.js",
 	"scripts": {
 		"start": "node server",
-		"server": "nodemon server"
+		"server": "nodemon server",
+		"client": "concurrently  \"npm start --prefix client\" \"npm run sass --prefix client\" ",
+		"dev": "concurrently  \"npm run server\" \"npm run client\" "
 	},
 	"repository": {
 		"type": "git",
@@ -29,6 +31,7 @@
 		"multer-gridfs-storage": "^5.0.2"
 	},
 	"devDependencies": {
+		"concurrently": "^7.5.0",
 		"nodemon": "^2.0.20"
 	}
 }

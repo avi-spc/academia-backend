@@ -17,3 +17,16 @@ body {
 ul {
 	list-style: none;
 }
+
+input {
+	font-family: 'Montserrat', sans-serif;
+
+	padding: 2.5rem;
+	background-color: $color-surface-tertiary;
+	border-radius: $border-radius-medium;
+	border-style: none;
+
+	&:focus {
+		outline-style: none;
+	}
+}

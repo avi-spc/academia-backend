@@ -1,13 +1,15 @@
 const StudyMaterial = () => {
 	return (
-		<div className="study-material">
+		<div className="study-material text-normal-M">
 			<div className="study-material__header">
-				<span className="study-material__header__icon"></span>
-				<div className="study-material__header__title"></div>
-				<div className="study-material__header__timestamp"></div>
+				<span className="icon icon--light material-symbols-outlined">description</span>
+				<div className="study-material__header__title">Lecture 101</div>
+				<div className="study-material__header__timestamp text-small-M">
+					Posted 12:04 PM
+				</div>
 			</div>
 			<div className="study-material__details">
-				<button>Download</button>
+				<button className="btn btn--round">Download</button>
 			</div>
 		</div>
 	);

@@ -16,6 +16,15 @@ body {
 ul {
   list-style: none; }
 
+input {
+  font-family: 'Montserrat', sans-serif;
+  padding: 2.5rem;
+  background-color: #ffffff;
+  border-radius: 2rem;
+  border-style: none; }
+  input:focus {
+    outline-style: none; }
+
 h1 {
   font-size: 6.4rem;
   font-weight: 600; }
@@ -35,6 +44,10 @@ h1 {
 .text-medium-M {
   font-size: 2.4rem;
   font-weight: 500; }
+
+.text-normal-SM {
+  font-size: 2rem;
+  font-weight: 600; }
 
 .text-normal-M {
   font-size: 2rem;
@@ -96,6 +109,14 @@ h1 {
     font-weight: 500;
     padding: 2.3rem;
     border-radius: 2rem; }
+  .btn--round-sm {
+    font-size: 1.6rem;
+    font-weight: 500;
+    padding: 1.2rem 2rem;
+    border-radius: 1.5rem; }
+  .btn--danger {
+    color: #c93b37;
+    background-color: #ff938b; }
 
 .chore {
   border-radius: 2.5rem;
@@ -109,12 +130,33 @@ h1 {
       margin-left: 2rem; }
     .chore__header__timestamp {
       margin-left: auto; }
-  .chore__details {
-    display: flex;
-    justify-content: space-between;
+  .chore__details, .chore__submission-details {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     align-items: center;
+    grid-gap: 2.5rem 0;
     padding: 2.4rem 2.8rem;
     background-color: #ededed; }
+    .chore__details > div:nth-child(2), .chore__submission-details > div:nth-child(2) {
+      margin-left: 5rem; }
+    .chore__details button, .chore__submission-details button {
+      justify-self: end;
+      grid-column: 3/-1; }
+  .chore__submission-details {
+    background-color: #ffffff; }
+  .chore__submission-extras {
+    text-align: right;
+    background-color: #ffffff; }
+  .chore__project-details {
+    padding: 2.4rem 2.8rem;
+    background-color: #ededed; }
+    .chore__project-details__synopsis {
+      margin: 2rem 0 2.5rem 0; }
+    .chore__project-details button {
+      display: flex;
+      align-items: center; }
+      .chore__project-details button div {
+        margin-left: 1rem; }
 
 .course-card {
   border-radius: 2.5rem;
@@ -143,6 +185,41 @@ h1 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   grid-gap: 5rem 5rem;
   margin-top: 5rem; }
+
+.discussion {
+  border-radius: 2.5rem;
+  overflow: hidden; }
+  .discussion__header {
+    display: flex;
+    align-items: center;
+    padding: 2rem;
+    background-color: #d9d9d9; }
+    .discussion__header__student-name {
+      margin-left: 2rem; }
+    .discussion__header__timestamp {
+      margin-left: auto; }
+  .discussion__details {
+    padding: 2.4rem 2.8rem;
+    background-color: #ededed; }
+    .discussion__details__issue {
+      margin-bottom: 4rem; }
+    .discussion__details__comment-input {
+      display: grid;
+      grid-template-columns: 1fr min-content;
+      grid-gap: 0 2rem; }
+  .discussion .individual-comment {
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    align-items: center;
+    grid-gap: 0 2rem;
+    margin-bottom: 4rem; }
+    .discussion .individual-comment__avatar {
+      width: 4rem;
+      height: 4rem;
+      background-color: #ffffff;
+      border-radius: 50%; }
+    .discussion .individual-comment__text {
+      grid-column: 2/-1; }
 
 .individual-course__banner {
   display: flex;
@@ -178,3 +255,38 @@ h1 {
       align-self: end; }
   .individual-course__work__list {
     margin-top: 5rem; }
+
+.study-material {
+  border-radius: 2.5rem;
+  overflow: hidden; }
+  .study-material__header {
+    display: flex;
+    align-items: center;
+    padding: 2rem;
+    background-color: #d9d9d9; }
+    .study-material__header__title {
+      margin-left: 2rem; }
+    .study-material__header__timestamp {
+      margin-left: auto; }
+  .study-material__details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2.4rem 2.8rem;
+    background-color: #ededed; }
+
+.submissions-docket__submission {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #d9d9d9;
+  border-radius: 1.5rem; }
+  .submissions-docket__submission:not(:last-child) {
+    margin-bottom: 1.5rem; }
+  .submissions-docket__submission__student-institute-id {
+    margin-left: 1rem; }
+  .submissions-docket__submission__grade-status {
+    padding: 0.8rem 1.4rem;
+    background-color: #ededed;
+    border-radius: 1rem; }

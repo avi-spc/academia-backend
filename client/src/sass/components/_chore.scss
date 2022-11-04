@@ -18,12 +18,55 @@
 		}
 	}
 
-	&__details {
-		display: flex;
-		justify-content: space-between;
+	&__details,
+	&__submission-details {
+		// display: flex;
+		// justify-content: space-between;
+		// align-items: center;
+
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
 		align-items: center;
+		grid-gap: 2.5rem 0;
 
 		padding: 2.4rem 2.8rem;
 		background-color: $color-surface-secondary;
+
+		& > div:nth-child(2) {
+			margin-left: 5rem;
+		}
+
+		button {
+			justify-self: end;
+			grid-column: 3/-1;
+		}
+	}
+
+	&__submission-details {
+		background-color: $color-surface-tertiary;
+	}
+
+	&__submission-extras {
+		text-align: right;
+		background-color: $color-surface-tertiary;
+	}
+
+	&__project-details {
+		padding: 2.4rem 2.8rem;
+
+		background-color: $color-surface-secondary;
+
+		&__synopsis {
+			margin: 2rem 0 2.5rem 0;
+		}
+
+		button {
+			display: flex;
+			align-items: center;
+
+			div {
+				margin-left: 1rem;
+			}
+		}
 	}
 }

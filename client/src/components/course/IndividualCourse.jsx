@@ -1,5 +1,10 @@
 import Announcement from './Announcement';
 import Chore from './Chore';
+import ChoreAssignment from './student/ChoreAssignment';
+import ChoreProject from './student/ChoreProject';
+import Discussion from './student/Discussion';
+import StudyMaterial from './StudyMaterial';
+import SubmissionsDocket from './SubmissionsDocket';
 
 const IndividualCourse = () => {
 	return (
@@ -24,7 +29,7 @@ const IndividualCourse = () => {
 					</button>
 					<ul className="individual-course__work__list">
 						<li>
-							<Announcement />
+							<Discussion />
 						</li>
 					</ul>
 				</div>

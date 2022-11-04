@@ -12,7 +12,7 @@ $color-surface-quarternary: #1e1e1e; //#121212;
 
 // @text
 $color-text-primary: #ffffff; //#d9d9d9;
-$color-text-secondary: #989899;
+$color-text-secondary: #000000;
 $color-text-tertiary: #bfbfbf; //#5a5a5e;
 $color-text-accent: #1e1e1e;
 $color-text-disabled: #989899;
@@ -42,6 +42,7 @@ $semibold: 600;
 // -- BORDER -- //
 
 // @radius
+$border-radius-small: 1rem;
 $border-radius-normal: 1.5rem;
 $border-radius-medium: 2rem;
 $border-radius-large: 2.5rem;

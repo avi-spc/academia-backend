@@ -27,4 +27,17 @@
 		padding: 2.3rem;
 		border-radius: $border-radius-medium;
 	}
+
+	&--round-sm {
+		font-size: 1.6rem;
+		font-weight: $medium;
+
+		padding: 1.2rem 2rem;
+		border-radius: $border-radius-normal;
+	}
+
+	&--danger {
+		color: $color-text-error;
+		background-color: $color-surface-error;
+	}
 }

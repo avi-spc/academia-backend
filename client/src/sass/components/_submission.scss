@@ -1,0 +1,25 @@
+.submissions-docket {
+	&__submission {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		padding: 1rem;
+		background-color: $color-surface-primary;
+		border-radius: $border-radius-normal;
+
+		&:not(:last-child) {
+			margin-bottom: 1.5rem;
+		}
+
+		&__student-institute-id {
+			margin-left: 1rem;
+		}
+
+		&__grade-status {
+			padding: 0.8rem 1.4rem;
+			background-color: $color-surface-secondary;
+			border-radius: $border-radius-small;
+		}
+	}
+}

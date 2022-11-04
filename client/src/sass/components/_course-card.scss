@@ -1,0 +1,41 @@
+.course-card {
+	border-radius: $border-radius-large;
+	overflow: hidden;
+
+	&__details {
+		position: relative;
+		padding: 3rem;
+
+		background-color: $color-surface-primary;
+
+		&__avatar {
+			position: absolute;
+			top: 100%;
+			right: 3rem;
+			width: 9rem;
+			height: 9rem;
+			transform: translateY(-50%);
+
+			background-color: $color-surface-quarternary;
+			border-radius: 50%;
+		}
+	}
+
+	&__access {
+		display: flex;
+		align-items: center;
+
+		padding: 2rem 3rem;
+		background-color: $color-surface-secondary;
+	}
+}
+
+.course-docket {
+	&__courses-list {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		grid-gap: 5rem 5rem;
+
+		margin-top: 5rem;
+	}
+}

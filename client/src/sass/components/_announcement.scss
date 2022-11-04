@@ -1,0 +1,18 @@
+.announcement {
+	display: grid;
+	grid-template-columns: min-content max-content 1fr;
+	grid-gap: 2rem;
+	align-items: center;
+
+	padding: 2rem 2rem 3.2rem 2rem;
+	background-color: $color-surface-secondary;
+	border-radius: $border-radius-large;
+
+	&__timestamp {
+		justify-self: end;
+	}
+
+	&__message {
+		grid-column: 2/-1;
+	}
+}

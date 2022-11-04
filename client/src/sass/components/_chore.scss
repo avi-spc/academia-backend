@@ -1,0 +1,29 @@
+.chore {
+	border-radius: $border-radius-large;
+	overflow: hidden;
+
+	&__header {
+		display: flex;
+		align-items: center;
+		padding: 2rem;
+
+		background-color: $color-surface-primary;
+
+		&__title {
+			margin-left: 2rem;
+		}
+
+		&__timestamp {
+			margin-left: auto;
+		}
+	}
+
+	&__details {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		padding: 2.4rem 2.8rem;
+		background-color: $color-surface-secondary;
+	}
+}

@@ -1,0 +1,180 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@800&display=swap");
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0; }
+
+html {
+  font-size: 45%; }
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #f6f6f6; }
+
+ul {
+  list-style: none; }
+
+h1 {
+  font-size: 6.4rem;
+  font-weight: 600; }
+
+.text-extra-large-SM {
+  font-size: 4rem;
+  font-weight: 600; }
+
+.text-large-SM {
+  font-size: 3.2rem;
+  font-weight: 600; }
+
+.text-large-M {
+  font-size: 3.2rem;
+  font-weight: 500; }
+
+.text-medium-M {
+  font-size: 2.4rem;
+  font-weight: 500; }
+
+.text-normal-M {
+  font-size: 2rem;
+  font-weight: 500; }
+
+.text-normal-sparsed-M {
+  font-size: 2rem;
+  font-weight: 500;
+  letter-spacing: 0.5em; }
+
+.text-small-M {
+  font-size: 1.6rem;
+  font-weight: 500; }
+
+.container-large {
+  max-width: 112rem;
+  margin: 5rem auto; }
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+
+.icon {
+  padding: 1rem;
+  border-radius: 50%; }
+  .icon--light {
+    background-color: #ededed; }
+  .icon--dark {
+    background-color: #d9d9d9; }
+
+.announcement {
+  display: grid;
+  grid-template-columns: min-content max-content 1fr;
+  grid-gap: 2rem;
+  align-items: center;
+  padding: 2rem 2rem 3.2rem 2rem;
+  background-color: #ededed;
+  border-radius: 2.5rem; }
+  .announcement__timestamp {
+    justify-self: end; }
+  .announcement__message {
+    grid-column: 2/-1; }
+
+.btn {
+  font-family: 'Montserrat', sans-serif;
+  color: #ffffff;
+  background-color: #1e1e1e;
+  border-style: none; }
+  .btn--capsule {
+    font-size: 2.4rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    padding: 2rem 3rem;
+    border-radius: 10rem; }
+    .btn--capsule span {
+      margin-right: 1.5rem; }
+  .btn--round {
+    font-size: 2rem;
+    font-weight: 500;
+    padding: 2.3rem;
+    border-radius: 2rem; }
+
+.chore {
+  border-radius: 2.5rem;
+  overflow: hidden; }
+  .chore__header {
+    display: flex;
+    align-items: center;
+    padding: 2rem;
+    background-color: #d9d9d9; }
+    .chore__header__title {
+      margin-left: 2rem; }
+    .chore__header__timestamp {
+      margin-left: auto; }
+  .chore__details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2.4rem 2.8rem;
+    background-color: #ededed; }
+
+.course-card {
+  border-radius: 2.5rem;
+  overflow: hidden; }
+  .course-card__details {
+    position: relative;
+    padding: 3rem;
+    background-color: #d9d9d9; }
+    .course-card__details__avatar {
+      position: absolute;
+      top: 100%;
+      right: 3rem;
+      width: 9rem;
+      height: 9rem;
+      transform: translateY(-50%);
+      background-color: #1e1e1e;
+      border-radius: 50%; }
+  .course-card__access {
+    display: flex;
+    align-items: center;
+    padding: 2rem 3rem;
+    background-color: #ededed; }
+
+.course-docket__courses-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-gap: 5rem 5rem;
+  margin-top: 5rem; }
+
+.individual-course__banner {
+  display: flex;
+  flex-direction: column;
+  height: 35rem;
+  padding: 3rem 4rem;
+  margin-bottom: 5rem;
+  background-color: #d9d9d9;
+  border-radius: 2.5rem; }
+  .individual-course__banner__access {
+    display: flex;
+    align-items: center;
+    margin-top: auto; }
+    .individual-course__banner__access .access-code {
+      margin-right: 2rem; }
+
+.individual-course__work {
+  display: grid;
+  grid-template-columns: 1fr 2.5fr;
+  grid-gap: 5rem; }
+  .individual-course__work__category {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 3rem;
+    align-self: start;
+    background-color: #d9d9d9;
+    border-radius: 2rem; }
+  .individual-course__work__chore-p-create {
+    display: flex;
+    flex-direction: column; }
+    .individual-course__work__chore-p-create .create {
+      align-self: end; }
+  .individual-course__work__list {
+    margin-top: 5rem; }

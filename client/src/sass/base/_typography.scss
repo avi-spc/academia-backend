@@ -7,6 +7,11 @@ h1 {
 	font-weight: $semibold;
 }
 
+.text-extra-large-SM {
+	font-size: 4rem;
+	font-weight: $semibold;
+}
+
 .text-large-SM {
 	font-size: 3.2rem;
 	font-weight: $semibold;
@@ -30,6 +35,7 @@ h1 {
 .text-normal-sparsed-M {
 	font-size: 2rem;
 	font-weight: $medium;
+	letter-spacing: 0.5em;
 }
 
 .text-small-M {

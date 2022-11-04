@@ -1,0 +1,53 @@
+.individual-course {
+	&__banner {
+		display: flex;
+		flex-direction: column;
+		height: 35rem;
+		padding: 3rem 4rem;
+		margin-bottom: 5rem;
+
+		background-color: $color-surface-primary;
+		border-radius: $border-radius-large;
+
+		&__access {
+			display: flex;
+			align-items: center;
+
+			margin-top: auto;
+
+			.access-code {
+				margin-right: 2rem;
+			}
+		}
+	}
+
+	&__work {
+		display: grid;
+		grid-template-columns: 1fr 2.5fr;
+		grid-gap: 5rem;
+
+		&__category {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 2rem 3rem;
+			align-self: start;
+
+			background-color: $color-surface-primary;
+			border-radius: $border-radius-medium;
+		}
+
+		&__chore-p-create {
+			display: flex;
+			flex-direction: column;
+
+			.create {
+				align-self: end;
+			}
+		}
+
+		&__list {
+			margin-top: 5rem;
+		}
+	}
+}

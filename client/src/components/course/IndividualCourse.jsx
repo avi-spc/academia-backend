@@ -29,7 +29,7 @@ const IndividualCourse = () => {
 					</button>
 					<ul className="individual-course__work__list">
 						<li>
-							<Discussion />
+							<ChoreAssignment />
 						</li>
 					</ul>
 				</div>

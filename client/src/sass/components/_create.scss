@@ -1,0 +1,89 @@
+.create-course {
+	form {
+		.code {
+			grid-column: 2 / span 2;
+		}
+
+		.credits {
+			grid-column: 5 / span 2;
+		}
+
+		.name {
+			grid-column: 2/-1;
+		}
+	}
+}
+
+.create-chore {
+	form {
+		.doc-label {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			grid-column: 1/-1;
+
+			height: 16rem;
+
+			color: $color-text-primary;
+			background-color: $color-surface-quarternary;
+			border-radius: $border-radius-medium;
+		}
+
+		.doc-file {
+			display: none;
+		}
+
+		.title {
+			grid-column: 2 / -1;
+		}
+
+		.deadline {
+			grid-column: 2 / span 2;
+		}
+
+		.points {
+			grid-column: 5 / span 2;
+		}
+	}
+}
+
+.create-announcement {
+	form {
+		.title {
+			grid-column: 2 / -1;
+		}
+
+		.message {
+			grid-column: 2 / -1;
+		}
+	}
+}
+
+.create-discussion {
+	form {
+		.issue {
+			grid-column: 2 / -1;
+		}
+	}
+}
+
+.create {
+	&__form {
+		display: grid;
+		grid-template-columns: repeat(6, minmax(0, 1fr));
+		grid-gap: 2rem;
+		align-items: center;
+
+		margin-top: 2.5rem;
+		margin-bottom: 6rem;
+	}
+
+	&__cta {
+		text-align: right;
+
+		& > button:not(:first-child) {
+			margin-left: 2rem;
+		}
+	}
+}

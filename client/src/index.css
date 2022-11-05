@@ -16,14 +16,19 @@ body {
 ul {
   list-style: none; }
 
-input {
+input,
+textarea {
   font-family: 'Montserrat', sans-serif;
   padding: 2.5rem;
   background-color: #ffffff;
   border-radius: 2rem;
   border-style: none; }
-  input:focus {
+  input:focus,
+  textarea:focus {
     outline-style: none; }
+
+textarea {
+  resize: none; }
 
 h1 {
   font-size: 6.4rem;
@@ -61,6 +66,13 @@ h1 {
 .text-small-M {
   font-size: 1.6rem;
   font-weight: 500; }
+
+.container-medium {
+  max-width: 66rem;
+  margin: 5rem auto;
+  padding: 3rem;
+  background-color: #ededed;
+  border-radius: 3rem; }
 
 .container-large {
   max-width: 112rem;
@@ -186,6 +198,59 @@ h1 {
   grid-gap: 5rem 5rem;
   margin-top: 5rem; }
 
+.create-course form .code {
+  grid-column: 2 / span 2; }
+
+.create-course form .credits {
+  grid-column: 5 / span 2; }
+
+.create-course form .name {
+  grid-column: 2/-1; }
+
+.create-chore form .doc-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-column: 1/-1;
+  height: 16rem;
+  color: #ffffff;
+  background-color: #1e1e1e;
+  border-radius: 2rem; }
+
+.create-chore form .doc-file {
+  display: none; }
+
+.create-chore form .title {
+  grid-column: 2 / -1; }
+
+.create-chore form .deadline {
+  grid-column: 2 / span 2; }
+
+.create-chore form .points {
+  grid-column: 5 / span 2; }
+
+.create-announcement form .title {
+  grid-column: 2 / -1; }
+
+.create-announcement form .message {
+  grid-column: 2 / -1; }
+
+.create-discussion form .issue {
+  grid-column: 2 / -1; }
+
+.create__form {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-gap: 2rem;
+  align-items: center;
+  margin-top: 2.5rem;
+  margin-bottom: 6rem; }
+
+.create__cta {
+  text-align: right; }
+  .create__cta > button:not(:first-child) {
+    margin-left: 2rem; }
+
 .discussion {
   border-radius: 2.5rem;
   overflow: hidden; }
@@ -255,6 +320,21 @@ h1 {
       align-self: end; }
   .individual-course__work__list {
     margin-top: 5rem; }
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 50rem;
+  background-color: #d9d9d9; }
+  .navbar__logo {
+    font-family: 'Raleway', sans-serif;
+    font-size: 4.8rem; }
+  .navbar__account {
+    width: 6rem;
+    height: 6rem;
+    background-color: black;
+    border-radius: 50%; }
 
 .study-material {
   border-radius: 2.5rem;

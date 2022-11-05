@@ -18,7 +18,8 @@ ul {
 	list-style: none;
 }
 
-input {
+input,
+textarea {
 	font-family: 'Montserrat', sans-serif;
 
 	padding: 2.5rem;
@@ -29,4 +30,8 @@ input {
 	&:focus {
 		outline-style: none;
 	}
+}
+
+textarea {
+	resize: none;
 }

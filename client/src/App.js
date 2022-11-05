@@ -6,12 +6,13 @@ import Course from './components/create/Course';
 import Navbar from './components/header/Navabr';
 import Announcement from './components/create/Announcement';
 import Discussion from './components/create/Discussion';
+import SignUp from './components/auth/SignUp';
+import SignIn from './components/auth/SignIn';
 
 const App = () => {
 	return (
 		<div className="App">
-			<Navbar />
-			<Discussion />
+			<SignIn />
 		</div>
 	);
 };

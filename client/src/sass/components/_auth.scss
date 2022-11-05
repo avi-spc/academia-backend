@@ -1,0 +1,60 @@
+.sign-up,
+.sign-in {
+	display: grid;
+	grid-template-columns: 1fr;
+	justify-items: center;
+
+	padding: 8rem;
+	padding-bottom: 5rem;
+
+	background-color: $color-surface-secondary;
+	border-radius: $border-radius-extra-large;
+
+	.account-type-tabs {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		grid-gap: 0 1rem;
+
+		text-align: center;
+		padding: 1rem;
+
+		background-color: $color-surface-primary;
+		border-radius: $border-radius-extra-large;
+
+		.tab {
+			padding: 2rem 3rem;
+
+			border-radius: $border-radius-large;
+			background-color: $color-surface-tertiary;
+		}
+	}
+
+	form {
+		text-align: center;
+		margin: 5rem auto 0 auto;
+
+		input {
+			width: 100%;
+
+			&:not(:first-child) {
+				margin-top: 2rem;
+			}
+		}
+
+		button {
+			margin-top: 5rem;
+		}
+	}
+}
+
+.logo {
+	font-family: 'Raleway', sans-serif;
+	font-size: 4.8rem;
+
+	margin-bottom: 8rem;
+
+	padding: 1rem 2.5rem 1.5rem 2.5rem;
+	color: $color-text-primary;
+	background-color: $color-surface-quarternary;
+	border-radius: 10rem;
+}

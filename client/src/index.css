@@ -4,7 +4,8 @@
 *::before,
 *::after {
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  box-sizing: border-box; }
 
 html {
   font-size: 45%; }
@@ -67,6 +68,10 @@ h1 {
   font-size: 1.6rem;
   font-weight: 500; }
 
+.container-small {
+  max-width: 65rem;
+  margin: 5rem auto; }
+
 .container-medium {
   max-width: 66rem;
   margin: 5rem auto;
@@ -102,6 +107,52 @@ h1 {
   .announcement__message {
     grid-column: 2/-1; }
 
+.sign-up,
+.sign-in {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  padding: 8rem;
+  padding-bottom: 5rem;
+  background-color: #ededed;
+  border-radius: 3rem; }
+  .sign-up .account-type-tabs,
+  .sign-in .account-type-tabs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-gap: 0 1rem;
+    text-align: center;
+    padding: 1rem;
+    background-color: #d9d9d9;
+    border-radius: 3rem; }
+    .sign-up .account-type-tabs .tab,
+    .sign-in .account-type-tabs .tab {
+      padding: 2rem 3rem;
+      border-radius: 2.5rem;
+      background-color: #ffffff; }
+  .sign-up form,
+  .sign-in form {
+    text-align: center;
+    margin: 5rem auto 0 auto; }
+    .sign-up form input,
+    .sign-in form input {
+      width: 100%; }
+      .sign-up form input:not(:first-child),
+      .sign-in form input:not(:first-child) {
+        margin-top: 2rem; }
+    .sign-up form button,
+    .sign-in form button {
+      margin-top: 5rem; }
+
+.logo {
+  font-family: 'Raleway', sans-serif;
+  font-size: 4.8rem;
+  margin-bottom: 8rem;
+  padding: 1rem 2.5rem 1.5rem 2.5rem;
+  color: #ffffff;
+  background-color: #1e1e1e;
+  border-radius: 10rem; }
+
 .btn {
   font-family: 'Montserrat', sans-serif;
   color: #ffffff;
@@ -129,6 +180,21 @@ h1 {
   .btn--danger {
     color: #c93b37;
     background-color: #ff938b; }
+
+.btn-alternate {
+  font-family: 'Montserrat', sans-serif;
+  margin-top: 2rem;
+  padding: 3.3rem 0;
+  width: 100%;
+  color: #000000;
+  background-color: #d9d9d9;
+  border-radius: 2rem;
+  border-style: none;
+  cursor: pointer; }
+  .btn-alternate:hover {
+    background-color: #ededed; }
+  .btn-alternate span {
+    color: #000000; }
 
 .chore {
   border-radius: 2.5rem;
@@ -329,7 +395,11 @@ h1 {
   background-color: #d9d9d9; }
   .navbar__logo {
     font-family: 'Raleway', sans-serif;
-    font-size: 4.8rem; }
+    font-size: 4.8rem;
+    padding: 1rem 2.5rem 1.5rem 2.5rem;
+    color: #ffffff;
+    background-color: #1e1e1e;
+    border-radius: 10rem; }
   .navbar__account {
     width: 6rem;
     height: 6rem;

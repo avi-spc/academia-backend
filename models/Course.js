@@ -1,5 +1,60 @@
 const mongoose = require('mongoose');
 
+const noteSchema = new mongoose.Schema(
+	{
+		title: {
+			type: String,
+			required: true
+		},
+		documentId: {
+			type: mongoose.Schema.Types.ObjectId
+		}
+	},
+	{ timestamps: true }
+);
+
+const assignmentSchema = new mongoose.Schema(
+	{
+		title: {
+			type: String,
+			required: true
+		},
+		documentId: {
+			type: mongoose.Schema.Types.ObjectId
+		},
+		deadline: {
+			type: Date,
+			required: true
+		},
+		maxMarks: {
+			type: Number,
+			required: true
+		}
+	},
+	{ timestamps: true }
+);
+
+const projectSchema = new mongoose.Schema(
+	{
+		_id: {
+			type: mongoose.Schema.Types.ObjectId
+		},
+		title: {
+			type: String
+		},
+		documentId: {
+			type: mongoose.Schema.Types.ObjectId
+		},
+		deadline: {
+			type: Date
+		},
+		maxMarks: {
+			type: Number
+		}
+	},
+	{ timestamps: true }
+);
+
 const CourseSchema = new mongoose.Schema(
 	{
 		code: {
@@ -23,61 +78,17 @@ const CourseSchema = new mongoose.Schema(
 		studyMaterial: {
 			notes: [
 				{
-					title: {
-						type: String,
-						required: true
-					},
-					documentId: {
-						type: mongoose.Schema.Types.ObjectId
-					}
-				}
-			],
-			references: [
-				{
-					title: {
-						type: String
-					},
-					documentId: {
-						type: mongoose.Schema.Types.ObjectId
-					},
-					documentLink: {
-						type: String
-					}
+					type: noteSchema
 				}
 			]
 		},
 		assignments: [
 			{
-				title: {
-					type: String,
-					required: true
-				},
-				documentId: {
-					type: mongoose.Schema.Types.ObjectId
-				},
-				deadline: {
-					type: Date,
-					required: true
-				},
-				maxMarks: {
-					type: Number,
-					required: true
-				}
+				type: assignmentSchema
 			}
 		],
 		project: {
-			_id: {
-				type: mongoose.Schema.Types.ObjectId
-			},
-			title: {
-				type: String
-			},
-			documentId: {
-				type: mongoose.Schema.Types.ObjectId
-			},
-			deadline: {
-				type: Date
-			}
+			type: projectSchema
 		}
 	},
 	{

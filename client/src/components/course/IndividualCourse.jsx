@@ -1,12 +1,16 @@
-import Announcement from './Announcement';
-import Chore from './Chore';
-import ChoreAssignment from './student/ChoreAssignment';
-import ChoreProject from './student/ChoreProject';
-import Discussion from './student/Discussion';
-import StudyMaterial from './StudyMaterial';
-import SubmissionsDocket from './SubmissionsDocket';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-const IndividualCourse = () => {
+import { getIndividualCourse } from '../../reduxStore/actions/course';
+
+const IndividualCourse = ({ getIndividualCourse }) => {
+	const { course_id } = useParams();
+
+	useEffect(() => {
+		getIndividualCourse(course_id);
+	}, []);
+
 	return (
 		<div className="container-large individual-course">
 			<div className="individual-course__banner">
@@ -28,9 +32,7 @@ const IndividualCourse = () => {
 						<span className="material-symbols-outlined">add_circle</span>Create
 					</button>
 					<ul className="individual-course__work__list">
-						<li>
-							<ChoreAssignment />
-						</li>
+						<li></li>
 					</ul>
 				</div>
 			</div>
@@ -38,4 +40,4 @@ const IndividualCourse = () => {
 	);
 };
 
-export default IndividualCourse;
+export default connect(null, { getIndividualCourse })(IndividualCourse);

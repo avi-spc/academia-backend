@@ -63,7 +63,9 @@ const SignIn = ({ loginInstructor, auth: { isAuthenticated } }) => {
 		</div>
 	);
 };
+
 const mapStateToProps = (state) => ({
 	auth: state.auth
 });
+
 export default connect(mapStateToProps, { loginInstructor })(SignIn);

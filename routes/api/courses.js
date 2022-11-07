@@ -18,7 +18,9 @@ const router = express.Router();
 // @access		Private
 router.get('/', auth, async (req, res) => {
 	try {
-		const courses = await Course.find().sort({ createdAt: 'desc' });
+		const courses = await Course.find({ instructor: req.account.id }).sort({
+			createdAt: 'desc'
+		});
 
 		res.status(200).json({ courses });
 	} catch (err) {

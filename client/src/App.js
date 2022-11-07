@@ -9,6 +9,7 @@ import SignIn from './components/auth/SignIn';
 import SignUp from './components/auth/SignUp';
 import PrivateRoute from './components/PrivateRoute';
 import CourseDocket from './components/course/CourseDocket';
+import IndividualCourse from './components/course/IndividualCourse';
 
 const App = () => {
 	useEffect(() => {
@@ -24,6 +25,7 @@ const App = () => {
 						<Route path="/register" element={<SignUp />} />
 						<Route path="/instructor" element={<PrivateRoute />}>
 							<Route path="courses" element={<CourseDocket />} />
+							<Route path="courses/:course_id" element={<IndividualCourse />} />
 						</Route>
 					</Routes>
 				</Router>

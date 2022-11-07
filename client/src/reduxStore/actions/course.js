@@ -92,9 +92,31 @@ export const createChore = (chore, courseId, type) => async (dispatch) => {
 		switch (type) {
 			case 'assignment':
 				res = await axios.put(`/courses/assignments/${courseId}`, body, config);
+				break;
 			case 'project':
 				res = await axios.put(`/courses/project/${courseId}`, body, config);
+				break;
+			default:
+				break;
 		}
+
+		dispatch({ type: GET_INDIVIDUAL_COURSE, payload: res.data });
+	} catch (err) {
+		console.log(err);
+	}
+};
+
+export const createStudyMaterial = (studyMaterial, courseId) => async (dispatch) => {
+	const config = {
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	};
+
+	const body = JSON.stringify(studyMaterial);
+
+	try {
+		const res = await axios.put(`/courses/material/${courseId}`, body, config);
 
 		dispatch({ type: GET_INDIVIDUAL_COURSE, payload: res.data });
 	} catch (err) {

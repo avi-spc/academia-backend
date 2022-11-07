@@ -390,6 +390,8 @@ h1 {
       align-self: end; }
   .individual-course__work__list {
     margin-top: 5rem; }
+    .individual-course__work__list > li:not(:last-child) {
+      margin-bottom: 3rem; }
 
 .navbar {
   display: flex;

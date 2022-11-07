@@ -1,8 +1,16 @@
-import { CREATE_COURSE_SUCCESS, GET_ALL_COURSES, GET_INDIVIDUAL_COURSE } from '../types';
+import {
+	CREATE_COURSE_SUCCESS,
+	GET_ALL_COURSES,
+	GET_ANNOUNCEMENTS,
+	GET_INDIVIDUAL_COURSE
+} from '../types';
 
 const initialState = {
 	courses: [],
-	individualCourse: null
+	individualCourse: {
+		course: null,
+		announcements: []
+	}
 };
 
 const courseReducer = (state = initialState, action) => {
@@ -14,7 +22,18 @@ const courseReducer = (state = initialState, action) => {
 		case CREATE_COURSE_SUCCESS:
 			return { ...state, courses: [...state.courses, payload.course] };
 		case GET_INDIVIDUAL_COURSE:
-			return { ...state, individualCourse: payload.course };
+			return {
+				...state,
+				individualCourse: { ...state.individualCourse, course: payload.course }
+			};
+		case GET_ANNOUNCEMENTS:
+			return {
+				...state,
+				individualCourse: {
+					...state.individualCourse,
+					announcements: payload.announcements
+				}
+			};
 		default:
 			return state;
 	}

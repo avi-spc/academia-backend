@@ -308,7 +308,8 @@ router.put(
 		[
 			check('title', 'title is required').not().isEmpty(),
 			check('documentId', 'document is required').not().isEmpty(),
-			check('deadline', 'deadline is required').not().isEmpty()
+			check('deadline', 'deadline is required').not().isEmpty(),
+			check('maxMarks', 'maxMarks is required').not().isEmpty()
 		]
 	],
 	async (req, res) => {
@@ -317,7 +318,7 @@ router.put(
 			return res.status(422).json({ errors: errors.array() });
 		}
 
-		const { title, documentId, deadline } = req.body;
+		const { title, documentId, deadline, maxMarks } = req.body;
 
 		try {
 			let course = await Course.findById(req.params.course_id);
@@ -329,7 +330,13 @@ router.put(
 				req.params.course_id,
 				{
 					$set: {
-						project: { _id: new mongoose.Types.ObjectId(), title, deadline, documentId }
+						project: {
+							_id: new mongoose.Types.ObjectId(),
+							title,
+							deadline,
+							documentId,
+							maxMarks
+						}
 					}
 				},
 				{ new: true }

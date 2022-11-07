@@ -3,9 +3,12 @@ import axios from 'axios';
 import {
 	CREATE_ANNOUNCEMENT,
 	CREATE_COURSE_SUCCESS,
+	DISCARD_FILE,
 	GET_ALL_COURSES,
 	GET_ANNOUNCEMENTS,
-	GET_INDIVIDUAL_COURSE
+	GET_ASSIGNMENTS,
+	GET_INDIVIDUAL_COURSE,
+	UPLOAD_FILE
 } from '../types';
 
 export const createCourse = (course) => async (dispatch) => {
@@ -69,6 +72,59 @@ export const createAnnouncement = (announcement, courseId) => async (dispatch) =
 		const res = await axios.post(`/announcements/${courseId}`, body, config);
 
 		dispatch({ type: GET_ANNOUNCEMENTS, payload: res.data.announcements });
+	} catch (err) {
+		console.log(err);
+	}
+};
+
+export const createChore = (chore, courseId, type) => async (dispatch) => {
+	const config = {
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	};
+
+	const body = JSON.stringify(chore);
+
+	try {
+		let res = null;
+
+		switch (type) {
+			case 'assignment':
+				res = await axios.put(`/courses/assignments/${courseId}`, body, config);
+			case 'project':
+				res = await axios.put(`/courses/project/${courseId}`, body, config);
+		}
+
+		dispatch({ type: GET_INDIVIDUAL_COURSE, payload: res.data });
+	} catch (err) {
+		console.log(err);
+	}
+};
+
+export const uploadDocument = (form) => async (dispatch) => {
+	const config = {
+		headers: {
+			'Content-Type': 'multipart-formdata'
+		}
+	};
+
+	const body = new FormData(form);
+
+	try {
+		const res = await axios.post('/performance/submissions/file', body, config);
+
+		dispatch({ type: UPLOAD_FILE, payload: res.data });
+	} catch (err) {
+		console.log(err);
+	}
+};
+
+export const discardDocument = (documentId) => async (dispatch) => {
+	try {
+		const res = await axios.delete(`/performance/submissions/file/${documentId}`);
+
+		dispatch({ type: DISCARD_FILE });
 	} catch (err) {
 		console.log(err);
 	}

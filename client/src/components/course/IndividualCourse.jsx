@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { togglePopup } from '../../reduxStore/actions/popus';
 import { getIndividualCourse, getAnnouncements } from '../../reduxStore/actions/course';
 
-import AnnouncementDocket from './AnnouncementDocket';
+import ChoreDocket from './ChoreDocket';
 
 const IndividualCourse = ({
 	getIndividualCourse,
@@ -52,7 +52,7 @@ const IndividualCourse = ({
 							<span className="material-symbols-outlined">add_circle</span>Create
 						</button>
 						<ul className="individual-course__work__list">
-							<AnnouncementDocket />
+							<ChoreDocket type="project" />
 						</ul>
 					</div>
 				</div>

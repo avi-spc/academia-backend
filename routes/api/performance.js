@@ -775,6 +775,30 @@ router.post('/submissions/file', [auth, fileUploadHandler], async (req, res) => 
 	}
 });
 
+// @route		DELETE: api/performance/submissions/file
+// @desc		Delete document file
+// @access		Private
+router.delete('/submissions/file/:document_id', auth, async (req, res) => {
+	if (!mongoose.isObjectIdOrHexString(req.params.document_id)) {
+		return res.status(404).json({ errors: [{ msg: 'document not found' }] });
+	}
+
+	try {
+		await SubmissionStream().delete(
+			mongoose.Types.ObjectId(req.params.document_id),
+			(err, result) => {
+				if (err) {
+					return res.status(404).json({ errors: [{ msg: 'document not found' }] });
+				}
+
+				res.status(200).json({ msg: 'document discarded' });
+			}
+		);
+	} catch (err) {
+		res.status(500).json({ errors: [{ msg: 'server error' }] });
+	}
+});
+
 // router.get('/submissions/file/:file_id', async (req, res) => {
 // 	try {
 // 		const files = await SubmissionStream()

@@ -1,16 +1,19 @@
 import {
 	CREATE_COURSE_SUCCESS,
+	DISCARD_FILE,
 	GET_ALL_COURSES,
 	GET_ANNOUNCEMENTS,
-	GET_INDIVIDUAL_COURSE
+	GET_INDIVIDUAL_COURSE,
+	UPLOAD_FILE
 } from '../types';
 
 const initialState = {
 	courses: [],
 	individualCourse: {
 		course: null,
-		announcements: []
-	}
+		announcements: [],
+	},
+	documentId: null
 };
 
 const courseReducer = (state = initialState, action) => {
@@ -34,6 +37,10 @@ const courseReducer = (state = initialState, action) => {
 					announcements: payload.announcements
 				}
 			};
+		case UPLOAD_FILE:
+			return { ...state, documentId: payload.documentId };
+		case DISCARD_FILE:
+			return { ...state, documentId: null };
 		default:
 			return state;
 	}

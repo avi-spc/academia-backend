@@ -35,7 +35,7 @@ router.post(
 				req.account.id,
 				{ $push: { coursesEnrolled: { course: req.params.course_id } } },
 				{ new: true }
-			);
+			).populate('coursesEnrolled.course');
 
 			await Performance.findOneAndUpdate(
 				{ student: req.account.id },
@@ -43,7 +43,11 @@ router.post(
 				{ new: true }
 			);
 
-			res.status(201).json({ msg: 'enrolled course', student });
+			res.status(201).json({
+				msg: 'enrolled course',
+				account: student,
+				type: 'student'
+			});
 		} catch (err) {
 			if (err.kind === 'ObjectId') {
 				return res.status(404).json({ errors: [{ msg: 'course not found' }] });
@@ -117,11 +121,11 @@ router.delete('/:course_id', auth, async (req, res) => {
 // @route		GET: api/performance/student/:student_id
 // @desc		Retrieve performace for a particular student
 // @access		Private
-router.get('/student/:student_id', auth, async (req, res) => {
+router.get('/student', auth, async (req, res) => {
 	try {
-		const studentPerformance = await Performance.find({
-			student: req.params.student_id
-		});
+		const studentPerformance = await Performance.findOne({
+			student: req.account.id
+		}).populate('performance.course');
 
 		res.status(200).json({ studentPerformance });
 	} catch (err) {

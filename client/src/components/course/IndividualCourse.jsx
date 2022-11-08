@@ -6,13 +6,17 @@ import { togglePopup } from '../../reduxStore/actions/popus';
 import { getIndividualCourse, getAnnouncements } from '../../reduxStore/actions/course';
 
 import StudyMaterialDocket from './StudyMaterialDocket';
+import ChoreDocket from './ChoreDocket';
+import ChoreAssignment from './student/ChoreAssignment';
+import ChoreProject from './student/ChoreProject';
 
 const IndividualCourse = ({
 	getIndividualCourse,
 	getAnnouncements,
 	togglePopup,
 	popup,
-	individualCourse
+	individualCourse,
+	performance
 }) => {
 	const { course_id } = useParams();
 
@@ -52,7 +56,24 @@ const IndividualCourse = ({
 							<span className="material-symbols-outlined">add_circle</span>Create
 						</button>
 						<ul className="individual-course__work__list">
-							<StudyMaterialDocket />
+							{/* <ChoreAssignment
+								performance={
+									performance[
+										performance.findIndex((perf) => {
+											return perf.course._id === individualCourse.course._id;
+										})
+									]
+								}
+							/> */}
+							<ChoreProject
+								performance={
+									performance[
+										performance.findIndex((perf) => {
+											return perf.course._id === individualCourse.course._id;
+										})
+									]
+								}
+							/>
 						</ul>
 					</div>
 				</div>
@@ -63,7 +84,8 @@ const IndividualCourse = ({
 
 const mapStateToProps = (state) => ({
 	popup: state.popup,
-	individualCourse: state.course.individualCourse
+	individualCourse: state.course.individualCourse,
+	performance: state.performance.performance.performance
 });
 
 export default connect(mapStateToProps, { getIndividualCourse, getAnnouncements, togglePopup })(

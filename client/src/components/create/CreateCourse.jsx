@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { createCourse } from '../../reduxStore/actions/course';
 import { useForm } from '../../hooks/useForm';
 
-const Course = ({ createCourse }) => {
+const CreateCourse = ({ createCourse }) => {
 	const { formData, onChange } = useForm({ code: '', credits: '', name: '' });
 	const { code, credits, name } = formData;
 
@@ -36,4 +36,4 @@ const Course = ({ createCourse }) => {
 
 const mapStateToProps = (state) => ({});
 
-export default connect(null, { createCourse })(Course);
+export default connect(null, { createCourse })(CreateCourse);

@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import store from './reduxStore/store';
-import { getInstructor } from './reduxStore/actions/auth';
+import { getAccount } from './reduxStore/actions/auth';
 
 import SignIn from './components/auth/SignIn';
 import SignUp from './components/auth/SignUp';
@@ -13,7 +13,7 @@ import IndividualCourse from './components/course/IndividualCourse';
 
 const App = () => {
 	useEffect(() => {
-		store.dispatch(getInstructor());
+		store.dispatch(getAccount());
 	}, []);
 
 	return (
@@ -23,10 +23,17 @@ const App = () => {
 					<Routes>
 						<Route path="/" element={<SignIn />} />
 						<Route path="/register" element={<SignUp />} />
-						<Route path="/instructor" element={<PrivateRoute />}>
-							<Route path="courses" element={<CourseDocket />} />
-							<Route path="courses/:course_id" element={<IndividualCourse />} />
-						</Route>
+						{['instructor', 'student'].map((path) => {
+							return (
+								<Route path={`/${path}`} element={<PrivateRoute />}>
+									<Route path="courses" element={<CourseDocket />} />
+									<Route
+										path="courses/:course_id"
+										element={<IndividualCourse />}
+									/>
+								</Route>
+							);
+						})}
 					</Routes>
 				</Router>
 			</Provider>

@@ -1,64 +1,86 @@
 import axios from 'axios';
 
 import {
-	INSTRUCTOR_REGISTER_SUCCESS,
-	INSTRUCTOR_REGISTER_ERROR,
-	GET_INSTRUCTOR,
-	INSTRUCTOR_LOGIN_SUCCESS,
-	INSTRUCTOR_LOGIN_ERROR
+	REGISTER_SUCCESS,
+	REGISTER_ERROR,
+	GET_ACCOUNT,
+	LOGIN_SUCCESS,
+	LOGIN_ERROR
 } from '../types';
 import { setAuthToken } from '../../utils/setAuthToken';
 
-export const registerInstructor = (instructor) => async (dispatch) => {
+export const registerAccount = (account, type) => async (dispatch) => {
 	const config = {
 		headers: {
 			'Content-Type': 'application/json'
 		}
 	};
 
-	const body = JSON.stringify(instructor);
+	const body = JSON.stringify(account);
 
 	try {
-		const res = await axios.post('/instructors', body, config);
+		let res = null;
 
-		dispatch({ type: INSTRUCTOR_REGISTER_SUCCESS, payload: res.data });
-		dispatch(getInstructor());
+		switch (type) {
+			case 'instructor':
+				res = await axios.post('/instructors', body, config);
+				break;
+			case 'student':
+				res = await axios.post('/students', body, config);
+				break;
+			default:
+				break;
+		}
+
+		dispatch({ type: REGISTER_SUCCESS, payload: res.data });
+		dispatch(getAccount());
 	} catch (err) {
 		console.log(err);
-		dispatch({ type: INSTRUCTOR_REGISTER_ERROR });
+		dispatch({ type: REGISTER_ERROR });
 	}
 };
 
-export const getInstructor = () => async (dispatch) => {
+export const getAccount = () => async (dispatch) => {
 	if (localStorage.token) {
 		setAuthToken(localStorage.token);
 	}
 
 	try {
-		const res = await axios.get('/instructors');
+		const res = await axios.get('/students');
 
-		dispatch({ type: GET_INSTRUCTOR, payload: res.data });
+		dispatch({ type: GET_ACCOUNT, payload: res.data });
 	} catch (err) {
 		console.log(err);
 	}
 };
 
-export const loginInstructor = (instructor) => async (dispatch) => {
+export const loginAccount = (account, type) => async (dispatch) => {
 	const config = {
 		headers: {
 			'Content-Type': 'application/json'
 		}
 	};
 
-	const body = JSON.stringify(instructor);
+	const body = JSON.stringify(account);
 
 	try {
-		const res = await axios.post('/instructors/login', body, config);
+		let res = null;
 
-		dispatch({ type: INSTRUCTOR_LOGIN_SUCCESS, payload: res.data });
-		dispatch(getInstructor());
+		switch (type) {
+			case 'instructor':
+				res = await axios.post('/instructors/login', body, config);
+				break;
+			case 'student':
+				res = await axios.post('/students/login', body, config);
+				break;
+			default:
+				break;
+		}
+
+		dispatch({ type: LOGIN_SUCCESS, payload: res.data });
+		dispatch(getAccount());
 	} catch (err) {
 		console.log(err);
-		dispatch({ type: INSTRUCTOR_LOGIN_ERROR });
+		dispatch({ type: LOGIN_ERROR });
 	}
 };

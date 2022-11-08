@@ -2,60 +2,45 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { loginInstructor } from '../../reduxStore/actions/auth';
+import { loginAccount } from '../../reduxStore/actions/auth';
 
-const SignIn = ({ loginInstructor, auth: { isAuthenticated } }) => {
+import StudentSignIn from './StudentSignIn';
+import InstructorSignIn from './InstructorSignIn';
+
+const SignIn = ({ loginAccount, auth: { isAuthenticated, account } }) => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
 		if (isAuthenticated) {
-			navigate('/instructor/courses');
+			navigate(`/${account.type}/courses`);
 		}
 	}, [isAuthenticated]);
 
-	const login = (e) => {
+	const login = (e, account) => {
 		e.preventDefault();
 
-		loginInstructor({ email, password });
+		loginAccount(account, accountType);
 	};
 
-	const OnChange = (e) => {
-		setFormData({ ...formData, [e.target.name]: e.target.value });
-	};
-
-	const [formData, setFormData] = useState({ email: '', password: '' });
-	const { email, password } = formData;
+	const [accountType, setAccountType] = useState('student');
 
 	return (
 		<div className="container-small">
 			<div className="sign-in">
 				<div className="logo">academia</div>
 				<div className="account-type-tabs text-normal-SM">
-					<div className="tab">Instructor</div>
-					<div className="tab">Student</div>
+					<div className="tab" onClick={() => setAccountType('instructor')}>
+						Instructor
+					</div>
+					<div className="tab" onClick={() => setAccountType('student')}>
+						Student
+					</div>
 				</div>
-				<form className="sign-in__form--instructor" onSubmit={login}>
-					<input
-						type="email"
-						name="email"
-						placeholder="email"
-						value={email}
-						onChange={OnChange}
-					/>
-					<input
-						type="password"
-						name="password"
-						placeholder="password"
-						value={password}
-						onChange={OnChange}
-					/>
-					<button className="btn btn--round">Sign In</button>
-				</form>
-				{/* <form className="sign-in__form--student">
-					<input type="text" placeholder="institute id" />
-					<input type="password" placeholder="password" />
-					<button>Sign In</button>
-				</form> */}
+				{accountType === 'student' ? (
+					<StudentSignIn login={login} />
+				) : (
+					<InstructorSignIn login={login} />
+				)}
 			</div>
 			<button className="btn-alternate text-normal-M">
 				Don't have an account? <span className="text-normal-SM">Sign Up</span>
@@ -68,4 +53,4 @@ const mapStateToProps = (state) => ({
 	auth: state.auth
 });
 
-export default connect(mapStateToProps, { loginInstructor })(SignIn);
+export default connect(mapStateToProps, { loginAccount })(SignIn);

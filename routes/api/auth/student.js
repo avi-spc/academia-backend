@@ -6,6 +6,7 @@ const config = require('config');
 
 const auth = require('../../../middlewares/auth');
 
+const Instructor = require('../../../models/Instructor');
 const Student = require('../../../models/Student');
 const Performance = require('../../../models/Performance');
 
@@ -16,9 +17,24 @@ const router = express.Router();
 // @access		Private
 router.get('/', auth, async (req, res) => {
 	try {
-		const student = await Student.findById(req.account.id).select('-password');
+		let account = null;
 
-		res.status(200).json({ student });
+		switch (req.account.type) {
+			case 'instructor':
+				account = await Instructor.findById(req.account.id)
+					.select('-password')
+					.populate('coursesIncharge.course');
+				break;
+			case 'student':
+				account = await Student.findById(req.account.id)
+					.select('-password')
+					.populate('coursesEnrolled.course');
+				break;
+			default:
+				break;
+		}
+
+		res.status(200).json({ account, type: req.account.type });
 	} catch (err) {
 		res.status(500).json({ errors: [{ msg: 'server error' }] });
 	}
@@ -56,7 +72,8 @@ router.post(
 
 			const payload = {
 				account: {
-					id: student.id
+					id: student.id,
+					type: 'student'
 				}
 			};
 
@@ -103,7 +120,8 @@ router.post(
 
 			const payload = {
 				account: {
-					id: student.id
+					id: student.id,
+					type: 'student'
 				}
 			};
 

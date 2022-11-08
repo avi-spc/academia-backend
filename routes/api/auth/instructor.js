@@ -52,7 +52,8 @@ router.post(
 
 			const payload = {
 				account: {
-					id: instructor.id
+					id: instructor.id,
+					type: 'instructor'
 				}
 			};
 
@@ -99,7 +100,8 @@ router.post(
 
 			const payload = {
 				account: {
-					id: instructor.id
+					id: instructor.id,
+					type: 'instructor'
 				}
 			};
 

@@ -1,31 +1,35 @@
 import {
-	INSTRUCTOR_REGISTER_SUCCESS,
-	INSTRUCTOR_REGISTER_ERROR,
-	GET_INSTRUCTOR,
-	INSTRUCTOR_LOGIN_SUCCESS,
-	INSTRUCTOR_LOGIN_ERROR
+	REGISTER_SUCCESS,
+	REGISTER_ERROR,
+	GET_ACCOUNT,
+	LOGIN_SUCCESS,
+	LOGIN_ERROR
 } from '../types';
 
 const initialState = {
 	token: localStorage.getItem('token'),
 	isAuthenticated: false,
-	instructor: null
+	account: null
 };
 
 const authReducer = (state = initialState, action) => {
 	const { type, payload } = action;
 
 	switch (type) {
-		case GET_INSTRUCTOR:
-			return { ...state, isAuthenticated: true, instructor: payload.instructor };
-		case INSTRUCTOR_REGISTER_SUCCESS:
-		case INSTRUCTOR_LOGIN_SUCCESS:
+		case GET_ACCOUNT:
+			return {
+				...state,
+				isAuthenticated: true,
+				account: { ...payload.account, type: payload.type }
+			};
+		case REGISTER_SUCCESS:
+		case LOGIN_SUCCESS:
 			localStorage.setItem('token', payload.token);
 			return { ...state, token: payload.token, isAuthenticated: true };
-		case INSTRUCTOR_REGISTER_ERROR:
-		case INSTRUCTOR_LOGIN_ERROR:
+		case REGISTER_ERROR:
+		case LOGIN_ERROR:
 			localStorage.removeItem('token');
-			return { ...state, token: null, isAuthenticated: false, instructor: null };
+			return { ...state, token: null, isAuthenticated: false, account: null };
 		default:
 			return state;
 	}

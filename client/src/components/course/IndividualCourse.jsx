@@ -6,7 +6,7 @@ import { togglePopup } from '../../reduxStore/actions/popus';
 import { getIndividualCourse, getAnnouncements } from '../../reduxStore/actions/course';
 
 import StudyMaterialDocket from './StudyMaterialDocket';
-import ChoreDocket from './ChoreDocket';
+import ChoreDocket from './ProjectDocket';
 import ChoreAssignment from './student/ChoreAssignment';
 import ChoreProject from './student/ChoreProject';
 
@@ -56,7 +56,7 @@ const IndividualCourse = ({
 							<span className="material-symbols-outlined">add_circle</span>Create
 						</button>
 						<ul className="individual-course__work__list">
-							<ChoreDocket type="project" />
+							{/* <ChoreDocket type="project" /> */}
 							<Outlet context={{ individualCourse }} />
 							{/* <ChoreAssignment
 								performance={

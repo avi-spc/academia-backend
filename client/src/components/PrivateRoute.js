@@ -9,7 +9,7 @@ const PrivateRoute = ({ auth: { isAuthenticated } }) => {
 
 	useEffect(() => {
 		if (!isAuthenticated) {
-			navigate('/');
+			// navigate('/');
 		}
 	}, [isAuthenticated]);
 

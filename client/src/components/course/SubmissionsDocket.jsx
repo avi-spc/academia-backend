@@ -5,7 +5,7 @@ const SubmissionsDocket = ({ students, choreId, courseId, choreType }) => {
 		<div className="submissions-docket">
 			{students.map((student) => (
 				<Link
-					to={`/instructor/courses/${courseId}/submission/${student.student}/${choreType}/${choreId}`}
+					to={`/courses/${courseId}/submission/${student.student}/${choreType}/${choreId}`}
 					className="submissions-docket__submission"
 					key={student.student}
 				>

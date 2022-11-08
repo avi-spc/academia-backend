@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 const Chore = ({ courseId, chore, type }) => {
 	return (
-		<Link to={`/instructor/courses/${courseId}/chore/${chore._id}/${type}`}>
+		<Link to={`/courses/${courseId}/chore/${chore._id}/${type}`}>
 			<div className="chore text-normal-M">
 				<div className="chore__header">
 					<span className="icon icon--light material-symbols-outlined">assignment</span>

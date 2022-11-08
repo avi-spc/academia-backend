@@ -11,7 +11,7 @@ const SignUp = ({ registerAccount, auth: { isAuthenticated, account } }) => {
 
 	useEffect(() => {
 		if (isAuthenticated) {
-			navigate(`/${account.type}/courses`);
+			navigate('/courses');
 		}
 	}, [isAuthenticated]);
 

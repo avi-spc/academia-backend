@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 const CourseCard = ({ course }) => {
 	return (
-		<Link to={`/instructor/courses/${course._id}`} className="course-card">
+		<Link to={`/courses/${course._id}`} className="course-card">
 			<div className="course-card__details">
 				<div className="course-card__details__thumbnail"></div>
 				<div className="course-card__details__name text-large-SM">{course.name}</div>

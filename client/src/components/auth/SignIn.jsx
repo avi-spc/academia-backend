@@ -12,7 +12,7 @@ const SignIn = ({ loginAccount, auth: { isAuthenticated, account } }) => {
 
 	useEffect(() => {
 		if (isAuthenticated) {
-			navigate(`/${account.type}/courses`);
+			navigate('/courses');
 		}
 	}, [isAuthenticated]);
 

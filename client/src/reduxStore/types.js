@@ -15,3 +15,4 @@ export const UPLOAD_FILE = 'UPLOAD_FILE';
 export const DISCARD_FILE = 'DISCARD_FILE';
 
 export const GET_PERFORMANCE = 'GET_PERFORMANCE';
+export const GET_STUDENTS = 'GET_STUDENTS';

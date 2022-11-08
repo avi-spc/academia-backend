@@ -5,13 +5,11 @@ import ChoreAssignment from './student/ChoreAssignment';
 import { useOutletContext, useParams } from 'react-router-dom';
 import AssignmentSubmission from './student/AssignmentSubmission';
 
-const IndividualSubmissionAssignment = ({ performance }) => {
-	const { assignment_id, student_id, course_id } = useParams();
+const IndividualSubmissionProject = ({ performance }) => {
+	const { student_id, course_id } = useParams();
 	const { individualCourse } = useOutletContext();
 
-	const chore = individualCourse.course.assignments.find((assignment) => {
-		return assignment._id === assignment_id;
-	});
+	const chore = individualCourse.course.project;
 
 	const student = performance.studentsSubmitted.find((student) => {
 		return student.student === student_id;
@@ -21,9 +19,7 @@ const IndividualSubmissionAssignment = ({ performance }) => {
 		return perf.course === course_id;
 	});
 
-	const submission = course.assignments.find((assignment) => {
-		return assignment.id === assignment_id;
-	});
+	const submission = course.project;
 
 	return (
 		submission && (
@@ -48,4 +44,4 @@ const mapStateToProps = (state) => ({
 	performance: state.performance
 });
 
-export default connect(mapStateToProps)(IndividualSubmissionAssignment);
+export default connect(mapStateToProps)(IndividualSubmissionProject);

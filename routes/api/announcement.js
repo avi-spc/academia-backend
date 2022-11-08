@@ -56,7 +56,7 @@ router.get('/:course_id', auth, async (req, res) => {
 		}
 
 		res.status(200).json({ announcements });
-	} catch (error) {
+	} catch (err) {
 		if (err.kind === 'ObjectId') {
 			return res.status(404).json({ errors: [{ msg: 'course not found' }] });
 		}

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { GET_ACCOUNT, GET_PERFORMANCE } from '../types';
+import { GET_ACCOUNT, GET_PERFORMANCE, GET_STUDENTS } from '../types';
 
 export const enrollCourse = (accessCode) => async (dispatch) => {
 	const config = {
@@ -41,7 +41,11 @@ export const submitAssignment = (assignment, courseId, assignmentId) => async (d
 	const body = JSON.stringify(assignment);
 
 	try {
-		const res = await axios.post(`/performance/assignment/${courseId}/${assignmentId}`, body, config);
+		const res = await axios.post(
+			`/performance/assignment/${courseId}/${assignmentId}`,
+			body,
+			config
+		);
 
 		dispatch({ type: GET_PERFORMANCE, payload: res.data.performance });
 	} catch (err) {
@@ -62,6 +66,25 @@ export const submitProject = (project, courseId, projectId) => async (dispatch) 
 		const res = await axios.post(`/performance/project/${courseId}/${projectId}`, body, config);
 
 		dispatch({ type: GET_PERFORMANCE, payload: res.data.performance });
+	} catch (err) {
+		console.log(err);
+	}
+};
+
+export const getStudents = (choreId, choreType) => async (dispatch) => {
+	try {
+		let res = null;
+		switch (choreType) {
+			case 'assignment':
+				res = await axios.get(`/performance/assignment/${choreId}`);
+				break;
+			case 'project':
+				res = await axios.get(`/performance/project/${choreId}`);
+				break;
+			default:
+				break;
+		}
+		dispatch({ type: GET_STUDENTS, payload: res.data });
 	} catch (err) {
 		console.log(err);
 	}

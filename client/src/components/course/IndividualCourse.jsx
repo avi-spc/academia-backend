@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Outlet, useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { togglePopup } from '../../reduxStore/actions/popus';
@@ -56,6 +56,8 @@ const IndividualCourse = ({
 							<span className="material-symbols-outlined">add_circle</span>Create
 						</button>
 						<ul className="individual-course__work__list">
+							<ChoreDocket type="project" />
+							<Outlet context={{ individualCourse }} />
 							{/* <ChoreAssignment
 								performance={
 									performance[
@@ -65,7 +67,7 @@ const IndividualCourse = ({
 									]
 								}
 							/> */}
-							<ChoreProject
+							{/* <ChoreProject
 								performance={
 									performance[
 										performance.findIndex((perf) => {
@@ -73,7 +75,7 @@ const IndividualCourse = ({
 										})
 									]
 								}
-							/>
+							/> */}
 						</ul>
 					</div>
 				</div>
@@ -84,8 +86,8 @@ const IndividualCourse = ({
 
 const mapStateToProps = (state) => ({
 	popup: state.popup,
-	individualCourse: state.course.individualCourse,
-	performance: state.performance.performance.performance
+	individualCourse: state.course.individualCourse
+	// performance: state.performance.performance.performance
 });
 
 export default connect(mapStateToProps, { getIndividualCourse, getAnnouncements, togglePopup })(

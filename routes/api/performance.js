@@ -375,10 +375,10 @@ router.put(
 // @route		GET: api/performance/project
 // @desc		Retrieve all students who have submitted the course project
 // @access		Private
-router.get('/project', auth, async (req, res) => {
+router.get('/project/:project_id', auth, async (req, res) => {
 	try {
 		const studentsSubmitted = await Performance.find({
-			'performance.project.id': { $exists: true }
+			'performance.project.id': req.params.project_id
 		});
 
 		res.status(200).json({ studentsSubmitted });

@@ -11,12 +11,20 @@ const ChoreDocket = ({ popup, individualCourse, type }) => {
 				individualCourse.course.assignments.map((assignment) => {
 					return (
 						<li key={assignment._id}>
-							<Chore chore={assignment} />
+							<Chore
+								courseId={individualCourse.course._id}
+								chore={assignment}
+								type={type}
+							/>
 						</li>
 					);
 				})
 			) : (
-				<Chore chore={individualCourse.course.project} />
+				<Chore
+					courseId={individualCourse.course._id}
+					chore={individualCourse.course.project}
+					type={type}
+				/>
 			)}
 			{popup.isVisible && <CreateChore courseId={individualCourse.course._id} type={type} />}
 		</Fragment>

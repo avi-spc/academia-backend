@@ -75,6 +75,28 @@ export const unsubmitAssignment = (courseId, assignmentId, documentId) => async 
 	}
 };
 
+export const gradeAssignment = (marks, studentId, courseId, assignmentId) => async (dispatch) => {
+	const config = {
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	};
+
+	const body = JSON.stringify(marks);
+
+	try {
+		const res = await axios.put(
+			`/performance/assignment/${studentId}/${courseId}/${assignmentId}`,
+			body,
+			config
+		);
+
+		dispatch({ type: GET_PERFORMANCE, payload: res.data.performance });
+	} catch (err) {
+		console.log(err);
+	}
+};
+
 export const submitProject = (project, courseId, projectId) => async (dispatch) => {
 	const config = {
 		headers: {
@@ -98,6 +120,24 @@ export const unsubmitProject = (courseId, documentId) => async (dispatch) => {
 		const res = await axios.delete(`/performance/project/${courseId}/${documentId}`);
 
 		dispatch({ type: GET_PERFORMANCE, payload: res.data.teamLeader });
+	} catch (err) {
+		console.log(err);
+	}
+};
+
+export const gradeProject = (marks, studentId, courseId) => async (dispatch) => {
+	const config = {
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	};
+
+	const body = JSON.stringify(marks);
+
+	try {
+		const res = await axios.put(`/performance/project/${studentId}/${courseId}`, body, config);
+
+		dispatch({ type: GET_PERFORMANCE, payload: res.data.performance });
 	} catch (err) {
 		console.log(err);
 	}

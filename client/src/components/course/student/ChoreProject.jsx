@@ -70,14 +70,19 @@ const ChoreProject = ({ getPerformance, unsubmitProject, togglePopup, performanc
 								</div>
 							</div>
 							<button className="btn btn--round">View submission</button>
-							<button
-								className="btn btn--round btn--danger"
-								onClick={() =>
-									unsubmitProject(course_id, coursePerformance.project.documentId)
-								}
-							>
-								Withdraw
-							</button>
+							{!coursePerformance.project.marksObtained && (
+								<button
+									className="btn btn--round btn--danger"
+									onClick={() =>
+										unsubmitProject(
+											course_id,
+											coursePerformance.project.documentId
+										)
+									}
+								>
+									Withdraw
+								</button>
+							)}
 						</Fragment>
 					) : (
 						<Fragment>

@@ -2,13 +2,17 @@ import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useOutletContext, useParams } from 'react-router-dom';
 
-import { getStudentPerformance } from '../../reduxStore/actions/performance';
+import { getStudentPerformance, gradeAssignment } from '../../reduxStore/actions/performance';
 
 import Chore from './Chore';
 import ChoreAssignment from './student/ChoreAssignment';
 import AssignmentSubmission from './student/AssignmentSubmission';
 
-const IndividualSubmissionAssignment = ({ getStudentPerformance, performance }) => {
+const IndividualSubmissionAssignment = ({
+	getStudentPerformance,
+	performance,
+	gradeAssignment
+}) => {
 	const { assignment_id, student_id, course_id } = useParams();
 	const { individualCourse } = useOutletContext();
 
@@ -48,7 +52,14 @@ const IndividualSubmissionAssignment = ({ getStudentPerformance, performance }) 
 						Submission
 					</div>
 					<AssignmentSubmission submission={submission} />
-					<button className='btn btn--round'>Grade</button>
+					<button
+						className="btn btn--round"
+						onClick={() =>
+							gradeAssignment({ marks: 34 }, student_id, course_id, assignment_id)
+						}
+					>
+						Grade
+					</button>
 				</div>
 			</div>
 		)
@@ -59,4 +70,6 @@ const mapStateToProps = (state) => ({
 	performance: state.performance.performance
 });
 
-export default connect(mapStateToProps, { getStudentPerformance })(IndividualSubmissionAssignment);
+export default connect(mapStateToProps, { getStudentPerformance, gradeAssignment })(
+	IndividualSubmissionAssignment
+);

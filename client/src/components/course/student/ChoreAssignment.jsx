@@ -96,18 +96,20 @@ const ChoreAssignment = ({
 										</div>
 									</div>
 									<button className="btn btn--round">View submission</button>
-									<button
-										className="btn btn--round btn--danger"
-										onClick={() =>
-											unsubmitAssignment(
-												course_id,
-												submission.id,
-												submission.documentId
-											)
-										}
-									>
-										Withdraw
-									</button>
+									{!submission.marksObtained && (
+										<button
+											className="btn btn--round btn--danger"
+											onClick={() =>
+												unsubmitAssignment(
+													course_id,
+													submission.id,
+													submission.documentId
+												)
+											}
+										>
+											Withdraw
+										</button>
+									)}
 								</Fragment>
 							) : (
 								<Fragment>
@@ -129,10 +131,7 @@ const ChoreAssignment = ({
 					</li>
 				))}
 				{popup.isVisible && (
-					<SubmitAssignment
-						courseId={course_id}
-						assignmentId={assignmentId}
-					/>
+					<SubmitAssignment courseId={course_id} assignmentId={assignmentId} />
 				)}
 			</Fragment>
 		)

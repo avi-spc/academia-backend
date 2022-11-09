@@ -212,7 +212,7 @@ router.post(
 					}
 				},
 				{ new: true }
-			);
+			).populate('performance.course');
 
 			res.status(201).json({ msg: 'submitted assignment', performance });
 		} catch (err) {
@@ -261,7 +261,7 @@ router.delete('/assignment/:course_id/:assignment_id/:document_id', auth, async 
 				}
 			},
 			{ new: true }
-		);
+		).populate('performance.course');
 
 		await SubmissionStream().delete(
 			mongoose.Types.ObjectId(req.params.document_id),
@@ -453,7 +453,7 @@ router.post(
 					}
 				},
 				{ new: true }
-			);
+			).populate('performance.course');
 
 			res.status(201).json({ msg: 'submitted project', performance });
 		} catch (err) {
@@ -496,7 +496,7 @@ router.delete('/project/:course_id/:document_id', auth, async (req, res) => {
 				$set: { 'performance.$.project': {} }
 			},
 			{ new: true }
-		);
+		).populate('performance.course');
 
 		if (!teamLeader) {
 			return res.status(403).json({ errors: [{ msg: 'forbidden' }] });

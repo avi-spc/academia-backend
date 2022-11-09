@@ -32,10 +32,13 @@ const CourseDocket = ({ togglePopup, getPerformance, popup, courses, auth: { acc
 									<CourseCard course={course.course} key={course.course._id} />
 								);
 						  })}
+					<div className="join-or-create" onClick={() => togglePopup(!popup.isVisible)}>
+						<span className="icon icon--dark material-symbols-outlined">add</span>
+						<span className="text-large-SM">
+							{account.type === 'student' ? 'Enroll' : 'Create'}
+						</span>
+					</div>
 				</div>
-				<button className="btn btn--round" onClick={() => togglePopup(!popup.isVisible)}>
-					{account.type === 'student' ? 'Enroll' : 'Create'}
-				</button>
 				{popup.isVisible &&
 					(account.type === 'student' ? <JoinCourse /> : <CreateCourse />)}
 			</div>

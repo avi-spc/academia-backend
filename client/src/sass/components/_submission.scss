@@ -23,3 +23,20 @@
 		}
 	}
 }
+
+.chore-submission {
+	&__details {
+		&__heading {
+			text-align: right;
+			margin-bottom: 2.5rem;
+		}
+	}
+	
+	&__submissions,&__individual-submission {
+		&__heading {
+			text-align: right;
+			margin-top: 5rem;
+			margin-bottom: 2.5rem;
+		}
+	}
+}

@@ -38,4 +38,33 @@
 
 		margin-top: 5rem;
 	}
+
+	.join-or-create {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+		border-radius: $border-radius-large;
+		background-color: $color-surface-secondary;
+
+		&:hover {
+			background-color: $color-surface-primary;
+			cursor: pointer;
+		}
+	}
+}
+
+.popup {
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	top: 0;
+	left: 0;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	background-color: rgba(black, 0.25);
 }

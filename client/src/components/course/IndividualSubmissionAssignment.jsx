@@ -40,15 +40,15 @@ const IndividualSubmissionAssignment = ({ getStudentPerformance, performance }) 
 		submission && (
 			<div className="chore-submission">
 				<div className="chore-submission__details">
-					<div className="chore-submission__details__heading">Details</div>
+					<div className="chore-submission__details__heading text-large-SM">Details</div>
 					<Chore courseId={individualCourse.course._id} chore={chore} />
 				</div>
 				<div className="chore-submission__individual-submission">
-					<div className="chore-submission__individual-submission__heading">
+					<div className="chore-submission__individual-submission__heading text-large-SM">
 						Submission
 					</div>
 					<AssignmentSubmission submission={submission} />
-					<button>Grade</button>
+					<button className='btn btn--round'>Grade</button>
 				</div>
 			</div>
 		)

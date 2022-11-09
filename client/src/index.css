@@ -268,6 +268,28 @@ h1 {
   grid-gap: 5rem 5rem;
   margin-top: 5rem; }
 
+.course-docket .join-or-create {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2.5rem;
+  background-color: #ededed; }
+  .course-docket .join-or-create:hover {
+    background-color: #d9d9d9;
+    cursor: pointer; }
+
+.popup {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.25); }
+
 .create-course form .code {
   grid-column: 2 / span 2; }
 
@@ -387,11 +409,10 @@ h1 {
     display: flex;
     flex-direction: column; }
     .individual-course__work__chore-p-create .create {
-      align-self: end; }
-  .individual-course__work__list {
-    margin-top: 5rem; }
-    .individual-course__work__list > li:not(:last-child) {
-      margin-bottom: 3rem; }
+      align-self: end;
+      margin-bottom: 5rem; }
+  .individual-course__work__list > li:not(:last-child) {
+    margin-bottom: 3rem; }
 
 .navbar {
   display: flex;
@@ -446,3 +467,12 @@ h1 {
     padding: 0.8rem 1.4rem;
     background-color: #ededed;
     border-radius: 1rem; }
+
+.chore-submission__details__heading {
+  text-align: right;
+  margin-bottom: 2.5rem; }
+
+.chore-submission__submissions__heading, .chore-submission__individual-submission__heading {
+  text-align: right;
+  margin-top: 5rem;
+  margin-bottom: 2.5rem; }

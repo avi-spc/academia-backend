@@ -16,3 +16,5 @@ export const DISCARD_FILE = 'DISCARD_FILE';
 
 export const GET_PERFORMANCE = 'GET_PERFORMANCE';
 export const GET_STUDENTS = 'GET_STUDENTS';
+
+export const SET_LOADING = 'SET_LOADING';

@@ -5,7 +5,8 @@ import {
 	REGISTER_ERROR,
 	GET_ACCOUNT,
 	LOGIN_SUCCESS,
-	LOGIN_ERROR
+	LOGIN_ERROR,
+	SET_LOADING
 } from '../types';
 import { setAuthToken } from '../../utils/setAuthToken';
 
@@ -41,6 +42,8 @@ export const registerAccount = (account, type) => async (dispatch) => {
 };
 
 export const getAccount = () => async (dispatch) => {
+	dispatch(setLoading(true));
+
 	if (localStorage.token) {
 		setAuthToken(localStorage.token);
 	}
@@ -49,8 +52,10 @@ export const getAccount = () => async (dispatch) => {
 		const res = await axios.get('/students');
 
 		dispatch({ type: GET_ACCOUNT, payload: res.data });
+		dispatch(setLoading(false));
 	} catch (err) {
 		console.log(err);
+		dispatch(setLoading(false));
 	}
 };
 
@@ -83,4 +88,8 @@ export const loginAccount = (account, type) => async (dispatch) => {
 		console.log(err);
 		dispatch({ type: LOGIN_ERROR });
 	}
+};
+
+export const setLoading = (isLoading) => (dispatch) => {
+	dispatch({ type: SET_LOADING, payload: isLoading });
 };

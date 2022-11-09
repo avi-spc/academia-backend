@@ -4,14 +4,14 @@ import { connect } from 'react-redux';
 
 import Navbar from './header/Navabr';
 
-const PrivateRoute = ({ auth: { isAuthenticated } }) => {
+const PrivateRoute = ({ auth: { isAuthenticated, loading } }) => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		if (!isAuthenticated) {
-			// navigate('/');
+		if (!isAuthenticated && !loading) {
+			navigate('/');
 		}
-	}, [isAuthenticated]);
+	}, [isAuthenticated, loading]);
 
 	return (
 		isAuthenticated && (

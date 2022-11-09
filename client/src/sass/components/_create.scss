@@ -75,8 +75,15 @@
 		grid-gap: 2rem;
 		align-items: center;
 
-		margin-top: 2.5rem;
 		margin-bottom: 6rem;
+	}
+
+	&-heading {
+		margin-bottom: 2.5rem;
+	}
+
+	&__file {
+		margin-bottom: 2rem;
 	}
 
 	&__cta {

@@ -7,14 +7,14 @@ import { loginAccount } from '../../reduxStore/actions/auth';
 import StudentSignIn from './StudentSignIn';
 import InstructorSignIn from './InstructorSignIn';
 
-const SignIn = ({ loginAccount, auth: { isAuthenticated, account } }) => {
+const SignIn = ({ loginAccount, auth: { isAuthenticated, loading } }) => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		if (isAuthenticated) {
+		if (!loading && isAuthenticated) {
 			navigate('/courses');
 		}
-	}, [isAuthenticated]);
+	}, [isAuthenticated, loading]);
 
 	const login = (e, account) => {
 		e.preventDefault();

@@ -53,7 +53,7 @@ const ChoreAssignment = ({
 		performanceObject && (
 			<Fragment>
 				{performanceObject.map(({ assignment, submission }) => (
-					<li className="chore text-normal-M">
+					<li className="chore text-normal-M" key={assignment._id}>
 						<div className="chore__header">
 							<span className="icon icon--light material-symbols-outlined">
 								assignment

@@ -3,13 +3,15 @@ import {
 	REGISTER_ERROR,
 	GET_ACCOUNT,
 	LOGIN_SUCCESS,
-	LOGIN_ERROR
+	LOGIN_ERROR,
+	SET_LOADING
 } from '../types';
 
 const initialState = {
 	token: localStorage.getItem('token'),
 	isAuthenticated: false,
-	account: null
+	account: null,
+	loading: true
 };
 
 const authReducer = (state = initialState, action) => {
@@ -30,6 +32,8 @@ const authReducer = (state = initialState, action) => {
 		case LOGIN_ERROR:
 			localStorage.removeItem('token');
 			return { ...state, token: null, isAuthenticated: false, account: null };
+		case SET_LOADING:
+			return { ...state, loading: payload };
 		default:
 			return state;
 	}

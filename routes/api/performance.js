@@ -27,19 +27,20 @@ router.post(
 		const { courseAccessCode } = req.body;
 
 		try {
-			if (courseAccessCode !== 'abcde') {
-				return res.status(400).json({ errors: [{ msg: 'invalid access code' }] });
+			const course = await Course.findOne({ accessCode: courseAccessCode });
+			if (!course) {
+				return res.status(404).json({ errors: [{ msg: 'course not found' }] });
 			}
 
 			const student = await Student.findByIdAndUpdate(
 				req.account.id,
-				{ $push: { coursesEnrolled: { course: req.params.course_id } } },
+				{ $push: { coursesEnrolled: { course: course._id } } },
 				{ new: true }
 			).populate('coursesEnrolled.course');
 
 			await Performance.findOneAndUpdate(
 				{ student: req.account.id },
-				{ $push: { performance: { course: req.params.course_id } } },
+				{ $push: { performance: { course: course._id } } },
 				{ new: true }
 			);
 

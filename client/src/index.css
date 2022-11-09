@@ -162,6 +162,8 @@ h1 {
   color: #ffffff;
   background-color: #1e1e1e;
   border-style: none; }
+  .btn:disabled {
+    background-color: darkgray; }
   .btn--capsule {
     font-size: 2.4rem;
     font-weight: 500;

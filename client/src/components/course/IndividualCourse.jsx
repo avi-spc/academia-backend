@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Outlet, useParams } from 'react-router-dom';
+import { Link, Outlet, useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { togglePopup } from '../../reduxStore/actions/popus';
@@ -40,7 +40,34 @@ const IndividualCourse = ({
 				</div>
 				<div className="individual-course__work">
 					<div className="individual-course__work__category text-medium-M">
-						<div>Assignments</div>
+						<ul>
+							<li>
+								<Link to={`/courses/${course_id}`}>Announcements</Link>
+							</li>
+							<li>
+								<Link
+									to={
+										account.type === 'instructor'
+											? `/courses/${course_id}/assignments`
+											: `/courses/${course_id}/assignments/performance`
+									}
+								>
+									Assignments
+								</Link>
+							</li>
+							<li>
+								<Link
+									to={
+										account.type === 'instructor'
+											? `/courses/${course_id}/project`
+											: `/courses/${course_id}/project/performance`
+									}
+								>
+									Project
+								</Link>
+							</li>
+							<li>Notes</li>
+						</ul>
 						<span className="material-symbols-outlined">arrow_drop_down_circle</span>
 					</div>
 					<div className="individual-course__work__chore-p-create">

@@ -2,7 +2,11 @@ import { useRef } from 'react';
 import { connect } from 'react-redux';
 
 import { togglePopup } from '../../../reduxStore/actions/popus';
-import { uploadDocument, discardDocument } from '../../../reduxStore/actions/course';
+import {
+	uploadDocument,
+	discardDocument,
+	clearDocumentId
+} from '../../../reduxStore/actions/course';
 import { submitAssignment } from '../../../reduxStore/actions/performance';
 
 const SubmitAssignment = ({
@@ -10,6 +14,7 @@ const SubmitAssignment = ({
 	uploadDocument,
 	discardDocument,
 	togglePopup,
+	clearDocumentId,
 	documentId,
 	courseId,
 	assignmentId
@@ -40,7 +45,12 @@ const SubmitAssignment = ({
 				<div className="create__cta">
 					<button
 						className="btn btn--round"
-						onClick={() => submitAssignment({ documentId }, courseId, assignmentId)}
+						disabled={documentId ? false : true}
+						onClick={() => {
+							submitAssignment({ documentId }, courseId, assignmentId);
+							togglePopup(false);
+							clearDocumentId();
+						}}
 					>
 						Submit
 					</button>
@@ -61,5 +71,6 @@ export default connect(mapStateToProps, {
 	submitAssignment,
 	uploadDocument,
 	discardDocument,
-	togglePopup
+	togglePopup,
+	clearDocumentId
 })(SubmitAssignment);

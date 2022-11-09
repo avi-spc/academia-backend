@@ -71,6 +71,9 @@ const CourseSchema = new mongoose.Schema(
 			type: Number,
 			required: true
 		},
+		accessCode: {
+			type: String
+		},
 		instructor: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'instructor'

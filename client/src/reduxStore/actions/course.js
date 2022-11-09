@@ -144,10 +144,14 @@ export const uploadDocument = (form) => async (dispatch) => {
 
 export const discardDocument = (documentId) => async (dispatch) => {
 	try {
-		const res = await axios.delete(`/performance/submissions/file/${documentId}`);
+		await axios.delete(`/performance/submissions/file/${documentId}`);
 
-		dispatch({ type: DISCARD_FILE });
+		dispatch(clearDocumentId());
 	} catch (err) {
 		console.log(err);
 	}
+};
+
+export const clearDocumentId = () => (dispatch) => {
+	dispatch({ type: DISCARD_FILE });
 };

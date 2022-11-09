@@ -79,6 +79,12 @@ router.post(
 
 			await course.save();
 
+			await Course.findByIdAndUpdate(
+				course.id,
+				{ $set: { accessCode: course.id.substring(19) } },
+				{ new: true }
+			);
+
 			await Instructor.findByIdAndUpdate(
 				req.account.id,
 				{ $addToSet: { coursesIncharge: { course: course.id } } },

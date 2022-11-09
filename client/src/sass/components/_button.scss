@@ -5,6 +5,10 @@
 	background-color: $color-surface-quarternary;
 	border-style: none;
 
+	&:disabled {
+		background-color: darkgray;
+	}
+
 	&--capsule {
 		font-size: 2.4rem;
 		font-weight: $medium;

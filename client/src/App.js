@@ -16,6 +16,8 @@ import IndividualSubmissionProject from './components/course/IndividualSubmissio
 import AnnouncementDocket from './components/course/AnnouncementDocket';
 import AssignmentDocket from './components/course/AssignmentDocket';
 import ProjectDocket from './components/course/ProjectDocket';
+import ChoreAssignment from './components/course/student/ChoreAssignment';
+import ChoreProject from './components/course/student/ChoreProject';
 
 const App = () => {
 	useEffect(() => {
@@ -47,6 +49,11 @@ const App = () => {
 									path="submission/:student_id/project/:project_id"
 									element={<IndividualSubmissionProject />}
 								/>
+								<Route
+									path="assignments/performance"
+									element={<ChoreAssignment />}
+								/>
+								<Route path="project/performance" element={<ChoreProject />} />
 							</Route>
 						</Route>
 					</Routes>

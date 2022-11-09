@@ -5,18 +5,13 @@ import { connect } from 'react-redux';
 import { togglePopup } from '../../reduxStore/actions/popus';
 import { getIndividualCourse, getAnnouncements } from '../../reduxStore/actions/course';
 
-import StudyMaterialDocket from './StudyMaterialDocket';
-import ChoreDocket from './ProjectDocket';
-import ChoreAssignment from './student/ChoreAssignment';
-import ChoreProject from './student/ChoreProject';
-
 const IndividualCourse = ({
 	getIndividualCourse,
 	getAnnouncements,
 	togglePopup,
 	popup,
 	individualCourse,
-	performance
+	auth: { account }
 }) => {
 	const { course_id } = useParams();
 
@@ -49,33 +44,16 @@ const IndividualCourse = ({
 						<span className="material-symbols-outlined">arrow_drop_down_circle</span>
 					</div>
 					<div className="individual-course__work__chore-p-create">
-						<button
-							className="btn btn--capsule create"
-							onClick={() => togglePopup(!popup.isVisible)}
-						>
-							<span className="material-symbols-outlined">add_circle</span>Create
-						</button>
+						{account.type === 'instructor' && (
+							<button
+								className="btn btn--capsule create"
+								onClick={() => togglePopup(!popup.isVisible)}
+							>
+								<span className="material-symbols-outlined">add_circle</span>Create
+							</button>
+						)}
 						<ul className="individual-course__work__list">
-							{/* <ChoreDocket type="project" /> */}
 							<Outlet context={{ individualCourse }} />
-							{/* <ChoreAssignment
-								performance={
-									performance[
-										performance.findIndex((perf) => {
-											return perf.course._id === individualCourse.course._id;
-										})
-									]
-								}
-							/> */}
-							{/* <ChoreProject
-								performance={
-									performance[
-										performance.findIndex((perf) => {
-											return perf.course._id === individualCourse.course._id;
-										})
-									]
-								}
-							/> */}
 						</ul>
 					</div>
 				</div>
@@ -86,8 +64,8 @@ const IndividualCourse = ({
 
 const mapStateToProps = (state) => ({
 	popup: state.popup,
-	individualCourse: state.course.individualCourse
-	// performance: state.performance.performance.performance
+	individualCourse: state.course.individualCourse,
+	auth: state.auth
 });
 
 export default connect(mapStateToProps, { getIndividualCourse, getAnnouncements, togglePopup })(

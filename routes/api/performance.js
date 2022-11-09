@@ -529,6 +529,7 @@ router.delete('/project/:course_id/:document_id', auth, async (req, res) => {
 
 		res.status(200).json({ msg: 'unsubmitted project', teamLeader });
 	} catch (err) {
+		console.log(err);
 		if (err.kind === 'ObjectId' && err.path === 'course') {
 			return res.status(404).json({ errors: [{ msg: 'course not found' }] });
 		}

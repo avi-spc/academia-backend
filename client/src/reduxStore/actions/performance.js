@@ -34,7 +34,7 @@ export const getPerformance = () => async (dispatch) => {
 export const getStudentPerformance = (studentId) => async (dispatch) => {
 	try {
 		const res = await axios.get(`/performance/student/${studentId}`);
-		
+
 		dispatch({ type: GET_PERFORMANCE, payload: res.data.studentPerformance });
 	} catch (err) {
 		console.log(err);
@@ -63,6 +63,18 @@ export const submitAssignment = (assignment, courseId, assignmentId) => async (d
 	}
 };
 
+export const unsubmitAssignment = (courseId, assignmentId, documentId) => async (dispatch) => {
+	try {
+		const res = await axios.delete(
+			`/performance/assignment/${courseId}/${assignmentId}/${documentId}`
+		);
+
+		dispatch({ type: GET_PERFORMANCE, payload: res.data.performance });
+	} catch (err) {
+		console.log(err);
+	}
+};
+
 export const submitProject = (project, courseId, projectId) => async (dispatch) => {
 	const config = {
 		headers: {
@@ -76,6 +88,16 @@ export const submitProject = (project, courseId, projectId) => async (dispatch) 
 		const res = await axios.post(`/performance/project/${courseId}/${projectId}`, body, config);
 
 		dispatch({ type: GET_PERFORMANCE, payload: res.data.performance });
+	} catch (err) {
+		console.log(err);
+	}
+};
+
+export const unsubmitProject = (courseId, documentId) => async (dispatch) => {
+	try {
+		const res = await axios.delete(`/performance/project/${courseId}/${documentId}`);
+
+		dispatch({ type: GET_PERFORMANCE, payload: res.data.teamLeader });
 	} catch (err) {
 		console.log(err);
 	}

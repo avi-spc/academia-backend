@@ -1,25 +1,34 @@
+import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import { useOutletContext, useParams } from 'react-router-dom';
+
+import { getStudentPerformance } from '../../reduxStore/actions/performance';
 
 import Chore from './Chore';
 import ChoreAssignment from './student/ChoreAssignment';
-import { useOutletContext, useParams } from 'react-router-dom';
 import AssignmentSubmission from './student/AssignmentSubmission';
 
-const IndividualSubmissionProject = ({ performance }) => {
+const IndividualSubmissionProject = ({ getStudentPerformance, performance }) => {
 	const { student_id, course_id } = useParams();
 	const { individualCourse } = useOutletContext();
 
+	const [submission, setSubmission] = useState(null);
+
+	useEffect(() => {
+		getStudentPerformance(student_id);
+	}, [student_id]);
+
+	useEffect(() => {
+		if (performance) {
+			setSubmission(
+				performance.performance.find((perf) => {
+					return perf.course._id === course_id;
+				}).project
+			);
+		}
+	}, [performance]);
+
 	const chore = individualCourse.course.project;
-
-	const student = performance.studentsSubmitted.find((student) => {
-		return student.student === student_id;
-	});
-
-	const course = student.performance.find((perf) => {
-		return perf.course === course_id;
-	});
-
-	const submission = course.project;
 
 	return (
 		submission && (
@@ -41,7 +50,7 @@ const IndividualSubmissionProject = ({ performance }) => {
 };
 
 const mapStateToProps = (state) => ({
-	performance: state.performance
+	performance: state.performance.performance
 });
 
-export default connect(mapStateToProps)(IndividualSubmissionProject);
+export default connect(mapStateToProps, { getStudentPerformance })(IndividualSubmissionProject);

@@ -118,13 +118,32 @@ router.delete('/:course_id', auth, async (req, res) => {
 	}
 });
 
-// @route		GET: api/performance/student/:student_id
-// @desc		Retrieve performace for a particular student
+// @route		GET: api/performance/student
+// @desc		Retrieve performace for loggedIn student
 // @access		Private
 router.get('/student', auth, async (req, res) => {
 	try {
 		const studentPerformance = await Performance.findOne({
 			student: req.account.id
+		}).populate('performance.course');
+
+		res.status(200).json({ studentPerformance });
+	} catch (err) {
+		if (err.kind === 'ObjectId') {
+			return res.status(404).json({ errors: [{ msg: 'student not found' }] });
+		}
+
+		res.status(500).json({ errors: [{ msg: 'server error' }] });
+	}
+});
+
+// @route		GET: api/performance/student/:student_id
+// @desc		Retrieve performace for a particular student
+// @access		Private
+router.get('/student/:student_id', auth, async (req, res) => {
+	try {
+		const studentPerformance = await Performance.findOne({
+			student: req.params.student_id
 		}).populate('performance.course');
 
 		res.status(200).json({ studentPerformance });

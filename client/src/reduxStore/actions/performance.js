@@ -31,6 +31,16 @@ export const getPerformance = () => async (dispatch) => {
 	}
 };
 
+export const getStudentPerformance = (studentId) => async (dispatch) => {
+	try {
+		const res = await axios.get(`/performance/student/${studentId}`);
+		
+		dispatch({ type: GET_PERFORMANCE, payload: res.data.studentPerformance });
+	} catch (err) {
+		console.log(err);
+	}
+};
+
 export const submitAssignment = (assignment, courseId, assignmentId) => async (dispatch) => {
 	const config = {
 		headers: {

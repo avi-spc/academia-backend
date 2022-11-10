@@ -324,7 +324,7 @@ router.put(
 					}
 				},
 				queryOptions
-			);
+			).populate('performance.course');
 
 			res.status(201).json({ msg: 'assignment graded', performance });
 		} catch (err) {
@@ -724,7 +724,7 @@ router.put(
 					}
 				},
 				{ new: true }
-			);
+			).populate('performance.course');
 
 			res.status(201).json({ msg: 'project graded', performance });
 		} catch (err) {

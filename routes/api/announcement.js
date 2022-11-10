@@ -45,6 +45,47 @@ router.post(
 	}
 );
 
+// @route		POST: api/announcements/:course_id
+// @desc		Create an announcement
+// @access		Private
+router.put(
+	'/:course_id/:announcement_id',
+	[
+		auth,
+		[
+			check('title', 'title is required').not().isEmpty(),
+			check('message', 'message is required').not().isEmpty()
+		]
+	],
+	async (req, res) => {
+		const errors = validationResult(req);
+		if (!errors.isEmpty()) {
+			return res.status(422).json({ errors: errors.array() });
+		}
+
+		const { title, message } = req.body;
+
+		try {
+			const announcements = await Announcement.findOneAndUpdate(
+				{
+					course: req.params.course_id,
+					announcements: { $elemMatch: { _id: req.params.announcement_id } }
+				},
+				{ $set: { 'announcements.$': { title, message } } },
+				{ new: true }
+			);
+
+			res.status(201).json({ msg: 'announcement updated', announcements });
+		} catch (err) {
+			if (err.kind === 'ObjectId') {
+				return res.status(404).json({ errors: [{ msg: 'course not found' }] });
+			}
+
+			res.status(500).json({ errors: [{ msg: 'server error' }] });
+		}
+	}
+);
+
 // @route		GET: api/announcements/:course_id
 // @desc		Retrieve all announcements for a course
 // @access		Private

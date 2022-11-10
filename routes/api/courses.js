@@ -113,6 +113,45 @@ router.post(
 	}
 );
 
+// @route		PUT: api/courses/:course_id
+// @desc		Update course
+// @access		Private
+router.put(
+	'/:course_id',
+	[
+		auth,
+		[
+			check('code', 'code is required').not().isEmpty(),
+			check('name', 'name is required').not().isEmpty(),
+			check('credits', 'credits are required').isNumeric().not().isEmpty()
+		]
+	],
+	async (req, res) => {
+		const errors = validationResult(req);
+		if (!errors.isEmpty()) {
+			return res.status(422).json({ errors: errors.array() });
+		}
+
+		const { code, name, credits } = req.body;
+
+		try {
+			const course = await Course.findByIdAndUpdate(
+				req.params.course_id,
+				{ $set: { code, name, credits } },
+				{ new: true }
+			);
+
+			res.status(200).json({ msg: 'course updated', course });
+		} catch (err) {
+			if (err.kind === 'ObjectId') {
+				return res.status(404).json({ errors: [{ msg: 'course not found' }] });
+			}
+
+			res.status(500).json({ errors: [{ msg: 'server error' }] });
+		}
+	}
+);
+
 // @route		PUT: api/courses/assignments/:course_id
 // @desc		Add assignment to course
 // @access		Private

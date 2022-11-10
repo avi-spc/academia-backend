@@ -20,6 +20,8 @@ ul {
 input,
 textarea {
   font-family: 'Fredoka', sans-serif;
+  font-size: 2rem;
+  font-weight: 400;
   padding: 2.5rem;
   background-color: #ffffff;
   border-radius: 2rem;
@@ -34,6 +36,9 @@ textarea {
 a {
   text-decoration: none;
   color: #000000; }
+
+button a {
+  color: #ffffff; }
 
 .text-small-R {
   font-size: 1.6rem;
@@ -81,9 +86,8 @@ a {
   margin: 5rem auto; }
 
 .container-medium {
-  max-width: 66rem;
-  margin: 5rem auto;
-  padding: 3rem;
+  width: 70rem;
+  padding: 1rem;
   background-color: #ededed;
   border-radius: 3rem; }
 
@@ -182,6 +186,11 @@ a {
     font-size: 2rem;
     font-weight: 500;
     padding: 2.3rem;
+    border-radius: 2rem; }
+  .btn--round-lg {
+    font-size: 2.4rem;
+    font-weight: 500;
+    padding: 2.5rem 4.3rem;
     border-radius: 2rem; }
   .btn--round-sm {
     font-size: 1.6rem;
@@ -321,7 +330,7 @@ a {
   height: 16rem;
   color: #ffffff;
   background-color: #1e1e1e;
-  border-radius: 2rem; }
+  border-radius: 3rem; }
 
 .create-chore form .doc-file {
   display: none; }
@@ -334,6 +343,9 @@ a {
 
 .create-chore form .points {
   grid-column: 5 / span 2; }
+
+.create-chore form .synopsis {
+  grid-column: 2/-1; }
 
 .create-announcement form .title {
   grid-column: 2 / -1; }
@@ -349,18 +361,28 @@ a {
   grid-template-columns: repeat(6, minmax(0, 1fr));
   grid-gap: 2rem;
   align-items: center;
-  margin-bottom: 6rem; }
+  padding: 4rem 3rem 0 4rem; }
 
 .create-heading {
-  margin-bottom: 2.5rem; }
+  padding: 2rem;
+  padding-left: 3rem;
+  background-color: #d9d9d9;
+  border-radius: 2.5rem; }
 
 .create__file {
-  margin-bottom: 2rem; }
+  padding: 4rem 3rem 0 3rem; }
 
 .create__cta {
-  text-align: right; }
+  text-align: right;
+  margin: 5rem 3rem 3rem 0; }
   .create__cta > button:not(:first-child) {
     margin-left: 2rem; }
+
+.join-course form label {
+  grid-column: 1 / span 2; }
+
+.join-course form .accessCode {
+  grid-column: 3/7; }
 
 .discussion {
   border-radius: 2.5rem;

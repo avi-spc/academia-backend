@@ -29,8 +29,8 @@ const CreateChore = ({
 	return (
 		<div className="popup">
 			<div className="create-chore container-medium text-normal-M">
-				<div className="create-heading text-large-SM">New chore</div>
-				<form className="create__file" ref={form}>
+				<div className="create-heading text-medium-SB">New chore</div>
+				<form className="create__file text-normal-R" ref={form}>
 					<label className="doc-label" htmlFor="doc-file">
 						<span>Upload file</span>
 					</label>
@@ -42,7 +42,7 @@ const CreateChore = ({
 						onChange={() => uploadDocument(form.current)}
 					/>
 				</form>
-				<form className="create__form">
+				<form className="create__form text-normal-R">
 					<label>Title</label>
 					<input
 						type="text"

@@ -27,7 +27,7 @@ const SignUp = ({ registerAccount, auth: { isAuthenticated, loading } }) => {
 		<div className="container-small">
 			<div className="sign-up">
 				<div className="logo">academia</div>
-				<div className="account-type-tabs text-normal-SM">
+				<div className="account-type-tabs text-medium-M">
 					<div className="tab" onClick={() => setAccountType('instructor')}>
 						Instructor
 					</div>
@@ -41,8 +41,8 @@ const SignUp = ({ registerAccount, auth: { isAuthenticated, loading } }) => {
 					<InstructorSignUp register={register} />
 				)}
 			</div>
-			<button className="btn-alternate text-normal-M">
-				Already have an account? <span className="text-normal-SM">Sign In</span>
+			<button className="btn-alternate text-medium-R">
+				Already have an account? <span className="text-medium-SB">Sign In</span>
 			</button>
 		</div>
 	);

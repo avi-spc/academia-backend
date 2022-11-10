@@ -27,7 +27,7 @@
 
 			color: $color-text-primary;
 			background-color: $color-surface-quarternary;
-			border-radius: $border-radius-medium;
+			border-radius: $border-radius-extra-large;
 		}
 
 		.doc-file {
@@ -44,6 +44,10 @@
 
 		.points {
 			grid-column: 5 / span 2;
+		}
+
+		.synopsis {
+			grid-column: 2/-1;
 		}
 	}
 }
@@ -75,22 +79,38 @@
 		grid-gap: 2rem;
 		align-items: center;
 
-		margin-bottom: 6rem;
+		padding: 4rem 3rem 0 4rem;
 	}
 
 	&-heading {
-		margin-bottom: 2.5rem;
+		padding: 2rem;
+		padding-left: 3rem;
+		background-color: $color-surface-primary;
+		border-radius: $border-radius-large;
 	}
 
 	&__file {
-		margin-bottom: 2rem;
+		padding: 4rem 3rem 0 3rem;
 	}
 
 	&__cta {
 		text-align: right;
+		margin: 5rem 3rem 3rem 0;
 
 		& > button:not(:first-child) {
 			margin-left: 2rem;
+		}
+	}
+}
+
+.join-course {
+	form {
+		label {
+			grid-column: 1 / span 2;
+		}
+
+		.accessCode {
+			grid-column: 3/7;
 		}
 	}
 }

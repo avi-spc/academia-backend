@@ -23,7 +23,7 @@ const StudentSignIn = ({ login }) => {
 					value={password}
 					onChange={onChange}
 				/>
-				<button className="btn btn--round">Sign In</button>
+				<button className="btn btn--round-lg">Sign In</button>
 			</form>
 		</Fragment>
 	);

@@ -28,7 +28,7 @@ const SignIn = ({ loginAccount, auth: { isAuthenticated, loading } }) => {
 		<div className="container-small">
 			<div className="sign-in">
 				<div className="logo">academia</div>
-				<div className="account-type-tabs text-normal-SM">
+				<div className="account-type-tabs text-medium-M">
 					<div className="tab" onClick={() => setAccountType('instructor')}>
 						Instructor
 					</div>
@@ -42,8 +42,8 @@ const SignIn = ({ loginAccount, auth: { isAuthenticated, loading } }) => {
 					<InstructorSignIn login={login} />
 				)}
 			</div>
-			<button className="btn-alternate text-normal-M">
-				Don't have an account? <span className="text-normal-SM">Sign Up</span>
+			<button className="btn-alternate text-medium-R">
+				Don't have an account? <span className="text-medium-SB">Sign Up</span>
 			</button>
 		</div>
 	);

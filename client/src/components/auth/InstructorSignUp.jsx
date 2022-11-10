@@ -31,7 +31,7 @@ const InstructorSignUp = ({ register }) => {
 					onChange={onChange}
 				/>
 				<input type="text" placeholder="access code" />
-				<button className="btn btn--round">Sign Up</button>
+				<button className="btn btn--round-lg">Sign Up</button>
 			</form>
 		</Fragment>
 	);

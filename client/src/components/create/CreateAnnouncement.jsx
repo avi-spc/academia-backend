@@ -11,8 +11,8 @@ const CreateAnnouncement = ({ createAnnouncement, clearDocumentId, togglePopup, 
 	return (
 		<div className="popup">
 			<div className="create-announcement container-medium text-normal-M">
-				<div className="create-heading text-large-SM">New announcement</div>
-				<form className="create__form">
+				<div className="create-heading text-medium-SB">New announcement</div>
+				<form className="create__form text-normal-R">
 					<label>Title</label>
 					<input
 						type="text"

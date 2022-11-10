@@ -28,9 +28,9 @@ const SubmitAssignment = ({
 
 	return (
 		<div className="popup">
-			<div className="create-chore container-medium text-normal-M">
-				<div className="create-heading text-large-SM">Submit assignment</div>
-				<form className="create__file" ref={form}>
+			<div className="create-chore container-medium">
+				<div className="create-heading text-medium-SB">Submit assignment</div>
+				<form className="create__file text-normal-R" ref={form}>
 					<label className="doc-label" htmlFor="doc-file">
 						<span>Upload file</span>
 					</label>

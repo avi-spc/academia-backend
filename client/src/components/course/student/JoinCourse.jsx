@@ -10,13 +10,13 @@ const JoinCourse = ({ enrollCourse, togglePopup }) => {
 
 	return (
 		<div className="popup">
-			<div className="create-course container-medium text-normal-M">
-				<div className="create-heading text-large-SM">Join course</div>
-				<form className="create__form">
-					<label>Course Access Code</label>
+			<div className="join-course container-medium">
+				<div className="create-heading text-medium-SB">Join course</div>
+				<form className="create__form text-normal-R">
+					<label>Access Code</label>
 					<input
 						type="text"
-						className="code"
+						className="accessCode"
 						name="courseAccessCode"
 						value={courseAccessCode}
 						onChange={onChange}

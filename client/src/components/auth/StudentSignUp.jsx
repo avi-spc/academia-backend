@@ -30,7 +30,7 @@ const StudentSignUp = ({ register }) => {
 					value={name}
 					onChange={onChange}
 				/>
-				<button className="btn btn--round">Sign Up</button>
+				<button className="btn btn--round-lg">Sign Up</button>
 			</form>
 		</Fragment>
 	);

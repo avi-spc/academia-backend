@@ -23,6 +23,9 @@ input,
 textarea {
 	font-family: 'Fredoka', sans-serif;
 
+	font-size: 2rem;
+	font-weight: $regular;
+
 	padding: 2.5rem;
 	background-color: $color-surface-tertiary;
 	border-radius: $border-radius-medium;
@@ -40,4 +43,10 @@ textarea {
 a {
 	text-decoration: none;
 	color: $color-text-secondary;
+}
+
+button {
+	a {
+		color: $color-text-primary;
+	}
 }

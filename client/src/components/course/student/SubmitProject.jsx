@@ -32,9 +32,9 @@ const SubmitProject = ({
 
 	return (
 		<div className="popup">
-			<div className="create-chore container-medium text-normal-M">
-				<div className="create-heading text-large-SM">Submit project</div>
-				<form ref={form}>
+			<div className="create-chore container-medium">
+				<div className="create-heading text-medium-SB">Submit project</div>
+				<form className="create__file text-normal-R" ref={form}>
 					<label className="doc-label" htmlFor="doc-file">
 						<span>Upload file</span>
 					</label>
@@ -46,7 +46,7 @@ const SubmitProject = ({
 						onChange={() => uploadDocument(form.current)}
 					/>
 				</form>
-				<form className="create__form">
+				<form className="create__form text-normal-R">
 					<label>Title</label>
 					<input
 						type="text"
@@ -56,12 +56,13 @@ const SubmitProject = ({
 						onChange={onChange}
 					/>
 					<label>Synopsis</label>
-					<input
+					<textarea
 						type="text"
-						className="deadline"
+						className="synopsis"
 						name="synopsis"
 						value={synopsis}
 						onChange={onChange}
+						rows="5"
 					/>
 				</form>
 				<div className="create__cta">

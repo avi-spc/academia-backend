@@ -10,9 +10,9 @@ const CreateCourse = ({ createCourse, togglePopup }) => {
 
 	return (
 		<div className="popup">
-			<div className="create-course container-medium text-normal-M">
-				<div className="create-heading text-large-SM">New course</div>
-				<form className="create__form">
+			<div className="create-course container-medium">
+				<div className="create-heading text-medium-SB">New course</div>
+				<form className="create__form text-normal-R">
 					<label>Code</label>
 					<input
 						type="text"

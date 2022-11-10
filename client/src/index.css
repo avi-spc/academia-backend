@@ -115,6 +115,8 @@ button a {
   padding-bottom: 3.2rem;
   background-color: #ededed;
   border-radius: 2.5rem; }
+  .announcement__title::first-letter {
+    text-transform: uppercase; }
   .announcement__timestamp {
     justify-self: end; }
   .announcement__message {
@@ -226,6 +228,8 @@ button a {
     background-color: #d9d9d9; }
     .chore__header__title {
       margin-left: 2rem; }
+      .chore__header__title::first-letter {
+        text-transform: uppercase; }
     .chore__header__timestamp {
       margin-left: auto; }
   .chore__details, .chore__submission-details {
@@ -263,6 +267,11 @@ button a {
     position: relative;
     padding: 3rem;
     background-color: #d9d9d9; }
+    .course-card__details__name {
+      text-transform: capitalize; }
+    .course-card__details__code {
+      text-transform: uppercase;
+      margin-top: 1rem; }
     .course-card__details__avatar {
       position: absolute;
       top: 100%;
@@ -272,9 +281,6 @@ button a {
       transform: translateY(-50%);
       background-color: #1e1e1e;
       border-radius: 50%; }
-    .course-card__details__code {
-      text-transform: uppercase;
-      margin-top: 1rem; }
   .course-card__access {
     display: flex;
     align-items: center;
@@ -427,15 +433,23 @@ button a {
   margin-bottom: 5rem;
   background-color: #d9d9d9;
   border-radius: 2.5rem; }
+  .individual-course__banner__name {
+    text-transform: capitalize; }
+  .individual-course__banner__code {
+    text-transform: uppercase;
+    margin-top: 1rem; }
   .individual-course__banner__access {
     display: flex;
     align-items: center;
     margin-top: auto; }
     .individual-course__banner__access .access-code {
       margin-right: 2rem; }
-  .individual-course__banner__code {
-    text-transform: uppercase;
-    margin-top: 1rem; }
+    .individual-course__banner__access .instructor-name {
+      margin-right: 2rem;
+      padding: 1rem 2rem;
+      text-transform: capitalize;
+      background-color: #ffffff;
+      border-radius: 3rem; }
 
 .individual-course__work {
   display: grid;
@@ -487,6 +501,8 @@ button a {
     background-color: #d9d9d9; }
     .study-material__header__title {
       margin-left: 2rem; }
+      .study-material__header__title::first-letter {
+        text-transform: uppercase; }
     .study-material__header__timestamp {
       margin-left: auto; }
   .study-material__details {
@@ -520,3 +536,6 @@ button a {
   text-align: right;
   margin-top: 5rem;
   margin-bottom: 2.5rem; }
+
+.chore-submission__submissions > button, .chore-submission__individual-submission > button {
+  margin-top: 2.5rem; }

@@ -23,7 +23,7 @@ const CreateCourse = ({ createCourse, togglePopup }) => {
 					/>
 					<label>Credits</label>
 					<input
-						type="text"
+						type="number"
 						className="credits"
 						name="credits"
 						value={credits}

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { Fragment, useEffect } from 'react';
 import { Link, Outlet, useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -32,10 +32,20 @@ const IndividualCourse = ({
 						{individualCourse.course.code}
 					</div>
 					<div className="individual-course__banner__access">
-						<span className="access-code text-normal-sparsed-M">ac3t8</span>
-						<span className="icon icon--light material-symbols-outlined">
-							content_copy
-						</span>
+						{account.type === 'instructor' ? (
+							<Fragment>
+								<span className="access-code text-normal-sparsed-M">
+									{individualCourse.course.accessCode}
+								</span>
+								<span className="icon icon--light material-symbols-outlined">
+									content_copy
+								</span>
+							</Fragment>
+						) : (
+							<span className="instructor-name text-medium-M">
+								{individualCourse.course.instructor.name}
+							</span>
+						)}
 					</div>
 				</div>
 				<div className="individual-course__work">

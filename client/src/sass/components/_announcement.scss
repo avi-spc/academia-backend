@@ -9,6 +9,12 @@
 	background-color: $color-surface-secondary;
 	border-radius: $border-radius-large;
 
+	&__title {
+		&::first-letter{
+			text-transform: uppercase;
+		}
+	}
+
 	&__timestamp {
 		justify-self: end;
 	}

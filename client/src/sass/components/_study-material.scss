@@ -11,6 +11,10 @@
 
 		&__title {
 			margin-left: 2rem;
+
+			&::first-letter {
+				text-transform: uppercase;
+			}
 		}
 
 		&__timestamp {

@@ -33,7 +33,7 @@ router.get('/', auth, async (req, res) => {
 // @access		Private
 router.get('/:course_id', auth, async (req, res) => {
 	try {
-		const course = await Course.findById(req.params.course_id);
+		const course = await Course.findById(req.params.course_id).populate('instructor');
 		if (!course) {
 			return res.status(404).json({ errors: [{ msg: 'course not found' }] });
 		}

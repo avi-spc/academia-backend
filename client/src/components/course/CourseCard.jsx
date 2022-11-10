@@ -10,7 +10,9 @@ const CourseCard = ({ course }) => {
 				<div className="course-card__details__avatar"></div>
 			</div>
 			<div className="course-card__access">
-				<span className="course-card__access__code text-normal-sparsed-M">ac3t8</span>
+				<span className="course-card__access__code text-normal-sparsed-M">
+					{course.accessCode}
+				</span>
 				<span className="icon icon--dark material-symbols-outlined">content_copy</span>
 			</div>
 		</Link>

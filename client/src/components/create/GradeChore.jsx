@@ -19,11 +19,11 @@ const GradeChore = ({
 	return (
 		<div className="popup">
 			<div className="create-announcement container-medium text-normal-M">
-				<div className="create-heading text-large-SM">Grade {type}</div>
-				<form className="create__form">
+				<div className="create-heading text-medium-SB">Grade {type}</div>
+				<form className="create__form text-normal-R">
 					<label>Marks</label>
 					<input
-						type="text"
+						type="number"
 						className="title"
 						name="marks"
 						value={marks}

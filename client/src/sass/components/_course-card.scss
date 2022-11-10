@@ -8,6 +8,15 @@
 
 		background-color: $color-surface-primary;
 
+		&__name {
+			text-transform: capitalize;
+		}
+
+		&__code {
+			text-transform: uppercase;
+			margin-top: 1rem;
+		}
+
 		&__avatar {
 			position: absolute;
 			top: 100%;
@@ -18,11 +27,6 @@
 
 			background-color: $color-surface-quarternary;
 			border-radius: 50%;
-		}
-
-		&__code {
-			text-transform: uppercase;
-			margin-top: 1rem;
 		}
 	}
 
@@ -57,7 +61,7 @@
 		border-radius: $border-radius-large;
 		background-color: $color-surface-secondary;
 
-		&>span:nth-child(2){
+		& > span:nth-child(2) {
 			margin-top: 2rem;
 		}
 

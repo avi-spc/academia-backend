@@ -61,7 +61,7 @@ const CreateChore = ({
 					/>
 					<label>Points</label>
 					<input
-						type="text"
+						type="number"
 						className="points"
 						name="maxMarks"
 						value={maxMarks}

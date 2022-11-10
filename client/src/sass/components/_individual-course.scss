@@ -9,6 +9,15 @@
 		background-color: $color-surface-primary;
 		border-radius: $border-radius-large;
 
+		&__name {
+			text-transform: capitalize;
+		}
+
+		&__code {
+			text-transform: uppercase;
+			margin-top: 1rem;
+		}
+
 		&__access {
 			display: flex;
 			align-items: center;
@@ -18,11 +27,15 @@
 			.access-code {
 				margin-right: 2rem;
 			}
-		}
-		
-		&__code {
-			text-transform: uppercase;
-			margin-top: 1rem;
+
+			.instructor-name {
+				margin-right: 2rem;
+				padding: 1rem 2rem;
+				text-transform: capitalize;
+
+				background-color: $color-surface-tertiary;
+				border-radius: $border-radius-extra-large;
+			}
 		}
 	}
 

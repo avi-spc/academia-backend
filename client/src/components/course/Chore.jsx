@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 const Chore = ({ courseId, chore, type }) => {
 	return (
-		<Link to={`/courses/${courseId}/chore/${chore._id}/${type}`}>
+		// <Link to={`/courses/${courseId}/chore/${chore._id}/${type}`}>
 			<div className="chore text-normal-M">
 				<div className="chore__header">
 					<span className="icon icon--light material-symbols-outlined">assignment</span>
@@ -20,10 +20,17 @@ const Chore = ({ courseId, chore, type }) => {
 						<label>Points</label>
 						<div className="chore__details__points text-large-M">{chore.maxMarks}</div>
 					</div>
-					<button className="btn btn--round">View deatils</button>
+					<button className="btn btn--round">
+						<a
+							href={`http://localhost:5000/api/performance/submissions/file/${chore.documentId}`}
+							target="_blank"
+						>
+							View details
+						</a>
+					</button>
 				</div>
 			</div>
-		</Link>
+		// </Link>
 	);
 };
 

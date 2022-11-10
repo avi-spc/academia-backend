@@ -66,7 +66,9 @@ const IndividualCourse = ({
 									Project
 								</Link>
 							</li>
-							<li>Notes</li>
+							<li>
+								<Link to={`/courses/${course_id}/notes`}>Notes</Link>
+							</li>
 						</ul>
 						<span className="material-symbols-outlined">arrow_drop_down_circle</span>
 					</div>

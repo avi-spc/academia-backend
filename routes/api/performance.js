@@ -1,6 +1,7 @@
 const express = require('express');
 const { check, validationResult } = require('express-validator');
 const mongoose = require('mongoose');
+const fs = require('fs');
 
 const auth = require('../../middlewares/auth');
 const fileUploadHandler = require('../../middlewares/fileUpload');
@@ -824,21 +825,21 @@ router.delete('/submissions/file/:document_id', auth, async (req, res) => {
 	}
 });
 
-// router.get('/submissions/file/:file_id', async (req, res) => {
-// 	try {
-// 		const files = await SubmissionStream()
-// 			.find({ _id: mongoose.Types.ObjectId(req.params.file_id) })
-// 			.toArray();
+router.get('/submissions/file/:file_id', async (req, res) => {
+	try {
+		const files = await SubmissionStream()
+			.find({ _id: mongoose.Types.ObjectId(req.params.file_id) })
+			.toArray();
 
-// 		const stream = SubmissionStream().openDownloadStreamByName(files[0].filename);
+		const stream = SubmissionStream().openDownloadStreamByName(files[0].filename);
 
-// 		stream.pipe(fs.createWriteStream('./outputFile.zip'));
-// 	} catch (err) {
-// 		console.log(err);
-// 		res.status(500).json({
-// 			errors: [{ msg: err }]
-// 		});
-// 	}
-// });
+		stream.pipe(res);
+	} catch (err) {
+		console.log(err);
+		res.status(500).json({
+			errors: [{ msg: err }]
+		});
+	}
+});
 
 module.exports = router;

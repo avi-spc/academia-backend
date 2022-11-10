@@ -6,7 +6,8 @@ import {
 	GET_ACCOUNT,
 	LOGIN_SUCCESS,
 	LOGIN_ERROR,
-	SET_LOADING
+	SET_LOADING,
+	LOGOUT
 } from '../types';
 import { setAuthToken } from '../../utils/setAuthToken';
 
@@ -92,4 +93,8 @@ export const loginAccount = (account, type) => async (dispatch) => {
 
 export const setLoading = (isLoading) => (dispatch) => {
 	dispatch({ type: SET_LOADING, payload: isLoading });
+};
+
+export const logout = () => (dispatch) => {
+	dispatch({ type: LOGOUT });
 };

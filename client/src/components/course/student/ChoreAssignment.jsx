@@ -76,7 +76,14 @@ const ChoreAssignment = ({
 									{assignment.maxMarks}
 								</div>
 							</div>
-							<button className="btn btn--round">View deatils</button>
+							<button className="btn btn--round">
+								<a
+									href={`http://localhost:5000/api/performance/submissions/file/${assignment.documentId}`}
+									target="_blank"
+								>
+									View details
+								</a>
+							</button>
 						</div>
 						<div className="chore__submission-details">
 							{submission ? (
@@ -95,7 +102,14 @@ const ChoreAssignment = ({
 												: 'NG'}
 										</div>
 									</div>
-									<button className="btn btn--round">View submission</button>
+									<button className="btn btn--round">
+										<a
+											href={`http://localhost:5000/api/performance/submissions/file/${submission.documentId}`}
+											target="_blank"
+										>
+											View submission
+										</a>
+									</button>
 									{!submission.marksObtained && (
 										<button
 											className="btn btn--round btn--danger"

@@ -18,6 +18,7 @@ import AssignmentDocket from './components/course/AssignmentDocket';
 import ProjectDocket from './components/course/ProjectDocket';
 import ChoreAssignment from './components/course/student/ChoreAssignment';
 import ChoreProject from './components/course/student/ChoreProject';
+import StudyMaterialDocket from './components/course/StudyMaterialDocket';
 
 const App = () => {
 	useEffect(() => {
@@ -35,6 +36,7 @@ const App = () => {
 							<Route path="courses" element={<CourseDocket />} />
 							<Route path="courses/:course_id" element={<IndividualCourse />}>
 								<Route path="" element={<AnnouncementDocket />} />
+								<Route path="notes" element={<StudyMaterialDocket />} />
 								<Route path="assignments" element={<AssignmentDocket />} />
 								<Route path="project" element={<ProjectDocket />} />
 								<Route

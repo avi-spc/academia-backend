@@ -27,7 +27,7 @@ const SubmitProject = ({
 
 	const cancelChore = () => {
 		togglePopup(false);
-		discardDocument(documentId);
+		if (documentId) discardDocument(documentId);
 	};
 
 	return (

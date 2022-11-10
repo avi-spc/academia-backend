@@ -69,7 +69,14 @@ const ChoreProject = ({ getPerformance, unsubmitProject, togglePopup, performanc
 										: 'NG'}
 								</div>
 							</div>
-							<button className="btn btn--round">View submission</button>
+							<button className="btn btn--round">
+								<a
+									href={`http://localhost:5000/api/performance/submissions/file/${coursePerformance.project.documentId}`}
+									target="_blank"
+								>
+									View submission
+								</a>
+							</button>
 							{!coursePerformance.project.marksObtained && (
 								<button
 									className="btn btn--round btn--danger"

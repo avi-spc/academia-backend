@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 
-import { createAnnouncement } from '../../reduxStore/actions/course';
+import { clearDocumentId, createAnnouncement } from '../../reduxStore/actions/course';
 import { togglePopup } from '../../reduxStore/actions/popus';
 import { useForm } from '../../hooks/useForm';
 
-const CreateAnnouncement = ({ createAnnouncement, togglePopup, courseId }) => {
+const CreateAnnouncement = ({ createAnnouncement, clearDocumentId, togglePopup, courseId }) => {
 	const { formData, onChange } = useForm({ title: '', message: '' });
 	const { title, message } = formData;
 
@@ -33,7 +33,11 @@ const CreateAnnouncement = ({ createAnnouncement, togglePopup, courseId }) => {
 				<div className="create__cta">
 					<button
 						className="btn btn--round"
-						onClick={() => createAnnouncement(formData, courseId)}
+						onClick={() => {
+							createAnnouncement(formData, courseId);
+							togglePopup(false);
+							clearDocumentId();
+						}}
 					>
 						Create
 					</button>
@@ -50,4 +54,6 @@ const mapStateToProps = (state) => ({
 	popup: state.popup
 });
 
-export default connect(null, { createAnnouncement, togglePopup })(CreateAnnouncement);
+export default connect(null, { createAnnouncement, togglePopup, clearDocumentId })(
+	CreateAnnouncement
+);

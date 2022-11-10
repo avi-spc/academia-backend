@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { togglePopup } from '../../reduxStore/actions/popus';
 import { createChore, uploadDocument, discardDocument } from '../../reduxStore/actions/course';
+import { clearDocumentId } from '../../reduxStore/actions/course';
 import { useForm } from '../../hooks/useForm';
 
 const CreateChore = ({
@@ -10,6 +11,7 @@ const CreateChore = ({
 	discardDocument,
 	createChore,
 	togglePopup,
+	clearDocumentId,
 	documentId,
 	courseId,
 	type
@@ -69,9 +71,11 @@ const CreateChore = ({
 				<div className="create__cta">
 					<button
 						className="btn btn--round"
-						onClick={() =>
-							createChore({ title, deadline, maxMarks, documentId }, courseId, type)
-						}
+						onClick={() => {
+							createChore({ title, deadline, maxMarks, documentId }, courseId, type);
+							togglePopup(false);
+							clearDocumentId();
+						}}
 					>
 						Create
 					</button>
@@ -92,5 +96,6 @@ export default connect(mapStateToProps, {
 	createChore,
 	uploadDocument,
 	discardDocument,
-	togglePopup
+	togglePopup,
+	clearDocumentId
 })(CreateChore);

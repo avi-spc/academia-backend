@@ -7,12 +7,13 @@ import Chore from './Chore';
 const ProjectDocket = ({ popup, individualCourse, type }) => {
 	return (
 		<Fragment>
-			<Chore
-				courseId={individualCourse.course._id}
-				chore={individualCourse.course.project}
-				type="project"
-			/>
-
+			{individualCourse.course.project && (
+				<Chore
+					courseId={individualCourse.course._id}
+					chore={individualCourse.course.project}
+					type="project"
+				/>
+			)}
 			{popup.isVisible && (
 				<CreateChore courseId={individualCourse.course._id} type="project" />
 			)}

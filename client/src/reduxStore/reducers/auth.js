@@ -4,7 +4,8 @@ import {
 	GET_ACCOUNT,
 	LOGIN_SUCCESS,
 	LOGIN_ERROR,
-	SET_LOADING
+	SET_LOADING,
+	LOGOUT
 } from '../types';
 
 const initialState = {
@@ -30,6 +31,7 @@ const authReducer = (state = initialState, action) => {
 			return { ...state, token: payload.token, isAuthenticated: true };
 		case REGISTER_ERROR:
 		case LOGIN_ERROR:
+		case LOGOUT:
 			localStorage.removeItem('token');
 			return { ...state, token: null, isAuthenticated: false, account: null };
 		case SET_LOADING:

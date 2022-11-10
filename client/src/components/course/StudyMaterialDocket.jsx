@@ -19,7 +19,14 @@ const StudyMaterialDocket = ({ popup, individualCourse }) => {
 							</div>
 						</div>
 						<div className="study-material__details">
-							<button className="btn btn--round">Download</button>
+							<button className="btn btn--round">
+								<a
+									href={`http://localhost:5000/api/performance/submissions/file/${note.documentId}`}
+									target="_blank"
+								>
+									Download
+								</a>
+							</button>
 						</div>
 					</div>
 				</li>

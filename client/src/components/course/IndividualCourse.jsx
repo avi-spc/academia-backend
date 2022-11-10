@@ -25,10 +25,10 @@ const IndividualCourse = ({
 			<div className="container-large individual-course">
 				<div className="individual-course__banner">
 					<div className="individual-course__banner__thumbnail"></div>
-					<div className="individual-course__banner__name text-extra-large-SM">
+					<div className="individual-course__banner__name text-extra-large-M">
 						{individualCourse.course.name}
 					</div>
-					<div className="individual-course__banner__code text-large-M">
+					<div className="individual-course__banner__code text-extra-medium-SB">
 						{individualCourse.course.code}
 					</div>
 					<div className="individual-course__banner__access">

@@ -8,7 +8,7 @@
   box-sizing: border-box; }
 
 html {
-  font-size: 47%; }
+  font-size: 45%; }
 
 body {
   font-family: 'Fredoka', sans-serif;
@@ -35,42 +35,46 @@ a {
   text-decoration: none;
   color: #000000; }
 
-h1 {
-  font-size: 6.4rem;
-  font-weight: 600; }
+.text-small-R {
+  font-size: 1.6rem;
+  font-weight: 400; }
 
-.text-extra-large-SM {
-  font-size: 4rem;
-  font-weight: 600; }
+.text-normal-R {
+  font-size: 2rem;
+  font-weight: 400; }
 
-.text-large-SM {
-  font-size: 3.2rem;
-  font-weight: 600; }
-
-.text-large-M {
-  font-size: 3.2rem;
-  font-weight: 500; }
+.text-medium-R {
+  font-size: 2.4rem;
+  font-weight: 400; }
 
 .text-medium-M {
   font-size: 2.4rem;
   font-weight: 500; }
 
-.text-normal-SM {
-  font-size: 2rem;
+.text-medium-SB {
+  font-size: 2.4rem;
   font-weight: 600; }
 
-.text-normal-M {
-  font-size: 2rem;
+.text-extra-medium-SB {
+  font-size: 2.8rem;
   font-weight: 500; }
+
+.text-large-M {
+  font-size: 4rem;
+  font-weight: 500; }
+
+.text-extra-large-M {
+  font-size: 4.8rem;
+  font-weight: 500; }
+
+.text-extra-large-SB {
+  font-size: 4.8rem;
+  font-weight: 600; }
 
 .text-normal-sparsed-M {
   font-size: 2rem;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: 0.5em; }
-
-.text-small-M {
-  font-size: 1.6rem;
-  font-weight: 500; }
 
 .container-small {
   max-width: 65rem;
@@ -101,9 +105,10 @@ h1 {
 .announcement {
   display: grid;
   grid-template-columns: min-content max-content 1fr;
-  grid-gap: 2rem;
+  grid-gap: 1rem 2rem;
   align-items: center;
-  padding: 2rem 2rem 3.2rem 2rem;
+  padding: 2.5rem;
+  padding-bottom: 3.2rem;
   background-color: #ededed;
   border-radius: 2.5rem; }
   .announcement__timestamp {
@@ -258,11 +263,16 @@ h1 {
       transform: translateY(-50%);
       background-color: #1e1e1e;
       border-radius: 50%; }
+    .course-card__details__code {
+      text-transform: uppercase;
+      margin-top: 1rem; }
   .course-card__access {
     display: flex;
     align-items: center;
     padding: 2rem 3rem;
     background-color: #ededed; }
+    .course-card__access__code {
+      margin-right: 2rem; }
 
 .course-docket__courses-list {
   display: grid;
@@ -277,6 +287,8 @@ h1 {
   align-items: center;
   border-radius: 2.5rem;
   background-color: #ededed; }
+  .course-docket .join-or-create > span:nth-child(2) {
+    margin-top: 2rem; }
   .course-docket .join-or-create:hover {
     background-color: #d9d9d9;
     cursor: pointer; }
@@ -399,6 +411,9 @@ h1 {
     margin-top: auto; }
     .individual-course__banner__access .access-code {
       margin-right: 2rem; }
+  .individual-course__banner__code {
+    text-transform: uppercase;
+    margin-top: 1rem; }
 
 .individual-course__work {
   display: grid;

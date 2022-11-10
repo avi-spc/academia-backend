@@ -2,24 +2,59 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@800&display=swap');
 
-h1 {
-	font-size: 6.4rem;
-	font-weight: $semibold;
+// h1 {
+// 	font-size: 6.4rem;
+// 	font-weight: $semibold;
+// }
+
+// .text-extra-large-SM {
+// 	font-size: 4rem;
+// 	font-weight: $semibold;
+// }
+
+// .text-large-SM {
+// 	font-size: 3.2rem;
+// 	font-weight: $semibold;
+// }
+
+// .text-large-M {
+// 	font-size: 3.2rem;
+// 	font-weight: $medium;
+// }
+
+// .text-medium-M {
+// 	font-size: 2.4rem;
+// 	font-weight: $medium;
+// }
+
+// .text-normal-SM {
+// 	font-size: 2rem;
+// 	font-weight: $semibold;
+// }
+
+// .text-normal-M {
+// 	font-size: 2rem;
+// 	font-weight: $medium;
+// }
+
+// .text-small-M {
+// 	font-size: 1.6rem;
+// 	font-weight: $medium;
+// }
+
+.text-small-R {
+	font-size: 1.6rem;
+	font-weight: $regular;
 }
 
-.text-extra-large-SM {
-	font-size: 4rem;
-	font-weight: $semibold;
+.text-normal-R {
+	font-size: 2rem;
+	font-weight: $regular;
 }
 
-.text-large-SM {
-	font-size: 3.2rem;
-	font-weight: $semibold;
-}
-
-.text-large-M {
-	font-size: 3.2rem;
-	font-weight: $medium;
+.text-medium-R {
+	font-size: 2.4rem;
+	font-weight: $regular;
 }
 
 .text-medium-M {
@@ -27,23 +62,33 @@ h1 {
 	font-weight: $medium;
 }
 
-.text-normal-SM {
-	font-size: 2rem;
+.text-medium-SB {
+	font-size: 2.4rem;
 	font-weight: $semibold;
 }
 
-.text-normal-M {
-	font-size: 2rem;
+.text-extra-medium-SB {
+	font-size: 2.8rem;
 	font-weight: $medium;
+}
+
+.text-large-M {
+	font-size: 4rem;
+	font-weight: $medium;
+}
+
+.text-extra-large-M {
+	font-size: 4.8rem;
+	font-weight: $medium;
+}
+
+.text-extra-large-SB {
+	font-size: 4.8rem;
+	font-weight: $semibold;
 }
 
 .text-normal-sparsed-M {
 	font-size: 2rem;
-	font-weight: $medium;
+	font-weight: $regular;
 	letter-spacing: 0.5em;
-}
-
-.text-small-M {
-	font-size: 1.6rem;
-	font-weight: $medium;
 }

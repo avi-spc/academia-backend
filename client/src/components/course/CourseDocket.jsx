@@ -19,7 +19,7 @@ const CourseDocket = ({ togglePopup, getPerformance, popup, courses, auth: { acc
 	return (
 		account && (
 			<div className="course-docket container-large">
-				<h1 className="course-docket__heading">Courses</h1>
+				<h1 className="course-docket__heading text-extra-large-SB">Courses</h1>
 				<div className="course-docket__courses-list">
 					{account.type === 'student'
 						? account.coursesEnrolled.map((course) => {
@@ -34,7 +34,7 @@ const CourseDocket = ({ togglePopup, getPerformance, popup, courses, auth: { acc
 						  })}
 					<div className="join-or-create" onClick={() => togglePopup(!popup.isVisible)}>
 						<span className="icon icon--dark material-symbols-outlined">add</span>
-						<span className="text-large-SM">
+						<span className="text-extra-medium-SB">
 							{account.type === 'student' ? 'Enroll' : 'Create'}
 						</span>
 					</div>

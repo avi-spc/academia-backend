@@ -26,11 +26,11 @@ const ChoreSubmissions = ({ getStudents, performance }) => {
 		chore && (
 			<div className="chore-submission">
 				<div className="chore-submission__details">
-					<div className="chore-submission__details__heading text-large-SM">Details</div>
+					<div className="chore-submission__details__heading text-large-M">Details</div>
 					<Chore courseId={individualCourse.course._id} chore={chore} />
 				</div>
 				<div className="chore-submission__submissions">
-					<div className="chore-submission__submissions__heading text-large-SM">
+					<div className="chore-submission__submissions__heading text-large-M">
 						Submissions
 					</div>
 					<SubmissionsDocket

@@ -146,7 +146,9 @@ router.get('/student/:student_id', auth, async (req, res) => {
 	try {
 		const studentPerformance = await Performance.findOne({
 			student: req.params.student_id
-		}).populate('performance.course');
+		})
+			.populate('performance.course')
+			.populate('student');
 
 		res.status(200).json({ studentPerformance });
 	} catch (err) {
@@ -165,10 +167,11 @@ router.get('/assignment/:assignment_id', auth, async (req, res) => {
 	try {
 		const studentsSubmitted = await Performance.find({
 			'performance.assignments.id': req.params.assignment_id
-		});
+		}).populate('student');
 
 		res.status(200).json({ studentsSubmitted });
 	} catch (err) {
+		console.log(err);
 		if (err.kind === 'ObjectId') {
 			return res.status(404).json({ errors: [{ msg: 'assignment not found' }] });
 		}
@@ -400,7 +403,7 @@ router.get('/project/:project_id', auth, async (req, res) => {
 	try {
 		const studentsSubmitted = await Performance.find({
 			'performance.project.id': req.params.project_id
-		});
+		}).populate('student');
 
 		res.status(200).json({ studentsSubmitted });
 	} catch (err) {

@@ -8,13 +8,13 @@ const StudyMaterialDocket = ({ popup, individualCourse }) => {
 		<Fragment>
 			{individualCourse.course.studyMaterial.notes.map((note) => (
 				<li key={note._id}>
-					<div className="study-material text-normal-M">
+					<div className="study-material">
 						<div className="study-material__header">
 							<span className="icon icon--light material-symbols-outlined">
 								description
 							</span>
-							<div className="study-material__header__title">{note.title}</div>
-							<div className="study-material__header__timestamp text-small-M">
+							<div className="study-material__header__title text-medium-SB">{note.title}</div>
+							<div className="study-material__header__timestamp text-small-R">
 								Posted 12:04 PM
 							</div>
 						</div>

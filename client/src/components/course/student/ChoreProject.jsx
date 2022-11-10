@@ -29,19 +29,19 @@ const ChoreProject = ({ getPerformance, unsubmitProject, togglePopup, performanc
 
 	return (
 		coursePerformance && (
-			<div className="chore text-normal-M">
+			<div className="chore text-medium-R">
 				<div className="chore__header">
 					<span className="icon icon--light material-symbols-outlined">assignment</span>
-					<div className="chore__header__title">
+					<div className="chore__header__title text-medium-SB">
 						{coursePerformance.course.project.title}
 					</div>
-					<div className="chore__header__timestamp text-small-M">Posted 12:04 PM</div>
+					<div className="chore__header__timestamp text-small-R">Posted 12:04 PM</div>
 				</div>
 				<div className="chore__details">
 					<div>
 						<label>Deadline</label>
 						<div className="chore__details__deadline text-large-M">
-							{coursePerformance.course.project.deadline}
+							{coursePerformance.course.project.deadline.substring(0, 10)}
 						</div>
 					</div>
 					<div>
@@ -58,7 +58,7 @@ const ChoreProject = ({ getPerformance, unsubmitProject, togglePopup, performanc
 							<div>
 								<label>Submitted on</label>
 								<div className="chore__submission-details__deadline text-large-M">
-									{coursePerformance.project.createdAt}
+									{coursePerformance.project.createdAt.substring(0, 10)}
 								</div>
 							</div>
 							<div>
@@ -110,7 +110,7 @@ const ChoreProject = ({ getPerformance, unsubmitProject, togglePopup, performanc
 				</div>
 				{coursePerformance.project.team.length > 0 && (
 					<div className="chore__project-details">
-						<div className="chore__project-details__title text-normal-SM">
+						<div className="chore__project-details__title text-medium-SB">
 							{coursePerformance.project.title}
 						</div>
 						<div className="chore__project-details__synopsis">

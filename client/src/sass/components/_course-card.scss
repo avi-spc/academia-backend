@@ -19,6 +19,11 @@
 			background-color: $color-surface-quarternary;
 			border-radius: 50%;
 		}
+
+		&__code {
+			text-transform: uppercase;
+			margin-top: 1rem;
+		}
 	}
 
 	&__access {
@@ -27,6 +32,10 @@
 
 		padding: 2rem 3rem;
 		background-color: $color-surface-secondary;
+
+		&__code {
+			margin-right: 2rem;
+		}
 	}
 }
 
@@ -47,6 +56,10 @@
 
 		border-radius: $border-radius-large;
 		background-color: $color-surface-secondary;
+
+		&>span:nth-child(2){
+			margin-top: 2rem;
+		}
 
 		&:hover {
 			background-color: $color-surface-primary;

@@ -1,10 +1,11 @@
 .announcement {
 	display: grid;
 	grid-template-columns: min-content max-content 1fr;
-	grid-gap: 2rem;
+	grid-gap: 1rem 2rem;
 	align-items: center;
 
-	padding: 2rem 2rem 3.2rem 2rem;
+	padding: 2.5rem;
+	padding-bottom: 3.2rem;
 	background-color: $color-surface-secondary;
 	border-radius: $border-radius-large;
 

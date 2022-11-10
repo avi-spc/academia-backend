@@ -48,16 +48,19 @@ const IndividualSubmissionAssignment = ({
 			<Fragment>
 				<div className="chore-submission">
 					<div className="chore-submission__details">
-						<div className="chore-submission__details__heading text-large-SM">
+						<div className="chore-submission__details__heading text-large-M">
 							Details
 						</div>
 						<Chore courseId={individualCourse.course._id} chore={chore} />
 					</div>
 					<div className="chore-submission__individual-submission">
-						<div className="chore-submission__individual-submission__heading text-large-SM">
+						<div className="chore-submission__individual-submission__heading text-large-M">
 							Submission
 						</div>
-						<AssignmentSubmission submission={submission} />
+						<AssignmentSubmission
+							studentId={performance.student.instituteId}
+							submission={submission}
+						/>
 						<button
 							className="btn btn--round"
 							onClick={() => togglePopup(!popup.isVisible)}

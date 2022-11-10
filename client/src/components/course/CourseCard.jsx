@@ -5,7 +5,7 @@ const CourseCard = ({ course }) => {
 		<Link to={`/courses/${course._id}`} className="course-card">
 			<div className="course-card__details">
 				<div className="course-card__details__thumbnail"></div>
-				<div className="course-card__details__name text-large-SM">{course.name}</div>
+				<div className="course-card__details__name text-large-M">{course.name}</div>
 				<div className="course-card__details__code text-medium-M">{course.code}</div>
 				<div className="course-card__details__avatar"></div>
 			</div>

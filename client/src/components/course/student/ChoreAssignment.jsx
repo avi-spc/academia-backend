@@ -53,13 +53,13 @@ const ChoreAssignment = ({
 		performanceObject && (
 			<Fragment>
 				{performanceObject.map(({ assignment, submission }) => (
-					<li className="chore text-normal-M" key={assignment._id}>
+					<li className="chore  text-medium-R" key={assignment._id}>
 						<div className="chore__header">
 							<span className="icon icon--light material-symbols-outlined">
 								assignment
 							</span>
-							<div className="chore__header__title">{assignment.title}</div>
-							<div className="chore__header__timestamp text-small-M">
+							<div className="chore__header__title text-medium-SB">{assignment.title}</div>
+							<div className="chore__header__timestamp text-small-R">
 								Posted 12:04 PM
 							</div>
 						</div>
@@ -67,7 +67,7 @@ const ChoreAssignment = ({
 							<div>
 								<label>Deadline</label>
 								<div className="chore__details__deadline text-large-M">
-									{assignment.deadline}
+									{assignment.deadline.substring(0,10)}
 								</div>
 							</div>
 							<div>
@@ -91,7 +91,7 @@ const ChoreAssignment = ({
 									<div>
 										<label>Submitted on</label>
 										<div className="chore__submission-details__deadline text-large-M">
-											{submission.createdAt}
+											{submission.createdAt.substring(0,10)}
 										</div>
 									</div>
 									<div>

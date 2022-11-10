@@ -5,16 +5,16 @@ const SubmissionsDocket = ({ students, choreId, courseId, choreType }) => {
 		<div className="submissions-docket">
 			{students.map((student) => (
 				<Link
-					to={`/courses/${courseId}/submission/${student.student}/${choreType}/${choreId}`}
+					to={`/courses/${courseId}/submission/${student.student._id}/${choreType}/${choreId}`}
 					className="submissions-docket__submission"
 					key={student.student}
 				>
-					<div className="submissions-docket__submission__student-institute-id text-normal-M">
-						{student._id}
+					<div className="submissions-docket__submission__student-institute-id text-medium-M">
+						{student.student.instituteId}
 					</div>
-					<div className="submissions-docket__submission__grade-status text-small-M">
+					{/* <div className="submissions-docket__submission__grade-status text-small-M">
 						Not graded
-					</div>
+					</div> */}
 				</Link>
 			))}
 		</div>

@@ -134,7 +134,7 @@ router.post(
 	}
 );
 
-// @route		GET: api/students//:course_id
+// @route		GET: api/students/:course_id
 // @desc		Retrieve all students enrolled into a particular course
 // @access		Private
 router.get('/:course_id', auth, async (req, res) => {

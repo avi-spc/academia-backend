@@ -115,6 +115,26 @@ export const submitProject = (project, courseId, projectId) => async (dispatch) 
 	}
 };
 
+export const addProjectTeamMember = (courseId, memberId) => async (dispatch) => {
+	try {
+		const res = await axios.put(`/performance/projectTeam/${courseId}/${memberId}`);
+
+		dispatch({ type: GET_PERFORMANCE, payload: res.data.performance });
+	} catch (err) {
+		console.log(err);
+	}
+};
+
+export const removeProjectTeamMember = (courseId, memberId) => async (dispatch) => {
+	try {
+		const res = await axios.delete(`/performance/projectTeam/${courseId}/${memberId}`);
+
+		dispatch({ type: GET_PERFORMANCE, payload: res.data.performance });
+	} catch (err) {
+		console.log(err);
+	}
+};
+
 export const unsubmitProject = (courseId, documentId) => async (dispatch) => {
 	try {
 		const res = await axios.delete(`/performance/project/${courseId}/${documentId}`);

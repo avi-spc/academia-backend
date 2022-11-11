@@ -550,96 +550,88 @@ router.delete('/project/:course_id/:document_id', auth, async (req, res) => {
 // @route		PUT: api/performance/project/:course_id
 // @desc		Add project team member
 // @access		Private
-router.put(
-	'/project/:course_id',
-	[auth, [check('teamMember', 'team member is required').not().isEmpty()]],
-	async (req, res) => {
-		const errors = validationResult(req);
-		if (!errors.isEmpty()) {
-			return res.status(422).json({ errors: errors.array() });
+router.put('/projectTeam/:course_id/:member_id', auth, async (req, res) => {
+	try {
+		const course = await Course.findById(req.params.course_id);
+
+		if (!(new Date(course.project.deadline) > Date.now())) {
+			return res
+				.status(400)
+				.json({ errors: [{ msg: "can't add team member past deadline" }] });
 		}
 
-		const { teamMember } = req.body;
-
-		try {
-			const course = await Course.findById(req.params.course_id);
-
-			if (!(new Date(course.project.deadline) > Date.now())) {
-				return res
-					.status(400)
-					.json({ errors: [{ msg: "can't add team member past deadline" }] });
-			}
-
-			const teamLeader = await Performance.findOneAndUpdate(
-				{
-					student: req.account.id,
-					performance: {
-						$elemMatch: { course: req.params.course_id, 'project.isTeamLeader': true }
-					}
-				},
-				{
-					$addToSet: {
-						'performance.$.project.team': { student: teamMember }
-					}
-				},
-				{ new: true }
-			);
-			if (!teamLeader) {
-				return res.status(403).json({ errors: [{ msg: 'allowed only by team leader' }] });
-			}
-
-			await Performance.updateMany(
-				{
-					performance: {
-						$elemMatch: {
-							course: req.params.course_id,
-							'project.team': { $elemMatch: { student: req.account.id } }
-						}
-					}
-				},
-				{
-					$addToSet: {
-						'performance.$.project.team': { student: teamMember }
-					}
-				},
-				{ new: true, multi: true }
-			);
-
-			await Performance.findOneAndUpdate(
-				{
-					student: teamMember,
-					performance: { $elemMatch: { course: req.params.course_id } }
-				},
-				{
-					$set: {
-						'performance.$.project': {
-							...teamLeader.performance[
-								teamLeader.performance.findIndex(
-									(perf) => perf.course.toString() === req.params.course_id
-								)
-							].project,
-							isTeamLeader: false
-						}
-					}
-				},
-				{ new: true }
-			);
-
-			res.status(201).json({ msg: 'team member added', teamLeader });
-		} catch (err) {
-			if (err.kind === 'ObjectId' && err.path === 'course') {
-				return res.status(404).json({ errors: [{ msg: 'course not found' }] });
-			}
-
-			res.status(500).json({ errors: [{ msg: 'server error' }] });
+		const teamLeader = await Performance.findOneAndUpdate(
+			{
+				student: req.account.id,
+				performance: {
+					$elemMatch: { course: req.params.course_id, 'project.isTeamLeader': true }
+				}
+			},
+			{
+				$addToSet: {
+					'performance.$.project.team': { student: req.params.member_id }
+				}
+			},
+			{ new: true }
+		).populate('performance.course');
+		if (!teamLeader) {
+			return res.status(403).json({ errors: [{ msg: 'allowed only by team leader' }] });
 		}
+
+		await Performance.updateMany(
+			{
+				performance: {
+					$elemMatch: {
+						course: req.params.course_id,
+						'project.team': { $elemMatch: { student: req.account.id } }
+					}
+				}
+			},
+			{
+				$addToSet: {
+					'performance.$.project.team': { student: req.params.member_id }
+				}
+			},
+			{ new: true, multi: true }
+		);
+
+		const teamLeaderProjectPerformance =
+			teamLeader.performance[
+				teamLeader.performance.findIndex(
+					(perf) => perf.course._id.toString() === req.params.course_id
+				)
+			].project;
+
+		teamLeaderProjectPerformance.isTeamLeader = false;
+
+		await Performance.findOneAndUpdate(
+			{
+				student: req.params.member_id,
+				performance: { $elemMatch: { course: req.params.course_id } }
+			},
+			{
+				$set: {
+					'performance.$.project': teamLeaderProjectPerformance
+				}
+			},
+			{ new: true }
+		);
+
+		res.status(201).json({ msg: 'team member added', performance: teamLeader });
+	} catch (err) {
+		console.log(err);
+		if (err.kind === 'ObjectId' && err.path === 'course') {
+			return res.status(404).json({ errors: [{ msg: 'course not found' }] });
+		}
+
+		res.status(500).json({ errors: [{ msg: 'server error' }] });
 	}
-);
+});
 
-// @route		DELETE: api/performance/project/:course_id/:teamMember_id
+// @route		DELETE: api/performance/project/:course_id/:member_id
 // @desc		Remove project team member
 // @access		Private
-router.delete('/project/:course_id/:teamMember_id', auth, async (req, res) => {
+router.delete('/projectTeam/:course_id/:member_id', auth, async (req, res) => {
 	try {
 		const course = await Course.findById(req.params.course_id);
 
@@ -649,12 +641,21 @@ router.delete('/project/:course_id/:teamMember_id', auth, async (req, res) => {
 				.json({ errors: [{ msg: "can't remove team member past deadline" }] });
 		}
 
-		const teamLeader = await Performance.findOne({
-			student: req.account.id,
-			performance: {
-				$elemMatch: { course: req.params.course_id, 'project.isTeamLeader': true }
-			}
-		});
+		const teamLeader = await Performance.findOneAndUpdate(
+			{
+				student: req.account.id,
+				performance: {
+					$elemMatch: { course: req.params.course_id, 'project.isTeamLeader': true }
+				}
+			},
+			{
+				$pull: {
+					'performance.$.project.team': { student: req.params.member_id }
+				}
+			},
+			{ new: true }
+		).populate('performance.course');
+		
 		if (!teamLeader) {
 			return res.status(403).json({ errors: [{ msg: 'allowed only by team leader' }] });
 		}
@@ -670,7 +671,7 @@ router.delete('/project/:course_id/:teamMember_id', auth, async (req, res) => {
 			},
 			{
 				$pull: {
-					'performance.$.project.team': { student: req.params.teamMember_id }
+					'performance.$.project.team': { student: req.params.member_id }
 				}
 			},
 			{ new: true, multi: true }
@@ -678,7 +679,7 @@ router.delete('/project/:course_id/:teamMember_id', auth, async (req, res) => {
 
 		await Performance.findOneAndUpdate(
 			{
-				student: req.params.teamMember_id,
+				student: req.params.member_id,
 				performance: {
 					$elemMatch: { course: req.params.course_id }
 				}
@@ -691,7 +692,7 @@ router.delete('/project/:course_id/:teamMember_id', auth, async (req, res) => {
 			{ new: true }
 		);
 
-		res.status(200).json({ msg: 'team member removed', teamLeader });
+		res.status(200).json({ msg: 'team member removed', performance: teamLeader });
 	} catch (err) {
 		if (err.kind === 'ObjectId' && err.path === 'course') {
 			return res.status(404).json({ errors: [{ msg: 'course not found' }] });

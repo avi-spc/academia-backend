@@ -8,6 +8,7 @@ import {
 	GET_ANNOUNCEMENTS,
 	GET_ASSIGNMENTS,
 	GET_INDIVIDUAL_COURSE,
+	GET_STUDENTS_ENROLLED,
 	UPLOAD_FILE
 } from '../types';
 
@@ -154,4 +155,14 @@ export const discardDocument = (documentId) => async (dispatch) => {
 
 export const clearDocumentId = () => (dispatch) => {
 	dispatch({ type: DISCARD_FILE });
+};
+
+export const getStudentsEnrolled = (courseId) => async (dispatch) => {
+	try {
+		const res = await axios.get(`/students/${courseId}`);
+		
+		dispatch({ type: GET_STUDENTS_ENROLLED, payload: res.data });
+	} catch (err) {
+		console.log(err);
+	}
 };

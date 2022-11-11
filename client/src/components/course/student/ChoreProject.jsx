@@ -4,10 +4,19 @@ import { connect } from 'react-redux';
 
 import { togglePopup } from '../../../reduxStore/actions/popus';
 import { getPerformance, unsubmitProject } from '../../../reduxStore/actions/performance';
+import { getStudentsEnrolled } from '../../../reduxStore/actions/course';
 
 import SubmitProject from './SubmitProject';
+import TeamMember from './TeamMember';
 
-const ChoreProject = ({ getPerformance, unsubmitProject, togglePopup, performance, popup }) => {
+const ChoreProject = ({
+	getPerformance,
+	unsubmitProject,
+	togglePopup,
+	getStudentsEnrolled,
+	performance,
+	popup
+}) => {
 	const { course_id } = useParams();
 
 	const [projectId, setProjectId] = useState(null);
@@ -122,7 +131,24 @@ const ChoreProject = ({ getPerformance, unsubmitProject, togglePopup, performanc
 						</button>
 					</div>
 				)}
-				{popup.isVisible && <SubmitProject courseId={course_id} projectId={projectId} />}
+				<button
+					className="btn btn--round"
+					onClick={() => {
+						getStudentsEnrolled(course_id);
+						togglePopup(!popup.isVisible);
+					}}
+				>
+					Submit
+				</button>
+				{/* {popup.isVisible && <SubmitProject courseId={course_id} projectId={projectId} />} */}
+				{popup.isVisible && (
+					<TeamMember
+						courseId={course_id}
+						teamMembers={coursePerformance.project.team.map((teamMember) => {
+							return teamMember.student;
+						})}
+					/>
+				)}
 			</div>
 		)
 	);
@@ -133,6 +159,9 @@ const mapStateToProps = (state) => ({
 	performance: state.performance.performance
 });
 
-export default connect(mapStateToProps, { togglePopup, getPerformance, unsubmitProject })(
-	ChoreProject
-);
+export default connect(mapStateToProps, {
+	togglePopup,
+	getPerformance,
+	unsubmitProject,
+	getStudentsEnrolled
+})(ChoreProject);

@@ -4,6 +4,7 @@ import {
 	GET_ALL_COURSES,
 	GET_ANNOUNCEMENTS,
 	GET_INDIVIDUAL_COURSE,
+	GET_STUDENTS_ENROLLED,
 	UPLOAD_FILE
 } from '../types';
 
@@ -11,9 +12,10 @@ const initialState = {
 	courses: [],
 	individualCourse: {
 		course: null,
-		announcements: [],
+		announcements: []
 	},
-	documentId: null
+	documentId: null,
+	studentsEnrolled: []
 };
 
 const courseReducer = (state = initialState, action) => {
@@ -29,6 +31,8 @@ const courseReducer = (state = initialState, action) => {
 				...state,
 				individualCourse: { ...state.individualCourse, course: payload.course }
 			};
+		case GET_STUDENTS_ENROLLED:
+			return { ...state, studentsEnrolled: payload.students };
 		case GET_ANNOUNCEMENTS:
 			return {
 				...state,

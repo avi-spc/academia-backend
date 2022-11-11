@@ -49,6 +49,10 @@
 		.synopsis {
 			grid-column: 2/-1;
 		}
+
+		.team-member {
+			grid-column: 1/-1;
+		}
 	}
 }
 
@@ -79,7 +83,7 @@
 		grid-gap: 2rem;
 		align-items: center;
 
-		padding: 4rem 3rem 0 4rem;
+		padding: 4rem 3rem 0 3rem;
 	}
 
 	&-heading {

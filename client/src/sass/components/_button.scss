@@ -24,6 +24,21 @@
 		}
 	}
 
+	&--capsule-sm {
+		font-size: 2rem;
+		font-weight: $medium;
+
+		display: flex;
+		align-items: center;
+
+		padding: 2rem 3rem;
+		border-radius: 10rem;
+
+		span {
+			margin-right: 1.5rem;
+		}
+	}
+
 	&--round {
 		font-size: 2rem;
 		font-weight: $medium;

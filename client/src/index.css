@@ -184,6 +184,15 @@ button a {
     border-radius: 10rem; }
     .btn--capsule span {
       margin-right: 1.5rem; }
+  .btn--capsule-sm {
+    font-size: 2rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    padding: 2rem 3rem;
+    border-radius: 10rem; }
+    .btn--capsule-sm span {
+      margin-right: 1.5rem; }
   .btn--round {
     font-size: 2rem;
     font-weight: 500;
@@ -259,6 +268,14 @@ button a {
       align-items: center; }
       .chore__project-details button div {
         margin-left: 1rem; }
+
+.enrolled-students-list {
+  margin: 4rem 3rem 6rem 3rem; }
+
+.enrolled-student {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; }
 
 .course-card {
   border-radius: 2.5rem;
@@ -353,6 +370,9 @@ button a {
 .create-chore form .synopsis {
   grid-column: 2/-1; }
 
+.create-chore form .team-member {
+  grid-column: 1/-1; }
+
 .create-announcement form .title {
   grid-column: 2 / -1; }
 
@@ -367,7 +387,7 @@ button a {
   grid-template-columns: repeat(6, minmax(0, 1fr));
   grid-gap: 2rem;
   align-items: center;
-  padding: 4rem 3rem 0 4rem; }
+  padding: 4rem 3rem 0 3rem; }
 
 .create-heading {
   padding: 2rem;

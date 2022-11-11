@@ -655,7 +655,7 @@ router.delete('/projectTeam/:course_id/:member_id', auth, async (req, res) => {
 			},
 			{ new: true }
 		).populate('performance.course');
-		
+
 		if (!teamLeader) {
 			return res.status(403).json({ errors: [{ msg: 'allowed only by team leader' }] });
 		}

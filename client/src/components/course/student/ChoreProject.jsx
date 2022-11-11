@@ -138,7 +138,7 @@ const ChoreProject = ({
 						togglePopup(!popup.isVisible);
 					}}
 				>
-					Submit
+					Add team member
 				</button>
 				{/* {popup.isVisible && <SubmitProject courseId={course_id} projectId={projectId} />} */}
 				{popup.isVisible && (

@@ -74,3 +74,13 @@
 		}
 	}
 }
+
+.enrolled-students-list {
+	margin: 4rem 3rem 6rem 3rem;
+}
+
+.enrolled-student {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}

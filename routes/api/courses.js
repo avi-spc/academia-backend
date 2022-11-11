@@ -197,6 +197,57 @@ router.put(
 	}
 );
 
+// @route		PUT: api/courses/assignments/:course_id/:assignment_id
+// @desc		Update assignment
+// @access		Private
+router.put(
+	'/assignments/:course_id/:assignment_id',
+	[
+		auth,
+		[
+			check('title', 'title is required').not().isEmpty(),
+			check('documentId', 'document is required').not().isEmpty(),
+			check('deadline', 'deadline is required').not().isEmpty(),
+			check('maxMarks', 'maxMarks is required').not().isEmpty()
+		]
+	],
+	async (req, res) => {
+		const errors = validationResult(req);
+		if (!errors.isEmpty()) {
+			return res.status(422).json({ errors: errors.array() });
+		}
+
+		const { title, documentId, deadline, maxMarks } = req.body;
+
+		try {
+			const course = await Course.findOneAndUpdate(
+				{
+					_id: req.params.course_id,
+					assignments: { $elemMatch: { _id: req.params.assignment_id } }
+				},
+				{
+					$set: {
+						'assignments.$.title': title,
+						'assignments.$.documentId': documentId,
+						'assignments.$.deadline': deadline,
+						'assignments.$.maxMarks': maxMarks
+					}
+				},
+				{ new: true }
+			);
+
+			res.status(200).json({ msg: 'assignment updated', course });
+		} catch (err) {
+			console.log(err);
+			if (err.kind === 'ObjectId') {
+				return res.status(404).json({ errors: [{ msg: 'course not found' }] });
+			}
+
+			res.status(500).json({ errors: [{ msg: 'server error' }] });
+		}
+	}
+);
+
 // @route		DELETE: api/courses/assignments/:course_id/:assignment_id
 // @desc		Remove assignment from course
 // @access		Private

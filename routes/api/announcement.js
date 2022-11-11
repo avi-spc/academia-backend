@@ -75,7 +75,7 @@ router.put(
 				{ new: true }
 			);
 
-			res.status(201).json({ msg: 'announcement updated', announcements });
+			res.status(200).json({ msg: 'announcement updated', announcements });
 		} catch (err) {
 			if (err.kind === 'ObjectId') {
 				return res.status(404).json({ errors: [{ msg: 'course not found' }] });

@@ -1,10 +1,13 @@
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 
 import CreateChore from '../create/CreateChore';
+import UpdateChore from '../update/UpdateChore';
 import Chore from './Chore';
 
-const ProjectDocket = ({ popup, individualCourse, type }) => {
+const ProjectDocket = ({ popup, individualCourse }) => {
+	const [choreDetails, setChoreDetails] = useState(null);
+
 	return (
 		<Fragment>
 			{individualCourse.course.project && (
@@ -12,10 +15,18 @@ const ProjectDocket = ({ popup, individualCourse, type }) => {
 					courseId={individualCourse.course._id}
 					chore={individualCourse.course.project}
 					type="project"
+					setChoreDetails={setChoreDetails}
 				/>
 			)}
 			{popup.isVisible && (
 				<CreateChore courseId={individualCourse.course._id} type="project" />
+			)}
+			{popup.isUpdate && (
+				<UpdateChore
+					choreDetails={choreDetails}
+					courseId={individualCourse.course._id}
+					type="project"
+				/>
 			)}
 		</Fragment>
 	);

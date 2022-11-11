@@ -125,6 +125,35 @@ export const createChore = (chore, courseId, type) => async (dispatch) => {
 	}
 };
 
+export const updateChore = (chore, courseId, choreId, type) => async (dispatch) => {
+	const config = {
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	};
+
+	const body = JSON.stringify(chore);
+
+	try {
+		let res = null;
+
+		switch (type) {
+			case 'assignment':
+				res = await axios.put(`/courses/assignments/${courseId}/${choreId}`, body, config);
+				break;
+			case 'project':
+				res = await axios.put(`/courses/project/${courseId}/update`, body, config);
+				break;
+			default:
+				break;
+		}
+
+		dispatch({ type: GET_INDIVIDUAL_COURSE, payload: res.data });
+	} catch (err) {
+		console.log(err);
+	}
+};
+
 export const createStudyMaterial = (studyMaterial, courseId) => async (dispatch) => {
 	const config = {
 		headers: {
@@ -136,6 +165,24 @@ export const createStudyMaterial = (studyMaterial, courseId) => async (dispatch)
 
 	try {
 		const res = await axios.put(`/courses/material/${courseId}`, body, config);
+
+		dispatch({ type: GET_INDIVIDUAL_COURSE, payload: res.data });
+	} catch (err) {
+		console.log(err);
+	}
+};
+
+export const updateStudyMaterial = (studyMaterial, courseId, noteId) => async (dispatch) => {
+	const config = {
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	};
+
+	const body = JSON.stringify(studyMaterial);
+
+	try {
+		const res = await axios.put(`/courses/material/${courseId}/${noteId}`, body, config);
 
 		dispatch({ type: GET_INDIVIDUAL_COURSE, payload: res.data });
 	} catch (err) {

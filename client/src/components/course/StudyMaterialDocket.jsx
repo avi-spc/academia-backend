@@ -1,9 +1,14 @@
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 
-import CreateStudyMaterial from '../create/CreateStudyMaterial';
+import { toggleUpdatePopup } from '../../reduxStore/actions/popus';
 
-const StudyMaterialDocket = ({ popup, individualCourse }) => {
+import CreateStudyMaterial from '../create/CreateStudyMaterial';
+import UpdateStudyMaterial from '../update/UpdateStudyMaterial';
+
+const StudyMaterialDocket = ({ popup, individualCourse, toggleUpdatePopup }) => {
+	const [noteDetails, setNoteDetails] = useState(null);
+
 	return (
 		<Fragment>
 			{individualCourse.course.studyMaterial.notes.map((note) => (
@@ -13,7 +18,9 @@ const StudyMaterialDocket = ({ popup, individualCourse }) => {
 							<span className="icon icon--light material-symbols-outlined">
 								description
 							</span>
-							<div className="study-material__header__title text-medium-SB">{note.title}</div>
+							<div className="study-material__header__title text-medium-SB">
+								{note.title}
+							</div>
 							<div className="study-material__header__timestamp text-small-R">
 								Posted 12:04 PM
 							</div>
@@ -27,11 +34,26 @@ const StudyMaterialDocket = ({ popup, individualCourse }) => {
 									Download
 								</a>
 							</button>
+							<button
+								className="btn btn--round"
+								onClick={() => {
+									setNoteDetails(note);
+									toggleUpdatePopup(!popup.isUpdate);
+								}}
+							>
+								Update details
+							</button>
 						</div>
 					</div>
 				</li>
 			))}
 			{popup.isVisible && <CreateStudyMaterial courseId={individualCourse.course._id} />}
+			{popup.isUpdate && (
+				<UpdateStudyMaterial
+					noteDetails={noteDetails}
+					courseId={individualCourse.course._id}
+				/>
+			)}
 		</Fragment>
 	);
 };
@@ -41,4 +63,4 @@ const mapStateToProps = (state) => ({
 	individualCourse: state.course.individualCourse
 });
 
-export default connect(mapStateToProps)(StudyMaterialDocket);
+export default connect(mapStateToProps, { toggleUpdatePopup })(StudyMaterialDocket);

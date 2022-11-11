@@ -1,9 +1,13 @@
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 
+import { toggleUpdatePopup } from '../../reduxStore/actions/popus';
 import CreateAnnouncement from '../create/CreateAnnouncement';
+import UpdateAnnouncement from '../update/UpdateAnnouncement';
 
-const AnnouncementDocket = ({ popup, individualCourse }) => {
+const AnnouncementDocket = ({ popup, individualCourse, toggleUpdatePopup }) => {
+	const [announcementDetails, setAnnouncementDetails] = useState(null);
+
 	return (
 		<Fragment>
 			{individualCourse.announcements.map((announcement) => (
@@ -17,10 +21,25 @@ const AnnouncementDocket = ({ popup, individualCourse }) => {
 						<p className="announcement__message text-medium-R">
 							{announcement.message}
 						</p>
+						<button
+							className="btn btn--round"
+							onClick={() => {
+								setAnnouncementDetails(announcement);
+								toggleUpdatePopup(!popup.isUpdate);
+							}}
+						>
+							Update
+						</button>
 					</div>
 				</li>
 			))}
 			{popup.isVisible && <CreateAnnouncement courseId={individualCourse.course._id} />}
+			{popup.isUpdate && (
+				<UpdateAnnouncement
+					announcementDetails={announcementDetails}
+					courseId={individualCourse.course._id}
+				/>
+			)}
 		</Fragment>
 	);
 };
@@ -30,4 +49,4 @@ const mapStateToProps = (state) => ({
 	individualCourse: state.course.individualCourse
 });
 
-export default connect(mapStateToProps)(AnnouncementDocket);
+export default connect(mapStateToProps, { toggleUpdatePopup })(AnnouncementDocket);

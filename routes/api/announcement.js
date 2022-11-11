@@ -45,8 +45,8 @@ router.post(
 	}
 );
 
-// @route		POST: api/announcements/:course_id
-// @desc		Create an announcement
+// @route		PUT: api/announcements/:course_id/:announcement_id
+// @desc		Update an announcement
 // @access		Private
 router.put(
 	'/:course_id/:announcement_id',

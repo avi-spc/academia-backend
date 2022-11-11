@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { togglePopup } from '../../reduxStore/actions/popus';
@@ -8,8 +8,11 @@ import { getPerformance } from '../../reduxStore/actions/performance';
 import CreateCourse from '../create/CreateCourse';
 import CourseCard from './CourseCard';
 import JoinCourse from './student/JoinCourse';
+import UpdateCourse from '../update/UpdateCourse';
 
-const CourseDocket = ({ togglePopup, getPerformance, popup, courses, auth: { account } }) => {
+const CourseDocket = ({ togglePopup, getPerformance, popup, auth: { account } }) => {
+	const [courseDetails, setCourseDetails] = useState(null);
+
 	useEffect(() => {
 		if (account.type === 'student') {
 			getPerformance();
@@ -29,7 +32,11 @@ const CourseDocket = ({ togglePopup, getPerformance, popup, courses, auth: { acc
 						  })
 						: account.coursesIncharge.map((course) => {
 								return (
-									<CourseCard course={course.course} key={course.course._id} />
+									<CourseCard
+										course={course.course}
+										key={course.course._id}
+										setCourseDetails={setCourseDetails}
+									/>
 								);
 						  })}
 					<div className="join-or-create" onClick={() => togglePopup(!popup.isVisible)}>
@@ -41,6 +48,7 @@ const CourseDocket = ({ togglePopup, getPerformance, popup, courses, auth: { acc
 				</div>
 				{popup.isVisible &&
 					(account.type === 'student' ? <JoinCourse /> : <CreateCourse />)}
+				{popup.isUpdate && <UpdateCourse courseDetails={courseDetails} />}
 			</div>
 		)
 	);

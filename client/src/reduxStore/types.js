@@ -6,6 +6,7 @@ export const LOGIN_ERROR = 'LOGIN_ERROR';
 export const LOGOUT = 'LOGOUT';
 
 export const TOGGLE_POPUP = 'TOGGLE_POPUP';
+export const TOGGLE_UPDATE_POPUP = 'TOGGLE_UPDATE_POPUP';
 
 export const CREATE_COURSE_SUCCESS = 'CREATE_COURSE_SUCCESS';
 export const GET_ALL_COURSES = 'GET_ALL_COURSES';

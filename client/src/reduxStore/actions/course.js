@@ -78,6 +78,24 @@ export const createAnnouncement = (announcement, courseId) => async (dispatch) =
 	}
 };
 
+export const updateAnnouncement = (announcement, courseId, announcementId) => async (dispatch) => {
+	const config = {
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	};
+
+	const body = JSON.stringify(announcement);
+
+	try {
+		const res = await axios.put(`/announcements/${courseId}/${announcementId}`, body, config);
+
+		dispatch({ type: GET_ANNOUNCEMENTS, payload: res.data.announcements });
+	} catch (err) {
+		console.log(err);
+	}
+};
+
 export const createChore = (chore, courseId, type) => async (dispatch) => {
 	const config = {
 		headers: {
@@ -160,8 +178,26 @@ export const clearDocumentId = () => (dispatch) => {
 export const getStudentsEnrolled = (courseId) => async (dispatch) => {
 	try {
 		const res = await axios.get(`/students/${courseId}`);
-		
+
 		dispatch({ type: GET_STUDENTS_ENROLLED, payload: res.data });
+	} catch (err) {
+		console.log(err);
+	}
+};
+
+export const updateCourse = (course, courseId) => async (dispatch) => {
+	const config = {
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	};
+
+	const body = JSON.stringify(course);
+
+	try {
+		const res = await axios.put(`/courses/${courseId}`, body, config);
+		console.log(res);
+		// dispatch({ type: CREATE_COURSE_SUCCESS, payload: res.data });
 	} catch (err) {
 		console.log(err);
 	}

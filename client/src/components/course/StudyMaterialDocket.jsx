@@ -6,6 +6,7 @@ import { toggleUpdatePopup, toggleUpdateDocPopup } from '../../reduxStore/action
 import CreateStudyMaterial from '../create/CreateStudyMaterial';
 import UpdateDocument from '../update/UpdateDocument';
 import UpdateStudyMaterial from '../update/UpdateStudyMaterial';
+import StudyMaterial from './StudyMaterial';
 
 const StudyMaterialDocket = ({
 	popup,
@@ -18,49 +19,7 @@ const StudyMaterialDocket = ({
 	return (
 		<Fragment>
 			{individualCourse.course.studyMaterial.notes.map((note) => (
-				<li key={note._id}>
-					<div className="study-material">
-						<div className="study-material__header">
-							<span className="icon icon--light material-symbols-outlined">
-								description
-							</span>
-							<div className="study-material__header__title text-medium-SB">
-								{note.title}
-							</div>
-							<div className="study-material__header__timestamp text-small-R">
-								Posted 12:04 PM
-							</div>
-						</div>
-						<div className="study-material__details">
-							<button className="btn btn--round">
-								<a
-									href={`http://localhost:5000/api/performance/submissions/file/${note.documentId}`}
-									target="_blank"
-								>
-									Download
-								</a>
-							</button>
-							<button
-								className="btn btn--round"
-								onClick={() => {
-									setNoteDetails(note);
-									toggleUpdatePopup(!popup.isUpdate);
-								}}
-							>
-								Update details
-							</button>
-							<button
-								className="btn btn--round"
-								onClick={() => {
-									setNoteDetails(note);
-									toggleUpdateDocPopup(!popup.isDocUpdate);
-								}}
-							>
-								Update Doc
-							</button>
-						</div>
-					</div>
-				</li>
+				<StudyMaterial key={note._id} note={note} setNoteDetails={setNoteDetails} />
 			))}
 			{popup.isVisible && <CreateStudyMaterial courseId={individualCourse.course._id} />}
 			{popup.isUpdate && (

@@ -310,7 +310,10 @@ button a {
     padding: 2rem 3rem;
     background-color: #ededed; }
     .course-card__access__code {
-      margin-right: 2rem; }
+      margin-right: 2rem;
+      justify-self: end; }
+    .course-card__access .icon {
+      margin-right: auto; }
 
 .course-docket__courses-list {
   display: grid;

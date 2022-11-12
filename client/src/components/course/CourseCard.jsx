@@ -20,7 +20,7 @@ const CourseCard = ({ toggleUpdatePopup, popup, course, setCourseDetails }) => {
 				</span>
 				<span className="icon icon--dark material-symbols-outlined">content_copy</span>
 				<button
-					className="btn btn--capsule-sm"
+					className="btn btn--capsule-sm update"
 					onClick={() => {
 						setCourseDetails(course);
 						toggleUpdatePopup(!popup.isUpdate);

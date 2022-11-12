@@ -1,9 +1,17 @@
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { toggleUpdatePopup } from '../../reduxStore/actions/popus';
+import { toggleUpdatePopup, toggleUpdateDocPopup } from '../../reduxStore/actions/popus';
 
-const Chore = ({ toggleUpdatePopup, setChoreDetails, courseId, chore, type, popup }) => {
+const Chore = ({
+	toggleUpdatePopup,
+	toggleUpdateDocPopup,
+	setChoreDetails,
+	courseId,
+	chore,
+	type,
+	popup
+}) => {
 	return (
 		// <Link to={`/courses/${courseId}/chore/${chore._id}/${type}`}>
 		<div className="chore text-medium-R">
@@ -40,6 +48,15 @@ const Chore = ({ toggleUpdatePopup, setChoreDetails, courseId, chore, type, popu
 				>
 					Update details
 				</button>
+				<button
+					className="btn btn--round"
+					onClick={() => {
+						setChoreDetails(chore);
+						toggleUpdateDocPopup(!popup.isDocUpdate);
+					}}
+				>
+					Update Doc
+				</button>
 			</div>
 		</div>
 		// </Link>
@@ -50,4 +67,4 @@ const mapStateToProps = (state) => ({
 	popup: state.popup
 });
 
-export default connect(mapStateToProps, { toggleUpdatePopup })(Chore);
+export default connect(mapStateToProps, { toggleUpdatePopup, toggleUpdateDocPopup })(Chore);

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import CreateChore from '../create/CreateChore';
 import UpdateChore from '../update/UpdateChore';
+import UpdateDocument from '../update/UpdateDocument';
 import Chore from './Chore';
 
 const ProjectDocket = ({ popup, individualCourse }) => {
@@ -24,6 +25,13 @@ const ProjectDocket = ({ popup, individualCourse }) => {
 			{popup.isUpdate && (
 				<UpdateChore
 					choreDetails={choreDetails}
+					courseId={individualCourse.course._id}
+					type="project"
+				/>
+			)}
+			{popup.isDocUpdate && (
+				<UpdateDocument
+					chore={choreDetails}
 					courseId={individualCourse.course._id}
 					type="project"
 				/>

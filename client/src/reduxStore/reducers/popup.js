@@ -1,8 +1,9 @@
-import { TOGGLE_POPUP, TOGGLE_UPDATE_POPUP } from '../types';
+import { TOGGLE_POPUP, TOGGLE_UPDATE_DOC_POPUP, TOGGLE_UPDATE_POPUP } from '../types';
 
 const initialState = {
 	isVisible: false,
-	isUpdate: false
+	isUpdate: false,
+	isDocUpdate: false
 };
 
 const popupReducer = (state = initialState, action) => {
@@ -13,6 +14,8 @@ const popupReducer = (state = initialState, action) => {
 			return { ...state, isVisible: payload };
 		case TOGGLE_UPDATE_POPUP:
 			return { ...state, isUpdate: payload };
+		case TOGGLE_UPDATE_DOC_POPUP:
+			return { ...state, isDocUpdate: payload };
 		default:
 			return state;
 	}

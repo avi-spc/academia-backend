@@ -3,11 +3,12 @@ import { connect } from 'react-redux';
 
 import CreateChore from '../create/CreateChore';
 import UpdateChore from '../update/UpdateChore';
+import UpdateDocument from '../update/UpdateDocument';
 import Chore from './Chore';
 
 const AssignmentDocket = ({ popup, individualCourse }) => {
 	const [choreDetails, setChoreDetails] = useState(null);
-	
+
 	return (
 		<Fragment>
 			{individualCourse.course.assignments.map((assignment) => {
@@ -28,6 +29,13 @@ const AssignmentDocket = ({ popup, individualCourse }) => {
 			{popup.isUpdate && (
 				<UpdateChore
 					choreDetails={choreDetails}
+					courseId={individualCourse.course._id}
+					type="assignment"
+				/>
+			)}
+			{popup.isDocUpdate && (
+				<UpdateDocument
+					chore={choreDetails}
 					courseId={individualCourse.course._id}
 					type="assignment"
 				/>

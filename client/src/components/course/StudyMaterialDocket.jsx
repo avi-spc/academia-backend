@@ -1,12 +1,18 @@
 import { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 
-import { toggleUpdatePopup } from '../../reduxStore/actions/popus';
+import { toggleUpdatePopup, toggleUpdateDocPopup } from '../../reduxStore/actions/popus';
 
 import CreateStudyMaterial from '../create/CreateStudyMaterial';
+import UpdateDocument from '../update/UpdateDocument';
 import UpdateStudyMaterial from '../update/UpdateStudyMaterial';
 
-const StudyMaterialDocket = ({ popup, individualCourse, toggleUpdatePopup }) => {
+const StudyMaterialDocket = ({
+	popup,
+	individualCourse,
+	toggleUpdatePopup,
+	toggleUpdateDocPopup
+}) => {
 	const [noteDetails, setNoteDetails] = useState(null);
 
 	return (
@@ -43,6 +49,15 @@ const StudyMaterialDocket = ({ popup, individualCourse, toggleUpdatePopup }) => 
 							>
 								Update details
 							</button>
+							<button
+								className="btn btn--round"
+								onClick={() => {
+									setNoteDetails(note);
+									toggleUpdateDocPopup(!popup.isDocUpdate);
+								}}
+							>
+								Update Doc
+							</button>
 						</div>
 					</div>
 				</li>
@@ -54,6 +69,13 @@ const StudyMaterialDocket = ({ popup, individualCourse, toggleUpdatePopup }) => 
 					courseId={individualCourse.course._id}
 				/>
 			)}
+			{popup.isDocUpdate && (
+				<UpdateDocument
+					chore={noteDetails}
+					courseId={individualCourse.course._id}
+					type="notes"
+				/>
+			)}
 		</Fragment>
 	);
 };
@@ -63,4 +85,6 @@ const mapStateToProps = (state) => ({
 	individualCourse: state.course.individualCourse
 });
 
-export default connect(mapStateToProps, { toggleUpdatePopup })(StudyMaterialDocket);
+export default connect(mapStateToProps, { toggleUpdatePopup, toggleUpdateDocPopup })(
+	StudyMaterialDocket
+);

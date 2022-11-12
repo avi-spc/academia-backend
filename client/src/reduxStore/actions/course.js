@@ -154,6 +154,51 @@ export const updateChore = (chore, courseId, choreId, type) => async (dispatch) 
 	}
 };
 
+export const updateChoreDoc =
+	(document, courseId, choreId, documentId, type) => async (dispatch) => {
+		const config = {
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		};
+
+		const body = JSON.stringify(document);
+
+		try {
+			let res = null;
+
+			switch (type) {
+				case 'assignment':
+					res = await axios.put(
+						`/courses/assignments/${courseId}/${choreId}/${documentId}`,
+						body,
+						config
+					);
+					break;
+				case 'notes':
+					res = await axios.put(
+						`/courses/material/${courseId}/${choreId}/${documentId}`,
+						body,
+						config
+					);
+					break;
+				case 'project':
+					res = await axios.put(
+						`/courses/project/${courseId}/${choreId}/${documentId}`,
+						body,
+						config
+					);
+					break;
+				default:
+					break;
+			}
+
+			dispatch({ type: GET_INDIVIDUAL_COURSE, payload: res.data });
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
 export const createStudyMaterial = (studyMaterial, courseId) => async (dispatch) => {
 	const config = {
 		headers: {

@@ -1,7 +1,6 @@
 const express = require('express');
 const { check, validationResult } = require('express-validator');
 const mongoose = require('mongoose');
-const fs = require('fs');
 
 const auth = require('../../middlewares/auth');
 const fileUploadHandler = require('../../middlewares/fileUpload');

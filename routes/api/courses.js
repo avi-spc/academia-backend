@@ -246,6 +246,52 @@ router.put(
 	}
 );
 
+// @route		PUT: api/courses/assignments/:course_id/:assignment_id/:document_id
+// @desc		Update assignment doc
+// @access		Private
+router.put(
+	'/assignments/:course_id/:assignment_id/:document_id',
+	[auth, [check('documentId', 'document is required').not().isEmpty()]],
+	async (req, res) => {
+		const errors = validationResult(req);
+		if (!errors.isEmpty()) {
+			return res.status(422).json({ errors: errors.array() });
+		}
+
+		const { documentId } = req.body;
+
+		try {
+			const course = await Course.findOneAndUpdate(
+				{
+					_id: req.params.course_id,
+					assignments: { $elemMatch: { _id: req.params.assignment_id } }
+				},
+				{
+					$set: {
+						'assignments.$.documentId': documentId
+					}
+				},
+				{ new: true }
+			);
+
+			await SubmissionStream().delete(
+				mongoose.Types.ObjectId(req.params.document_id),
+				(err, result) => {
+					if (err) {
+						return res.status(404).json({
+							errors: [{ msg: err }]
+						});
+					}
+				}
+			);
+
+			res.status(201).json({ msg: 'assignment doc updated', course });
+		} catch (err) {
+			res.status(500).json({ errors: [{ msg: 'server error' }] });
+		}
+	}
+);
+
 // @route		DELETE: api/courses/assignments/:course_id/:assignment_id
 // @desc		Remove assignment from course
 // @access		Private
@@ -380,6 +426,52 @@ router.put(
 				return res.status(404).json({ errors: [{ msg: 'course not found' }] });
 			}
 
+			res.status(500).json({ errors: [{ msg: 'server error' }] });
+		}
+	}
+);
+
+// @route		PUT: api/courses/material/:course_id/:notes_id/:document_id
+// @desc		Update study material doc
+// @access		Private
+router.put(
+	'/material/:course_id/:notes_id/:document_id',
+	[auth, [check('documentId', 'document is required').not().isEmpty()]],
+	async (req, res) => {
+		const errors = validationResult(req);
+		if (!errors.isEmpty()) {
+			return res.status(422).json({ errors: errors.array() });
+		}
+
+		const { documentId } = req.body;
+
+		try {
+			const course = await Course.findOneAndUpdate(
+				{
+					_id: req.params.course_id,
+					'studyMaterial.notes': { $elemMatch: { _id: req.params.notes_id } }
+				},
+				{
+					$set: {
+						'studyMaterial.notes.$.documentId': documentId
+					}
+				},
+				{ new: true }
+			);
+
+			await SubmissionStream().delete(
+				mongoose.Types.ObjectId(req.params.document_id),
+				(err, result) => {
+					if (err) {
+						return res.status(404).json({
+							errors: [{ msg: err }]
+						});
+					}
+				}
+			);
+
+			res.status(201).json({ msg: 'notes doc updated', course });
+		} catch (err) {
 			res.status(500).json({ errors: [{ msg: 'server error' }] });
 		}
 	}
@@ -528,6 +620,49 @@ router.put(
 				return res.status(404).json({ errors: [{ msg: 'course not found' }] });
 			}
 
+			res.status(500).json({ errors: [{ msg: 'server error' }] });
+		}
+	}
+);
+
+// @route		PUT: api/courses/project/:course_id/:project_id/:document_id
+// @desc		Update project doc
+// @access		Private
+router.put(
+	'/project/:course_id/:project_id/:document_id',
+	[auth, [check('documentId', 'document is required').not().isEmpty()]],
+	async (req, res) => {
+		const errors = validationResult(req);
+		if (!errors.isEmpty()) {
+			return res.status(422).json({ errors: errors.array() });
+		}
+
+		const { documentId } = req.body;
+
+		try {
+			const course = await Course.findByIdAndUpdate(
+				req.params.course_id,
+				{
+					$set: {
+						'project.documentId': documentId
+					}
+				},
+				{ new: true }
+			);
+
+			await SubmissionStream().delete(
+				mongoose.Types.ObjectId(req.params.document_id),
+				(err, result) => {
+					if (err) {
+						return res.status(404).json({
+							errors: [{ msg: err }]
+						});
+					}
+				}
+			);
+
+			res.status(201).json({ msg: 'notes doc updated', course });
+		} catch (err) {
 			res.status(500).json({ errors: [{ msg: 'server error' }] });
 		}
 	}

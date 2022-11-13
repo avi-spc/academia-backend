@@ -66,7 +66,7 @@ const CreateStudyMaterial = ({
 					>
 						Create
 					</button>
-					<button className="btn btn--round" onClick={cancelChore}>
+					<button className="btn btn--cancel" onClick={cancelChore}>
 						Cancel
 					</button>
 				</div>

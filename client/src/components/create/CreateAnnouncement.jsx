@@ -41,7 +41,7 @@ const CreateAnnouncement = ({ createAnnouncement, clearDocumentId, togglePopup, 
 					>
 						Create
 					</button>
-					<button className="btn btn--round" onClick={() => togglePopup(false)}>
+					<button className="btn btn--cancel" onClick={() => togglePopup(false)}>
 						Cancel
 					</button>
 				</div>

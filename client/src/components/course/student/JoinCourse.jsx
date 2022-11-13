@@ -26,7 +26,7 @@ const JoinCourse = ({ enrollCourse, togglePopup }) => {
 					<button className="btn btn--round" onClick={() => enrollCourse(formData)}>
 						Enroll
 					</button>
-					<button className="btn btn--round" onClick={() => togglePopup(false)}>
+					<button className="btn btn--cancel" onClick={() => togglePopup(false)}>
 						Cancel
 					</button>
 				</div>

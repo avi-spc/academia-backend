@@ -57,7 +57,7 @@ const CreateChore = ({ updateChore, toggleUpdatePopup, choreDetails, courseId, t
 					>
 						Update
 					</button>
-					<button className="btn btn--round" onClick={() => toggleUpdatePopup(false)}>
+					<button className="btn btn--cancel" onClick={() => toggleUpdatePopup(false)}>
 						Cancel
 					</button>
 				</div>

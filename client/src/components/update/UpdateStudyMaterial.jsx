@@ -34,7 +34,7 @@ const UpdateStudyMaterial = ({ updateStudyMaterial, toggleUpdatePopup, noteDetai
 					>
 						Update
 					</button>
-					<button className="btn btn--round" onClick={() => toggleUpdatePopup(false)}>
+					<button className="btn btn--cancel" onClick={() => toggleUpdatePopup(false)}>
 						Cancel
 					</button>
 				</div>

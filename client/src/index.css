@@ -205,6 +205,15 @@ button a {
     font-weight: 500;
     padding: 2.3rem;
     border-radius: 2rem; }
+  .btn--cancel {
+    font-size: 2rem;
+    font-weight: 500;
+    padding: 2.3rem;
+    color: #cb9efb;
+    background-color: #121212;
+    border-radius: 2rem; }
+    .btn--cancel:hover {
+      background-color: #1e1e1e; }
   .btn--round-lg {
     font-size: 2.4rem;
     font-weight: 500;

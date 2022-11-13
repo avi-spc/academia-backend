@@ -51,6 +51,20 @@
 		border-radius: $border-radius-medium;
 	}
 
+	&--cancel {
+		font-size: 2rem;
+		font-weight: $medium;
+
+		padding: 2.3rem;
+		color: $color-accent-primary;
+		background-color: $color-surface-quarternary;
+		border-radius: $border-radius-medium;
+
+		&:hover {
+			background-color: $color-surface-primary;
+		}
+	}
+
 	&--round-lg {
 		font-size: 2.4rem;
 		font-weight: $medium;

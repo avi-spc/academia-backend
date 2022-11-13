@@ -42,7 +42,10 @@ const CreateCourse = ({ createCourse, togglePopup }) => {
 					<button className="btn btn--round" onClick={() => createCourse(formData)}>
 						Create
 					</button>
-					<button className="btn btn--round" onClick={() => togglePopup(false)}>
+					<button
+						className="btn btn--cancel"
+						onClick={() => togglePopup(false)}
+					>
 						Cancel
 					</button>
 				</div>
@@ -50,7 +53,5 @@ const CreateCourse = ({ createCourse, togglePopup }) => {
 		</div>
 	);
 };
-
-const mapStateToProps = (state) => ({});
 
 export default connect(null, { createCourse, togglePopup })(CreateCourse);

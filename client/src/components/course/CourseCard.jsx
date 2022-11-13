@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { toggleUpdatePopup } from '../../reduxStore/actions/popus';
 
-const CourseCard = ({ toggleUpdatePopup, popup, course, setCourseDetails }) => {
+const CourseCard = ({ toggleUpdatePopup, popup, course, setCourseDetails, auth: { account } }) => {
 	return (
 		<div className="course-card">
 			<Link to={`/courses/${course._id}`}>
@@ -19,22 +19,25 @@ const CourseCard = ({ toggleUpdatePopup, popup, course, setCourseDetails }) => {
 					{course.accessCode}
 				</span>
 				<span className="icon icon--dark material-symbols-outlined">content_copy</span>
-				<button
-					className="btn btn--capsule-sm update"
-					onClick={() => {
-						setCourseDetails(course);
-						toggleUpdatePopup(!popup.isUpdate);
-					}}
-				>
-					Update
-				</button>
+				{account.type === 'instructor' && (
+					<button
+						className="btn btn--capsule-sm update"
+						onClick={() => {
+							setCourseDetails(course);
+							toggleUpdatePopup(!popup.isUpdate);
+						}}
+					>
+						Update
+					</button>
+				)}
 			</div>
 		</div>
 	);
 };
 
 const mapStateToProps = (state) => ({
-	popup: state.popup
+	popup: state.popup,
+	auth: state.auth
 });
 
 export default connect(mapStateToProps, { toggleUpdatePopup })(CourseCard);

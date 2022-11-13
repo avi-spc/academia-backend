@@ -56,14 +56,13 @@ const StudyMaterialDocket = ({
 					)}
 				</div>
 				<div className="study-material__details">
-					<button className="btn btn--round">
-						<a
-							href={`http://localhost:5000/api/performance/submissions/file/${note.documentId}`}
-							target="_blank"
-						>
-							Download
-						</a>
-					</button>
+					<a
+						className="btn btn--round"
+						href={`http://localhost:5000/api/performance/submissions/file/${note.documentId}`}
+						target="_blank"
+					>
+						View PDF
+					</a>
 				</div>
 			</div>
 		</li>

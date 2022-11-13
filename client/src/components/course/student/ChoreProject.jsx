@@ -59,7 +59,13 @@ const ChoreProject = ({
 							{coursePerformance.course.project.maxMarks}
 						</div>
 					</div>
-					<button className="btn btn--round">View deatils</button>
+					<a
+						className="btn btn--round"
+						href={`http://localhost:5000/api/performance/submissions/file/${coursePerformance.course.project.documentId}`}
+						target="_blank"
+					>
+						View details
+					</a>
 				</div>
 				<div className="chore__submission-details">
 					{coursePerformance.project.team.length > 0 ? (
@@ -78,15 +84,14 @@ const ChoreProject = ({
 										: 'NG'}
 								</div>
 							</div>
-							<button className="btn btn--round">
-								<a
-									href={`http://localhost:5000/api/performance/submissions/file/${coursePerformance.project.documentId}`}
-									target="_blank"
-								>
-									View submission
-								</a>
-							</button>
-							{!coursePerformance.project.marksObtained && (
+							<a
+								className="btn btn--round"
+								href={`http://localhost:5000/api/performance/submissions/file/${coursePerformance.project.documentId}`}
+								target="_blank"
+							>
+								View submission
+							</a>
+							{!('marksObtained' in coursePerformance.project) && (
 								<button
 									className="btn btn--round btn--danger"
 									onClick={() =>

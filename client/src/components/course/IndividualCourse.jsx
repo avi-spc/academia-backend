@@ -1,5 +1,5 @@
 import { useState, Fragment, useEffect } from 'react';
-import { Link, Outlet, useParams } from 'react-router-dom';
+import { Link, Outlet, useParams, useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { togglePopup } from '../../reduxStore/actions/popus';
@@ -13,12 +13,29 @@ const IndividualCourse = ({
 	individualCourse,
 	auth: { account }
 }) => {
+	const location = useLocation();
+
+	const [showDropdown, setShowDropdown] = useState(false);
+	const [activeTab, setActiveTab] = useState('announcements');
 	const { course_id } = useParams();
 
 	useEffect(() => {
 		getIndividualCourse(course_id);
 		getAnnouncements(course_id);
 	}, [course_id]);
+
+	useEffect(() => {
+		setActiveTab(selectTab(location.pathname.split('/')[3]));
+		setShowDropdown(false);
+	}, [location]);
+
+	const selectTab = (tab) => {
+		if (!tab) {
+			return 'announcements';
+		}
+
+		return tab;
+	};
 
 	return (
 		individualCourse.course && (
@@ -49,12 +66,14 @@ const IndividualCourse = ({
 					</div>
 				</div>
 				<div className="individual-course__work">
-					<div className="individual-course__work__category text-extra-medium-SB">
-						<ul>
-							<li>
+					<div
+						className="individual-course__work__category text-extra-medium-SB"
+						onClick={() => setShowDropdown(!showDropdown)}
+					>
+						<div className="category-tab">{activeTab}</div>
+						{showDropdown && (
+							<ul className="category-list">
 								<Link to={`/courses/${course_id}`}>Announcements</Link>
-							</li>
-							<li>
 								<Link
 									to={
 										account.type === 'instructor'
@@ -64,8 +83,6 @@ const IndividualCourse = ({
 								>
 									Assignments
 								</Link>
-							</li>
-							<li>
 								<Link
 									to={
 										account.type === 'instructor'
@@ -75,11 +92,9 @@ const IndividualCourse = ({
 								>
 									Project
 								</Link>
-							</li>
-							<li>
 								<Link to={`/courses/${course_id}/notes`}>Notes</Link>
-							</li>
-						</ul>
+							</ul>
+						)}
 						<span className="material-symbols-outlined">expand_circle_down</span>
 					</div>
 					<div className="individual-course__work__chore-p-create">

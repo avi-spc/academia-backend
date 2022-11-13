@@ -40,7 +40,8 @@
 			margin-left: 5rem;
 		}
 
-		button {
+		button,
+		a {
 			justify-self: end;
 			grid-column: 3/-1;
 		}
@@ -85,6 +86,6 @@
 	align-items: center;
 }
 
-.chore-parent{
+.chore-parent {
 	position: relative;
 }

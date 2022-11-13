@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { registerAccount } from '../../reduxStore/actions/auth';
@@ -41,9 +41,11 @@ const SignUp = ({ registerAccount, auth: { isAuthenticated, loading } }) => {
 					<InstructorSignUp register={register} />
 				)}
 			</div>
-			<button className="btn-alternate text-medium-R">
-				Already have an account? <span className="text-medium-SB">Sign In</span>
-			</button>
+			<Link to="/">
+				<button className="btn-alternate text-medium-R">
+					Already have an account? <span className="text-medium-SB">Sign In</span>
+				</button>
+			</Link>
 		</div>
 	);
 };

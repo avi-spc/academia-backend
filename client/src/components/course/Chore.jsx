@@ -16,7 +16,6 @@ const Chore = ({
 	const [showDropdown, setShowDropdown] = useState(false);
 
 	return (
-		//
 		<div className="chore-parent">
 			<div className="chore text-medium-R">
 				<div className="chore__header">
@@ -71,18 +70,16 @@ const Chore = ({
 						<label>Points</label>
 						<div className="chore__details__points text-large-M">{chore.maxMarks}</div>
 					</div>
-					<button className="btn btn--round">
-						<a
-							href={`http://localhost:5000/api/performance/submissions/file/${chore.documentId}`}
-							target="_blank"
-						>
-							View details
-						</a>
-					</button>
+					<a
+						className="btn btn--round"
+						href={`http://localhost:5000/api/performance/submissions/file/${chore.documentId}`}
+						target="_blank"
+					>
+						View details
+					</a>
 				</div>
 			</div>
 		</div>
-		// </Link>
 	);
 };
 

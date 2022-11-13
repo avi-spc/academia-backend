@@ -257,7 +257,9 @@ button a {
     background-color: #242424; }
     .chore__details > div:nth-child(2), .chore__submission-details > div:nth-child(2) {
       margin-left: 5rem; }
-    .chore__details button, .chore__submission-details button {
+    .chore__details button,
+    .chore__details a, .chore__submission-details button,
+    .chore__submission-details a {
       justify-self: end;
       grid-column: 3/-1; }
   .chore__submission-details {
@@ -496,7 +498,9 @@ button a {
     padding: 2rem 3rem;
     align-self: start;
     background-color: #1e1e1e;
-    border-radius: 2rem; }
+    border-radius: 2rem;
+    position: relative;
+    text-transform: capitalize; }
   .individual-course__work__chore-p-create {
     display: flex;
     flex-direction: column; }
@@ -505,6 +509,25 @@ button a {
       margin-bottom: 5rem; }
   .individual-course__work__list > li:not(:last-child) {
     margin-bottom: 3rem; }
+
+.category-list {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 110%;
+  left: 0;
+  padding: 2rem 2.5rem;
+  width: 100%;
+  background-color: #242424;
+  border-radius: 2rem; }
+  .category-list a:not(:first-child) {
+    margin-top: 1rem; }
+  .category-list a {
+    padding: 0.8rem 1.6rem;
+    border-radius: 1.5rem; }
+    .category-list a:hover {
+      background-color: #cb9efb;
+      color: #1e1e1e; }
 
 .icon--more {
   margin-left: 2rem; }

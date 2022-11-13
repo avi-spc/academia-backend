@@ -12,7 +12,8 @@ html {
 
 body {
   font-family: 'Fredoka', sans-serif;
-  background-color: #f6f6f6; }
+  color: #d9d9d9;
+  background-color: #121212; }
 
 ul {
   list-style: none; }
@@ -23,7 +24,8 @@ textarea {
   font-size: 2rem;
   font-weight: 400;
   padding: 2.5rem;
-  background-color: #ffffff;
+  color: #d9d9d9;
+  background-color: #2c2c2c;
   border-radius: 2rem;
   border-style: none; }
   input:focus,
@@ -35,10 +37,10 @@ textarea {
 
 a {
   text-decoration: none;
-  color: #000000; }
+  color: #d9d9d9; }
 
 button a {
-  color: #ffffff; }
+  color: #1e1e1e; }
 
 .text-small-R {
   font-size: 1.6rem;
@@ -88,7 +90,7 @@ button a {
 .container-medium {
   width: 70rem;
   padding: 1rem;
-  background-color: #ededed;
+  background-color: #242424;
   border-radius: 3rem; }
 
 .container-large {
@@ -102,9 +104,9 @@ button a {
   padding: 1rem;
   border-radius: 50%; }
   .icon--light {
-    background-color: #ededed; }
+    background-color: #2c2c2c; }
   .icon--dark {
-    background-color: #d9d9d9; }
+    background-color: #2c2c2c; }
 
 .center {
   text-align: center; }
@@ -116,7 +118,7 @@ button a {
   align-items: center;
   padding: 2.5rem;
   padding-bottom: 3.2rem;
-  background-color: #ededed;
+  background-color: #1e1e1e;
   border-radius: 2.5rem; }
   .announcement__title::first-letter {
     text-transform: uppercase; }
@@ -132,7 +134,7 @@ button a {
   justify-items: center;
   padding: 8rem;
   padding-bottom: 5rem;
-  background-color: #ededed;
+  background-color: #242424;
   border-radius: 3rem; }
   .sign-up .account-type-tabs,
   .sign-in .account-type-tabs {
@@ -141,13 +143,13 @@ button a {
     grid-gap: 0 1rem;
     text-align: center;
     padding: 1rem;
-    background-color: #d9d9d9;
+    background-color: #1e1e1e;
     border-radius: 3rem; }
     .sign-up .account-type-tabs .tab,
     .sign-in .account-type-tabs .tab {
       padding: 2rem 3rem;
       border-radius: 2.5rem;
-      background-color: #ffffff; }
+      background-color: #2c2c2c; }
   .sign-up form,
   .sign-in form {
     text-align: center;
@@ -167,17 +169,19 @@ button a {
   font-size: 4.8rem;
   margin-bottom: 8rem;
   padding: 1rem 2.5rem 1.5rem 2.5rem;
-  color: #ffffff;
-  background-color: #1e1e1e;
+  color: #d9d9d9;
+  background-color: #121212;
   border-radius: 10rem; }
 
 .btn {
   font-family: 'Fredoka', sans-serif;
-  color: #ffffff;
-  background-color: #1e1e1e;
+  color: #1e1e1e;
+  background-color: #cb9efb;
   border-style: none; }
   .btn:disabled {
     background-color: darkgray; }
+  .btn:hover {
+    background-color: #DCBDFB; }
   .btn--capsule {
     font-size: 2.4rem;
     font-weight: 500;
@@ -220,15 +224,15 @@ button a {
   margin-top: 2rem;
   padding: 3.3rem 0;
   width: 100%;
-  color: #000000;
-  background-color: #d9d9d9;
+  color: #989899;
+  background-color: #1e1e1e;
   border-radius: 2rem;
   border-style: none;
   cursor: pointer; }
   .btn-alternate:hover {
-    background-color: #ededed; }
+    background-color: #242424; }
   .btn-alternate span {
-    color: #000000; }
+    color: #989899; }
 
 .chore {
   border-radius: 2.5rem;
@@ -237,7 +241,7 @@ button a {
     display: flex;
     align-items: center;
     padding: 2rem;
-    background-color: #d9d9d9; }
+    background-color: #1e1e1e; }
     .chore__header__title {
       margin-left: 2rem; }
       .chore__header__title::first-letter {
@@ -250,20 +254,20 @@ button a {
     align-items: center;
     grid-gap: 2.5rem 0;
     padding: 2.4rem 2.8rem;
-    background-color: #ededed; }
+    background-color: #242424; }
     .chore__details > div:nth-child(2), .chore__submission-details > div:nth-child(2) {
       margin-left: 5rem; }
     .chore__details button, .chore__submission-details button {
       justify-self: end;
       grid-column: 3/-1; }
   .chore__submission-details {
-    background-color: #ffffff; }
+    background-color: #242424; }
   .chore__submission-extras {
     text-align: right;
-    background-color: #ffffff; }
+    background-color: #2c2c2c; }
   .chore__project-details {
     padding: 2.4rem 2.8rem;
-    background-color: #ededed; }
+    background-color: #242424; }
     .chore__project-details__synopsis {
       margin: 2rem 0 2.5rem 0; }
     .chore__project-details button {
@@ -289,7 +293,7 @@ button a {
   .course-card__details {
     position: relative;
     padding: 3rem;
-    background-color: #d9d9d9; }
+    background-color: #1e1e1e; }
     .course-card__details__name {
       text-transform: capitalize; }
     .course-card__details__code {
@@ -302,13 +306,13 @@ button a {
       width: 9rem;
       height: 9rem;
       transform: translateY(-50%);
-      background-color: #1e1e1e;
+      background-color: #121212;
       border-radius: 50%; }
   .course-card__access {
     display: flex;
     align-items: center;
     padding: 2rem 3rem;
-    background-color: #ededed; }
+    background-color: #242424; }
     .course-card__access__code {
       margin-right: 2rem;
       justify-self: end; }
@@ -327,11 +331,11 @@ button a {
   justify-content: center;
   align-items: center;
   border-radius: 2.5rem;
-  background-color: #ededed; }
+  background-color: #242424; }
   .course-docket .join-or-create > span:nth-child(2) {
     margin-top: 2rem; }
   .course-docket .join-or-create:hover {
-    background-color: #d9d9d9;
+    background-color: #1e1e1e;
     cursor: pointer; }
 
 .popup {
@@ -361,8 +365,8 @@ button a {
   align-items: center;
   grid-column: 1/-1;
   height: 16rem;
-  color: #ffffff;
-  background-color: #1e1e1e;
+  color: #d9d9d9;
+  background-color: #121212;
   border-radius: 3rem; }
 
 .create-chore form .doc-file {
@@ -402,7 +406,7 @@ button a {
 .create-heading {
   padding: 2rem;
   padding-left: 3rem;
-  background-color: #d9d9d9;
+  background-color: #1e1e1e;
   border-radius: 2.5rem; }
 
 .create__file {
@@ -427,14 +431,14 @@ button a {
     display: flex;
     align-items: center;
     padding: 2rem;
-    background-color: #d9d9d9; }
+    background-color: #1e1e1e; }
     .discussion__header__student-name {
       margin-left: 2rem; }
     .discussion__header__timestamp {
       margin-left: auto; }
   .discussion__details {
     padding: 2.4rem 2.8rem;
-    background-color: #ededed; }
+    background-color: #242424; }
     .discussion__details__issue {
       margin-bottom: 4rem; }
     .discussion__details__comment-input {
@@ -450,7 +454,7 @@ button a {
     .discussion .individual-comment__avatar {
       width: 4rem;
       height: 4rem;
-      background-color: #ffffff;
+      background-color: #2c2c2c;
       border-radius: 50%; }
     .discussion .individual-comment__text {
       grid-column: 2/-1; }
@@ -461,7 +465,7 @@ button a {
   height: 35rem;
   padding: 3rem 4rem;
   margin-bottom: 5rem;
-  background-color: #d9d9d9;
+  background-color: #1e1e1e;
   border-radius: 2.5rem; }
   .individual-course__banner__name {
     text-transform: capitalize; }
@@ -478,7 +482,7 @@ button a {
       margin-right: 2rem;
       padding: 1rem 2rem;
       text-transform: capitalize;
-      background-color: #ffffff;
+      background-color: #2c2c2c;
       border-radius: 3rem; }
 
 .individual-course__work {
@@ -491,7 +495,7 @@ button a {
     align-items: center;
     padding: 2rem 3rem;
     align-self: start;
-    background-color: #d9d9d9;
+    background-color: #1e1e1e;
     border-radius: 2rem; }
   .individual-course__work__chore-p-create {
     display: flex;
@@ -512,7 +516,7 @@ button a {
   right: 2rem;
   z-index: 1000;
   padding: 1rem;
-  background-color: #ffffff;
+  background-color: #2c2c2c;
   border-radius: 3rem; }
   .more-dropdown button:not(:first-child) {
     margin-top: 1rem; }
@@ -521,15 +525,13 @@ button a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 50rem;
-  background-color: #d9d9d9; }
+  padding: 0.5rem 50rem;
+  color: #d9d9d9;
+  background-color: #242424; }
   .navbar__logo {
     font-family: 'Raleway', sans-serif;
     font-size: 4.8rem;
-    padding: 1rem 2.5rem 1.5rem 2.5rem;
-    color: #ffffff;
-    background-color: #1e1e1e;
-    border-radius: 10rem; }
+    padding: 1rem 2.5rem 1.5rem 2.5rem; }
   .navbar__account {
     width: 6rem;
     height: 6rem;
@@ -543,7 +545,7 @@ button a {
     display: flex;
     align-items: center;
     padding: 2rem;
-    background-color: #d9d9d9; }
+    background-color: #1e1e1e; }
     .study-material__header__title {
       margin-left: 2rem; }
       .study-material__header__title::first-letter {
@@ -555,14 +557,14 @@ button a {
     justify-content: space-between;
     align-items: center;
     padding: 2.4rem 2.8rem;
-    background-color: #ededed; }
+    background-color: #242424; }
 
 .submissions-docket__submission {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background-color: #d9d9d9;
+  background-color: #1e1e1e;
   border-radius: 1.5rem; }
   .submissions-docket__submission:not(:last-child) {
     margin-bottom: 1.5rem; }
@@ -570,7 +572,7 @@ button a {
     margin-left: 1rem; }
   .submissions-docket__submission__grade-status {
     padding: 0.8rem 1.4rem;
-    background-color: #ededed;
+    background-color: #242424;
     border-radius: 1rem; }
 
 .chore-submission__details__heading {

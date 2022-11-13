@@ -131,7 +131,7 @@ const ChoreProject = ({
 						</button>
 					</div>
 				)}
-				<button
+				{/* <button
 					className="btn btn--round"
 					onClick={() => {
 						getStudentsEnrolled(course_id);
@@ -139,7 +139,7 @@ const ChoreProject = ({
 					}}
 				>
 					Add team member
-				</button>
+				</button> */}
 				{/* {popup.isVisible && <SubmitProject courseId={course_id} projectId={projectId} />} */}
 				{popup.isVisible && (
 					<TeamMember

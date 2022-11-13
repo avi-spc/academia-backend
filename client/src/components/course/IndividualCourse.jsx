@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from 'react';
+import { useState, Fragment, useEffect } from 'react';
 import { Link, Outlet, useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -49,7 +49,7 @@ const IndividualCourse = ({
 					</div>
 				</div>
 				<div className="individual-course__work">
-					<div className="individual-course__work__category text-medium-M">
+					<div className="individual-course__work__category text-extra-medium-SB">
 						<ul>
 							<li>
 								<Link to={`/courses/${course_id}`}>Announcements</Link>
@@ -80,7 +80,7 @@ const IndividualCourse = ({
 								<Link to={`/courses/${course_id}/notes`}>Notes</Link>
 							</li>
 						</ul>
-						<span className="material-symbols-outlined">arrow_drop_down_circle</span>
+						<span className="material-symbols-outlined">expand_circle_down</span>
 					</div>
 					<div className="individual-course__work__chore-p-create">
 						{account.type === 'instructor' && (

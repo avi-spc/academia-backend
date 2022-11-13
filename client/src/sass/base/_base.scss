@@ -12,6 +12,8 @@ html {
 
 body {
 	font-family: 'Fredoka', sans-serif;
+
+	color: $color-text-primary;
 	background-color: $color-background;
 }
 
@@ -27,6 +29,7 @@ textarea {
 	font-weight: $regular;
 
 	padding: 2.5rem;
+	color: $color-text-primary;
 	background-color: $color-surface-tertiary;
 	border-radius: $border-radius-medium;
 	border-style: none;
@@ -42,11 +45,11 @@ textarea {
 
 a {
 	text-decoration: none;
-	color: $color-text-secondary;
+	color: $color-text-primary;
 }
 
 button {
 	a {
-		color: $color-text-primary;
+		color: $color-text-accent;
 	}
 }

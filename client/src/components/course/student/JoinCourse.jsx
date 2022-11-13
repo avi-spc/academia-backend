@@ -23,7 +23,13 @@ const JoinCourse = ({ enrollCourse, togglePopup }) => {
 					/>
 				</form>
 				<div className="create__cta">
-					<button className="btn btn--round" onClick={() => enrollCourse(formData)}>
+					<button
+						className="btn btn--round"
+						onClick={() => {
+							enrollCourse(formData);
+							togglePopup(false);
+						}}
+					>
 						Enroll
 					</button>
 					<button className="btn btn--cancel" onClick={() => togglePopup(false)}>

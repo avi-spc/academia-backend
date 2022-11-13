@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useState } from 'react';
 import { connect } from 'react-redux';
 
 import {
@@ -15,15 +17,39 @@ const TeamMember = ({
 	teamMembers,
 	courseId
 }) => {
+	const [searchedStudents, setSearchedStudents] = useState([]);
+	const [searchString, setSearchString] = useState('');
+
+	useEffect(() => {
+		if (searchString.length > 0) {
+			setSearchedStudents(
+				studentsEnrolled.filter((student) => {
+					return (
+						student.name.startsWith(searchString) ||
+						student.instituteId.startsWith(searchString)
+					);
+				})
+			);
+		} else {
+			setSearchedStudents(studentsEnrolled);
+		}
+	}, [studentsEnrolled, searchString]);
+
 	return (
 		<div className="popup">
 			<div className="create-chore container-medium">
 				<div className="create-heading text-medium-SB">Add team member</div>
 				<form className="create__form">
-					<input type="text" placeholder="search student" className="team-member" />
+					<input
+						type="text"
+						placeholder="search student"
+						className="team-member"
+						value={searchString}
+						onChange={(e) => setSearchString(e.target.value)}
+					/>
 				</form>
 				<ul className="enrolled-students-list">
-					{studentsEnrolled.map((student) => {
+					{searchedStudents.map((student) => {
 						if (student._id !== performance.student)
 							return (
 								<li className="enrolled-student" key={student._id}>

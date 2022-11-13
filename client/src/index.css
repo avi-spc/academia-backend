@@ -289,6 +289,8 @@ button a {
 
 .enrolled-students-list {
   margin: 4rem 3rem 6rem 3rem; }
+  .enrolled-students-list li:not(:first-child) {
+    margin-top: 1.5rem; }
 
 .enrolled-student {
   display: flex;
@@ -297,6 +299,9 @@ button a {
 
 .chore-parent {
   position: relative; }
+
+.btn-team-member {
+  margin-top: 2rem; }
 
 .course-card {
   border-radius: 2.5rem;

@@ -78,6 +78,10 @@
 
 .enrolled-students-list {
 	margin: 4rem 3rem 6rem 3rem;
+
+	li:not(:first-child) {
+		margin-top: 1.5rem;
+	}
 }
 
 .enrolled-student {
@@ -88,4 +92,8 @@
 
 .chore-parent {
 	position: relative;
+}
+
+.btn-team-member {
+	margin-top: 2rem;
 }

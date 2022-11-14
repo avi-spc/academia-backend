@@ -569,22 +569,48 @@ button a {
   .more-dropdown button:not(:first-child) {
     margin-top: 1rem; }
 
+.empty-list {
+  padding: 2rem 0;
+  background-color: #242424;
+  border-radius: 2rem; }
+
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 50rem;
-  color: #d9d9d9;
-  background-color: #242424; }
+  max-width: 112rem;
+  margin: 0.5rem auto;
+  color: #d9d9d9; }
+  .navbar-parent {
+    background-color: #242424; }
   .navbar__logo {
     font-family: 'Raleway', sans-serif;
     font-size: 4.8rem;
-    padding: 1rem 2.5rem 1.5rem 2.5rem; }
+    padding: 1rem 2.5rem 1.5rem 0rem; }
+  .navbar__profile {
+    display: flex;
+    align-items: center;
+    text-transform: capitalize;
+    position: relative; }
   .navbar__account {
-    width: 6rem;
-    height: 6rem;
-    background-color: black;
+    width: 5rem;
+    height: 5rem;
+    margin-left: 2rem;
+    background-color: #cb9efb;
     border-radius: 50%; }
+    .navbar__account .account-name {
+      margin-left: -5rem; }
+  .navbar__logout {
+    position: absolute;
+    top: 115%;
+    right: 0;
+    z-index: 1000;
+    padding: 2rem 2.5rem;
+    background-color: #2c2c2c;
+    border-radius: 2.5rem; }
+    .navbar__logout:hover {
+      background-color: #cb9efb;
+      color: #1e1e1e; }
 
 .study-material {
   border-radius: 2.5rem;

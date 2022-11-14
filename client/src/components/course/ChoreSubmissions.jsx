@@ -33,12 +33,16 @@ const ChoreSubmissions = ({ getStudents, performance }) => {
 					<div className="chore-submission__submissions__heading text-large-M">
 						Submissions
 					</div>
-					<SubmissionsDocket
-						students={performance.studentsSubmitted}
-						choreId={chore._id}
-						courseId={individualCourse.course._id}
-						choreType={chore_type}
-					/>
+					{performance.studentsSubmitted.length > 0 ? (
+						<SubmissionsDocket
+							students={performance.studentsSubmitted}
+							choreId={chore._id}
+							courseId={individualCourse.course._id}
+							choreType={chore_type}
+						/>
+					) : (
+						<div className="empty-list text-medium-R center">No submissions yet</div>
+					)}
 					{/* <ul className="chore-submission__submissions__students-list"> */}
 					{/* {performance.studentsSubmitted.map((student) => (
 							<li key={student.student}>

@@ -9,6 +9,7 @@ import {
 } from '../../../reduxStore/actions/course';
 import { submitProject } from '../../../reduxStore/actions/performance';
 import { useForm } from '../../../hooks/useForm';
+import { isEmpty } from '../../../utils/validator';
 
 const SubmitProject = ({
 	submitProject,
@@ -76,7 +77,7 @@ const SubmitProject = ({
 				<div className="create__cta">
 					<button
 						className="btn btn--round"
-						disabled={documentId ? false : true}
+						disabled={isEmpty({ ...formData, documentId })}
 						onClick={() => {
 							submitProject({ title, documentId, synopsis }, courseId, projectId);
 							togglePopup(false);

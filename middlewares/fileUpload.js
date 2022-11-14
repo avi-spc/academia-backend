@@ -40,7 +40,7 @@ const upload = multer({
 }).single('file');
 
 const isFileTypeAllowed = (file) => {
-	const allowedFileTypes = ['application/pdf', 'application/zip'];
+	const allowedFileTypes = ['application/pdf', 'application/zip', 'application/x-zip-compressed'];
 
 	return allowedFileTypes.includes(file.mimetype);
 };

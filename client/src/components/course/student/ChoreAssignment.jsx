@@ -49,106 +49,104 @@ const ChoreAssignment = ({
 		}
 	}, [performance]);
 
-	return (
-		performanceObject && (
-			<Fragment>
-				{performanceObject.map(({ assignment, submission }) => (
-					<li className="chore  text-medium-R" key={assignment._id}>
-						<div className="chore__header">
-							<span className="icon icon--light material-symbols-outlined">
-								assignment
-							</span>
-							<div className="chore__header__title text-medium-SB">
-								{assignment.title}
-							</div>
-							<div className="chore__header__timestamp text-small-R">
-								Posted 12:04 PM
+	return performanceObject && performanceObject.length > 0 ? (
+		<Fragment>
+			{performanceObject.map(({ assignment, submission }) => (
+				<li className="chore  text-medium-R" key={assignment._id}>
+					<div className="chore__header">
+						<span className="icon icon--light material-symbols-outlined">
+							assignment
+						</span>
+						<div className="chore__header__title text-medium-SB">
+							{assignment.title}
+						</div>
+						<div className="chore__header__timestamp text-small-R">Posted 12:04 PM</div>
+					</div>
+					<div className="chore__details">
+						<div>
+							<label>Deadline</label>
+							<div className="chore__details__deadline text-large-M">
+								{assignment.deadline.substring(0, 10)}
 							</div>
 						</div>
-						<div className="chore__details">
-							<div>
-								<label>Deadline</label>
-								<div className="chore__details__deadline text-large-M">
-									{assignment.deadline.substring(0, 10)}
-								</div>
+						<div>
+							<label>Points</label>
+							<div className="chore__details__points text-large-M">
+								{assignment.maxMarks}
 							</div>
-							<div>
-								<label>Points</label>
-								<div className="chore__details__points text-large-M">
-									{assignment.maxMarks}
-								</div>
-							</div>
-							<a
-								className="btn btn--round"
-								href={`http://localhost:5000/api/performance/submissions/file/${assignment.documentId}`}
-								target="_blank"
-							>
-								View details
-							</a>
 						</div>
-						<div className="chore__submission-details">
-							{submission ? (
-								<Fragment>
-									<div>
-										<label>Submitted on</label>
-										<div className="chore__submission-details__deadline text-large-M">
-											{submission.createdAt.substring(0, 10)}
-										</div>
+						<a
+							className="btn btn--round"
+							href={`http://localhost:5000/api/performance/submissions/file/${assignment.documentId}`}
+							target="_blank"
+						>
+							View details
+						</a>
+					</div>
+					<div className="chore__submission-details">
+						{submission ? (
+							<Fragment>
+								<div>
+									<label>Submitted on</label>
+									<div className="chore__submission-details__deadline text-large-M">
+										{submission.createdAt.substring(0, 10)}
 									</div>
-									<div>
-										<label>Obtained</label>
-										<div className="chore__submission-details__points text-large-M">
-											{'marksObtained' in submission
-												? submission.marksObtained
-												: 'NG'}
-										</div>
+								</div>
+								<div>
+									<label>Obtained</label>
+									<div className="chore__submission-details__points text-large-M">
+										{'marksObtained' in submission
+											? submission.marksObtained
+											: 'NG'}
 									</div>
-									<a
-										className="btn btn--round"
-										href={`http://localhost:5000/api/performance/submissions/file/${submission.documentId}`}
-										target="_blank"
-									>
-										View submission
-									</a>
-									{!submission.marksObtained && (
-										<button
-											className="btn btn--round btn--danger"
-											onClick={() =>
-												unsubmitAssignment(
-													course_id,
-													submission.id,
-													submission.documentId
-												)
-											}
-										>
-											Withdraw
-										</button>
-									)}
-								</Fragment>
-							) : (
-								<Fragment>
-									<div className="chore__submission-details__status">
-										Not yet submitted
-									</div>
+								</div>
+								<a
+									className="btn btn--round"
+									href={`http://localhost:5000/api/performance/submissions/file/${submission.documentId}`}
+									target="_blank"
+								>
+									View submission
+								</a>
+								{!submission.marksObtained && (
 									<button
-										className="btn btn--round"
-										onClick={() => {
-											togglePopup(!popup.isVisible);
-											setAssignmentId(assignment._id);
-										}}
+										className="btn btn--round btn--danger"
+										onClick={() =>
+											unsubmitAssignment(
+												course_id,
+												submission.id,
+												submission.documentId
+											)
+										}
 									>
-										Submit
+										Withdraw
 									</button>
-								</Fragment>
-							)}
-						</div>
-					</li>
-				))}
-				{popup.isVisible && (
-					<SubmitAssignment courseId={course_id} assignmentId={assignmentId} />
-				)}
-			</Fragment>
-		)
+								)}
+							</Fragment>
+						) : (
+							<Fragment>
+								<div className="chore__submission-details__status">
+									Not yet submitted
+								</div>
+								<button
+									className="btn btn--round"
+									onClick={() => {
+										togglePopup(!popup.isVisible);
+										setAssignmentId(assignment._id);
+									}}
+								>
+									Submit
+								</button>
+							</Fragment>
+						)}
+					</div>
+				</li>
+			))}
+			{popup.isVisible && (
+				<SubmitAssignment courseId={course_id} assignmentId={assignmentId} />
+			)}
+		</Fragment>
+	) : (
+		<div className="empty-list text-medium-R center">No assignments for this course yet</div>
 	);
 };
 

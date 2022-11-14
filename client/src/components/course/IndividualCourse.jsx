@@ -25,7 +25,7 @@ const IndividualCourse = ({
 	}, [course_id]);
 
 	useEffect(() => {
-		if (location.pathname.split('/').length <= 4) {
+		if (location.pathname.split('/').length <= 5) {
 			setActiveTab(selectTab(location.pathname.split('/')[3]));
 		}
 		setShowDropdown(false);

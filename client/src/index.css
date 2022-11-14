@@ -111,6 +111,19 @@ button a {
 .center {
   text-align: center; }
 
+.input-group {
+  position: relative;
+  width: 100%;
+  grid-column: 2/-1; }
+  .input-group .length-indicator {
+    position: absolute;
+    bottom: 2.6rem;
+    right: 2rem;
+    color: #cb9efb; }
+  .input-group input,
+  .input-group textarea {
+    width: 100%; }
+
 .announcement {
   display: grid;
   grid-template-columns: min-content max-content 1fr min-content;

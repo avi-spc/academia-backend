@@ -36,3 +36,22 @@
 .center {
 	text-align: center;
 }
+
+.input-group {
+	position: relative;
+	width: 100%;
+	grid-column: 2/-1;
+
+	.length-indicator {
+		position: absolute;
+		bottom: 2.6rem;
+		right: 2rem;
+
+		color: $color-accent-primary;
+	}
+
+	input,
+	textarea {
+		width: 100%;
+	}
+}

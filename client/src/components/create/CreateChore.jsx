@@ -45,13 +45,17 @@ const CreateChore = ({
 				</form>
 				<form className="create__form text-normal-R">
 					<label>Title</label>
-					<input
-						type="text"
-						className="title"
-						name="title"
-						value={title}
-						onChange={onChange}
-					/>
+					<div className="input-group">
+						<input
+							type="text"
+							maxLength="30"
+							className="title"
+							name="title"
+							value={title}
+							onChange={onChange}
+						/>
+						<span className="length-indicator">{title.length}/30</span>
+					</div>
 					<label>Deadline</label>
 					<input
 						type="date"

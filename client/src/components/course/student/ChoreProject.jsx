@@ -21,6 +21,7 @@ const ChoreProject = ({
 
 	const [projectId, setProjectId] = useState(null);
 	const [coursePerformance, setCoursePerformance] = useState(null);
+	const [teamPopup, setTeamPopup] = useState(false);
 
 	useEffect(() => {
 		getPerformance();
@@ -146,10 +147,10 @@ const ChoreProject = ({
 						</button>
 					</div>
 				)}
-
-				{/* {popup.isVisible && <SubmitProject courseId={course_id} projectId={projectId} />} */}
-				{popup.isVisible && (
+				{popup.isVisible && <SubmitProject courseId={course_id} projectId={projectId} />}
+				{teamPopup && (
 					<TeamMember
+						setTeamPopup={setTeamPopup}
 						courseId={course_id}
 						teamMembers={coursePerformance.project.team.map((teamMember) => {
 							return teamMember.student._id;
@@ -162,7 +163,7 @@ const ChoreProject = ({
 					className="btn btn--round btn-team-member"
 					onClick={() => {
 						getStudentsEnrolled(course_id);
-						togglePopup(!popup.isVisible);
+						setTeamPopup(!teamPopup);
 					}}
 				>
 					Add team member

@@ -15,7 +15,8 @@ const TeamMember = ({
 	studentsEnrolled,
 	performance,
 	teamMembers,
-	courseId
+	courseId,
+	setTeamPopup
 }) => {
 	const [searchedStudents, setSearchedStudents] = useState([]);
 	const [searchString, setSearchString] = useState('');
@@ -86,7 +87,7 @@ const TeamMember = ({
 					})}
 				</ul>
 				<div className="create__cta">
-					<button className="btn btn--cancel" onClick={() => togglePopup(false)}>
+					<button className="btn btn--cancel" onClick={() => setTeamPopup(false)}>
 						Cancel
 					</button>
 				</div>

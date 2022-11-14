@@ -31,13 +31,17 @@ const CreateCourse = ({ createCourse, togglePopup }) => {
 						onChange={onChange}
 					/>
 					<label>Name</label>
-					<input
-						type="text"
-						className="name"
-						name="name"
-						value={name}
-						onChange={onChange}
-					/>
+					<div className="input-group">
+						<input
+							type="text"
+							maxLength="50"
+							className="name"
+							name="name"
+							value={name}
+							onChange={onChange}
+						/>
+						<span className="length-indicator">{name.length}/50</span>
+					</div>
 				</form>
 				<div className="create__cta">
 					<button

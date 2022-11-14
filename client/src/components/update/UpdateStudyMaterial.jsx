@@ -27,7 +27,8 @@ const UpdateStudyMaterial = ({ updateStudyMaterial, toggleUpdatePopup, noteDetai
 				<div className="create__cta">
 					<button
 						className="btn btn--round"
-						onClick={() => {
+						onClick={(e) => {
+							e.preventDefault();
 							updateStudyMaterial({ title }, courseId, noteDetails._id);
 							toggleUpdatePopup(false);
 						}}

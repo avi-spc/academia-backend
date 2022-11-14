@@ -41,7 +41,8 @@ const UpdateAnnouncement = ({
 				<div className="create__cta">
 					<button
 						className="btn btn--round"
-						onClick={() => {
+						onClick={(e) => {
+							e.preventDefault();
 							updateAnnouncement(formData, courseId, announcementDetails._id);
 							toggleUpdatePopup(false);
 						}}

@@ -71,7 +71,8 @@ const CreateChore = ({
 				<div className="create__cta">
 					<button
 						className="btn btn--round"
-						onClick={() => {
+						onClick={(e) => {
+							e.preventDefault();
 							createChore({ title, deadline, maxMarks, documentId }, courseId, type);
 							togglePopup(false);
 							clearDocumentId();

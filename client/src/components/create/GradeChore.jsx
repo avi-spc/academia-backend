@@ -33,7 +33,9 @@ const GradeChore = ({
 				<div className="create__cta">
 					<button
 						className="btn btn--round"
-						onClick={() => {
+						onClick={(e) => {
+							e.preventDefault();
+
 							if (type === 'assignment') {
 								gradeAssignment(formData, studentId, courseId, choreId);
 							} else {

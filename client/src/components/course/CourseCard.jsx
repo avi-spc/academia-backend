@@ -4,6 +4,10 @@ import { connect } from 'react-redux';
 import { toggleUpdatePopup } from '../../reduxStore/actions/popus';
 
 const CourseCard = ({ toggleUpdatePopup, popup, course, setCourseDetails, auth: { account } }) => {
+	const shareCourseCode = async (courseCode) => {
+		await navigator.clipboard.writeText(courseCode);
+	};
+
 	return (
 		<div className="course-card">
 			<Link to={`/courses/${course._id}`}>
@@ -18,7 +22,12 @@ const CourseCard = ({ toggleUpdatePopup, popup, course, setCourseDetails, auth: 
 				<span className="course-card__access__code text-normal-sparsed-M">
 					{course.accessCode}
 				</span>
-				<span className="icon icon--dark material-symbols-outlined">content_copy</span>
+				<span
+					className="icon icon--dark material-symbols-outlined"
+					onClick={() => shareCourseCode(course.accessCode)}
+				>
+					content_copy
+				</span>
 				{account.type === 'instructor' && (
 					<button
 						className="btn btn--capsule-sm update"

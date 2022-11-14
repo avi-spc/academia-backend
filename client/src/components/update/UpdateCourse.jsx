@@ -45,7 +45,8 @@ const CreateCourse = ({ updateCourse, toggleUpdatePopup, courseDetails }) => {
 				<div className="create__cta">
 					<button
 						className="btn btn--round"
-						onClick={() => {
+						onClick={(e) => {
+							e.preventDefault();
 							updateCourse(formData, courseDetails._id);
 							toggleUpdatePopup(false);
 						}}

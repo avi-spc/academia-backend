@@ -41,7 +41,8 @@ const CreateCourse = ({ createCourse, togglePopup }) => {
 				<div className="create__cta">
 					<button
 						className="btn btn--round"
-						onClick={() => {
+						onClick={(e) => {
+							e.preventDefault();
 							createCourse(formData);
 							togglePopup(false);
 						}}

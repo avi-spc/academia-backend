@@ -45,7 +45,8 @@ const CreateChore = ({ updateChore, toggleUpdatePopup, choreDetails, courseId, t
 				<div className="create__cta">
 					<button
 						className="btn btn--round"
-						onClick={() => {
+						onClick={(e) => {
+							e.preventDefault();
 							updateChore(
 								{ title, deadline, maxMarks },
 								courseId,

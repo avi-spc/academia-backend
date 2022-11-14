@@ -58,7 +58,8 @@ const CreateStudyMaterial = ({
 				<div className="create__cta">
 					<button
 						className="btn btn--round"
-						onClick={() => {
+						onClick={(e) => {
+							e.preventDefault();
 							createStudyMaterial({ title, documentId }, courseId);
 							togglePopup(false);
 							clearDocumentId();

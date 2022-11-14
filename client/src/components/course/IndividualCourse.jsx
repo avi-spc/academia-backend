@@ -31,6 +31,10 @@ const IndividualCourse = ({
 		setShowDropdown(false);
 	}, [location]);
 
+	const shareCourseCode = async (courseCode) => {
+		await navigator.clipboard.writeText(courseCode);
+	};
+
 	const selectTab = (tab) => {
 		if (!tab) {
 			return 'announcements';
@@ -56,7 +60,12 @@ const IndividualCourse = ({
 								<span className="access-code text-normal-sparsed-M">
 									{individualCourse.course.accessCode}
 								</span>
-								<span className="icon icon--light material-symbols-outlined">
+								<span
+									className="icon icon--light material-symbols-outlined"
+									onClick={() =>
+										shareCourseCode(individualCourse.course.accessCode)
+									}
+								>
 									content_copy
 								</span>
 							</Fragment>

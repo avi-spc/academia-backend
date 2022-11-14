@@ -33,7 +33,8 @@ const CreateAnnouncement = ({ createAnnouncement, clearDocumentId, togglePopup, 
 				<div className="create__cta">
 					<button
 						className="btn btn--round"
-						onClick={() => {
+						onClick={(e) => {
+							e.preventDefault();
 							createAnnouncement(formData, courseId);
 							togglePopup(false);
 							clearDocumentId();

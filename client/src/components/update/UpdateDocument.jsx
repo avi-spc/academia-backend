@@ -47,7 +47,8 @@ const UpdateDocument = ({
 					<button
 						className="btn btn--round"
 						disabled={documentId ? false : true}
-						onClick={() => {
+						onClick={(e) => {
+							e.preventDefault();
 							updateChoreDoc(
 								{ documentId },
 								courseId,

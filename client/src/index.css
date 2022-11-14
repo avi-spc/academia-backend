@@ -281,6 +281,15 @@ button a {
     background-color: #242424; }
     .chore__project-details__synopsis {
       margin: 2rem 0 2.5rem 0; }
+    .chore__project-details__team {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, max-content));
+      grid-gap: 0 2rem;
+      margin: 2rem 0 4rem 0; }
+      .chore__project-details__team div {
+        padding: 1rem 1.5rem;
+        background-color: #2c2c2c;
+        border-radius: 1.5rem; }
     .chore__project-details button {
       display: flex;
       align-items: center; }
@@ -296,6 +305,8 @@ button a {
   display: flex;
   justify-content: space-between;
   align-items: center; }
+  .enrolled-student:hover {
+    color: #cb9efb; }
 
 .chore-parent {
   position: relative; }

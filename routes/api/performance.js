@@ -126,10 +126,13 @@ router.get('/student', auth, async (req, res) => {
 	try {
 		const studentPerformance = await Performance.findOne({
 			student: req.account.id
-		}).populate('performance.course');
+		})
+			.populate('performance.course')
+			.populate('performance.project.team.student');
 
 		res.status(200).json({ studentPerformance });
 	} catch (err) {
+		console.log(err);
 		if (err.kind === 'ObjectId') {
 			return res.status(404).json({ errors: [{ msg: 'student not found' }] });
 		}
@@ -147,10 +150,12 @@ router.get('/student/:student_id', auth, async (req, res) => {
 			student: req.params.student_id
 		})
 			.populate('performance.course')
-			.populate('student');
+			.populate('student')
+			.populate('performance.project.team.student');
 
 		res.status(200).json({ studentPerformance });
 	} catch (err) {
+		console.log(err);
 		if (err.kind === 'ObjectId') {
 			return res.status(404).json({ errors: [{ msg: 'student not found' }] });
 		}
@@ -326,7 +331,9 @@ router.put(
 					}
 				},
 				queryOptions
-			).populate('performance.course');
+			)
+				.populate('performance.course')
+				.populate('student');
 
 			res.status(201).json({ msg: 'assignment graded', performance });
 		} catch (err) {
@@ -572,7 +579,9 @@ router.put('/projectTeam/:course_id/:member_id', auth, async (req, res) => {
 				}
 			},
 			{ new: true }
-		).populate('performance.course');
+		)
+			.populate('performance.course')
+			.populate('performance.project.team.student');
 		if (!teamLeader) {
 			return res.status(403).json({ errors: [{ msg: 'allowed only by team leader' }] });
 		}
@@ -653,7 +662,9 @@ router.delete('/projectTeam/:course_id/:member_id', auth, async (req, res) => {
 				}
 			},
 			{ new: true }
-		).populate('performance.course');
+		)
+			.populate('performance.course')
+			.populate('performance.project.team.student');
 
 		if (!teamLeader) {
 			return res.status(403).json({ errors: [{ msg: 'allowed only by team leader' }] });
@@ -727,7 +738,10 @@ router.put(
 					}
 				},
 				{ new: true }
-			).populate('performance.course');
+			)
+				.populate('performance.course')
+				.populate('student')
+				.populate('performance.project.team.student');
 
 			res.status(201).json({ msg: 'project graded', performance });
 		} catch (err) {

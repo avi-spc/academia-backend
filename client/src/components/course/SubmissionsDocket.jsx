@@ -7,7 +7,7 @@ const SubmissionsDocket = ({ students, choreId, courseId, choreType }) => {
 				<Link
 					to={`/courses/${courseId}/submission/${student.student._id}/${choreType}/${choreId}`}
 					className="submissions-docket__submission"
-					key={student.student}
+					key={student.student._id}
 				>
 					<div className="submissions-docket__submission__student-institute-id text-medium-M">
 						{student.student.instituteId}

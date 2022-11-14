@@ -1,4 +1,6 @@
-const AssignmentSubmission = ({ studentId, submission }) => {
+import { Fragment } from 'react';
+
+const ProjectSubmission = ({ studentId, submission }) => {
 	return (
 		<div className="chore text-medium-R">
 			<div className="chore__header">
@@ -27,8 +29,28 @@ const AssignmentSubmission = ({ studentId, submission }) => {
 					View submission
 				</a>
 			</div>
+			<div className="chore__project-details">
+				<div className="chore__project-details__title text-medium-SB">
+					{submission.title}
+				</div>
+				<div className="chore__project-details__synopsis">{submission.synopsis}</div>
+				<div className="text-medium-SB">Team</div>
+				<div className="chore__project-details__team">
+					{submission.team.map((member) => {
+						return (
+							<div className="team-member" key={member.student._id}>
+								{member.student.instituteId}
+							</div>
+						);
+					})}
+				</div>
+				<button className="btn btn--round-sm">
+					<span className="material-symbols-outlined">link</span>
+					<div>Available At</div>
+				</button>
+			</div>
 		</div>
 	);
 };
 
-export default AssignmentSubmission;
+export default ProjectSubmission;

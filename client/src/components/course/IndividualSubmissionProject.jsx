@@ -6,9 +6,8 @@ import { getStudentPerformance, gradeProject } from '../../reduxStore/actions/pe
 import { togglePopup } from '../../reduxStore/actions/popus';
 
 import Chore from './Chore';
-import ChoreAssignment from './student/ChoreAssignment';
-import AssignmentSubmission from './student/AssignmentSubmission';
 import GradeChore from '../create/GradeChore';
+import ProjectSubmission from './student/ProjectSubmission';
 
 const IndividualSubmissionProject = ({
 	getStudentPerformance,
@@ -51,7 +50,7 @@ const IndividualSubmissionProject = ({
 						<div className="chore-submission__individual-submission__heading text-large-M">
 							Submission
 						</div>
-						<AssignmentSubmission
+						<ProjectSubmission
 							studentId={performance.student.instituteId}
 							submission={submission}
 						/>

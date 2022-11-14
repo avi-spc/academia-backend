@@ -24,7 +24,7 @@ const Chore = ({
 					<div className="chore__header__timestamp text-small-R">Posted 12:04 PM</div>
 					<div className="more-p-dropdown">
 						<span
-							class="icon--more material-symbols-outlined"
+							className="icon--more material-symbols-outlined"
 							onClick={() => setShowDropdown(!showDropdown)}
 						>
 							expand_circle_down

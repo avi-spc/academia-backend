@@ -133,6 +133,16 @@ const ChoreProject = ({
 							<div className="chore__project-details__synopsis">
 								{coursePerformance.project.synopsis}
 							</div>
+							<div className="text-medium-SB">Team</div>
+							<div className="chore__project-details__team">
+								{coursePerformance.project.team.map((member) => {
+									return (
+										<div className="team-member" key={member.student._id}>
+											{member.student.instituteId}
+										</div>
+									);
+								})}
+							</div>
 							<button className="btn btn--round-sm">
 								<span className="material-symbols-outlined">link</span>
 								<div>Available At</div>
@@ -145,7 +155,7 @@ const ChoreProject = ({
 						<TeamMember
 							courseId={course_id}
 							teamMembers={coursePerformance.project.team.map((teamMember) => {
-								return teamMember.student;
+								return teamMember.student._id;
 							})}
 						/>
 					)}

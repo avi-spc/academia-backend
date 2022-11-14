@@ -25,7 +25,9 @@ const IndividualCourse = ({
 	}, [course_id]);
 
 	useEffect(() => {
-		setActiveTab(selectTab(location.pathname.split('/')[3]));
+		if (location.pathname.split('/').length <= 4) {
+			setActiveTab(selectTab(location.pathname.split('/')[3]));
+		}
 		setShowDropdown(false);
 	}, [location]);
 
@@ -98,7 +100,7 @@ const IndividualCourse = ({
 						<span className="material-symbols-outlined">expand_circle_down</span>
 					</div>
 					<div className="individual-course__work__chore-p-create">
-						{account.type === 'instructor' && (
+						{account.type === 'instructor' && location.pathname.split('/').length <= 4 && (
 							<button
 								className="btn btn--capsule create"
 								onClick={() => togglePopup(!popup.isVisible)}

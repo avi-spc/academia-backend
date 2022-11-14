@@ -6,6 +6,11 @@
 		position: relative;
 		padding: 3rem;
 
+		&:hover {
+			background-color: $color-accent-primary;
+			color: $color-text-accent;
+		}
+
 		background-color: $color-surface-primary;
 
 		&__name {
@@ -44,6 +49,12 @@
 
 		.icon {
 			margin-right: auto;
+
+			&:hover {
+				cursor: pointer;
+				background-color: $color-accent-primary;
+				color: $color-text-accent;
+			}
 		}
 	}
 }

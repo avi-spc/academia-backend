@@ -4,6 +4,7 @@ import {
 	CREATE_ANNOUNCEMENT,
 	CREATE_COURSE_SUCCESS,
 	DISCARD_FILE,
+	GET_ACCOUNT,
 	GET_ALL_COURSES,
 	GET_ANNOUNCEMENTS,
 	GET_ASSIGNMENTS,
@@ -24,7 +25,7 @@ export const createCourse = (course) => async (dispatch) => {
 	try {
 		const res = await axios.post('/courses', body, config);
 
-		dispatch({ type: CREATE_COURSE_SUCCESS, payload: res.data });
+		dispatch({ type: GET_ACCOUNT, payload: res.data });
 	} catch (err) {
 		console.log(err);
 	}

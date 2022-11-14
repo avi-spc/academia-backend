@@ -39,13 +39,16 @@ const CreateCourse = ({ createCourse, togglePopup }) => {
 					/>
 				</form>
 				<div className="create__cta">
-					<button className="btn btn--round" onClick={() => createCourse(formData)}>
+					<button
+						className="btn btn--round"
+						onClick={() => {
+							createCourse(formData);
+							togglePopup(false);
+						}}
+					>
 						Create
 					</button>
-					<button
-						className="btn btn--cancel"
-						onClick={() => togglePopup(false)}
-					>
+					<button className="btn btn--cancel" onClick={() => togglePopup(false)}>
 						Cancel
 					</button>
 				</div>

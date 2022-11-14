@@ -28,6 +28,12 @@
 				margin-right: 2rem;
 			}
 
+			.icon:hover {
+				cursor: pointer;
+				background-color: $color-accent-primary;
+				color: $color-text-accent;
+			}
+
 			.instructor-name {
 				margin-right: 2rem;
 				padding: 1rem 2rem;
@@ -56,6 +62,12 @@
 
 			position: relative;
 			text-transform: capitalize;
+
+			cursor: pointer;
+
+			&:hover {
+				background-color: $color-surface-secondary;
+			}
 		}
 
 		&__chore-p-create {
@@ -128,8 +140,15 @@
 	}
 }
 
-.empty-list{
+.empty-list {
 	padding: 2rem 0;
 	background-color: $color-surface-secondary;
 	border-radius: $border-radius-medium;
+}
+
+.more-p-dropdown {
+	span:hover {
+		color: $color-accent-primary;
+		cursor: pointer;
+	}
 }

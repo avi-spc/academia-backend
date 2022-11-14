@@ -177,7 +177,8 @@ button a {
   font-family: 'Fredoka', sans-serif;
   color: #1e1e1e;
   background-color: #cb9efb;
-  border-style: none; }
+  border-style: none;
+  cursor: pointer; }
   .btn:disabled {
     background-color: darkgray; }
   .btn:hover {
@@ -321,6 +322,9 @@ button a {
     position: relative;
     padding: 3rem;
     background-color: #1e1e1e; }
+    .course-card__details:hover {
+      background-color: #cb9efb;
+      color: #1e1e1e; }
     .course-card__details__name {
       text-transform: capitalize; }
     .course-card__details__code {
@@ -345,6 +349,10 @@ button a {
       justify-self: end; }
     .course-card__access .icon {
       margin-right: auto; }
+      .course-card__access .icon:hover {
+        cursor: pointer;
+        background-color: #cb9efb;
+        color: #1e1e1e; }
 
 .course-docket__courses-list {
   display: grid;
@@ -390,11 +398,14 @@ button a {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
   grid-column: 1/-1;
   height: 16rem;
   color: #d9d9d9;
   background-color: #121212;
   border-radius: 3rem; }
+  .create-chore form .doc-label:hover {
+    background-color: black; }
 
 .create-chore form .doc-file {
   display: none; }
@@ -505,6 +516,10 @@ button a {
     margin-top: auto; }
     .individual-course__banner__access .access-code {
       margin-right: 2rem; }
+    .individual-course__banner__access .icon:hover {
+      cursor: pointer;
+      background-color: #cb9efb;
+      color: #1e1e1e; }
     .individual-course__banner__access .instructor-name {
       margin-right: 2rem;
       padding: 1rem 2rem;
@@ -525,7 +540,10 @@ button a {
     background-color: #1e1e1e;
     border-radius: 2rem;
     position: relative;
-    text-transform: capitalize; }
+    text-transform: capitalize;
+    cursor: pointer; }
+    .individual-course__work__category:hover {
+      background-color: #242424; }
   .individual-course__work__chore-p-create {
     display: flex;
     flex-direction: column; }
@@ -574,6 +592,10 @@ button a {
   background-color: #242424;
   border-radius: 2rem; }
 
+.more-p-dropdown span:hover {
+  color: #cb9efb;
+  cursor: pointer; }
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -597,7 +619,8 @@ button a {
     height: 5rem;
     margin-left: 2rem;
     background-color: #cb9efb;
-    border-radius: 50%; }
+    border-radius: 50%;
+    cursor: pointer; }
     .navbar__account .account-name {
       margin-left: -5rem; }
   .navbar__logout {
@@ -605,6 +628,7 @@ button a {
     top: 115%;
     right: 0;
     z-index: 1000;
+    cursor: pointer;
     padding: 2rem 2.5rem;
     background-color: #2c2c2c;
     border-radius: 2.5rem; }

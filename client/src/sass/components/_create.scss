@@ -21,6 +21,7 @@
 			justify-content: center;
 			align-items: center;
 
+			cursor: pointer;
 			grid-column: 1/-1;
 
 			height: 16rem;
@@ -28,6 +29,10 @@
 			color: $color-text-primary;
 			background-color: $color-surface-quarternary;
 			border-radius: $border-radius-extra-large;
+
+			&:hover{
+				background-color: black;
+			}
 		}
 
 		.doc-file {

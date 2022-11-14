@@ -33,6 +33,7 @@ const Announcement = ({
 									onClick={() => {
 										setAnnouncementDetails(announcement);
 										toggleUpdatePopup(!popup.isUpdate);
+										setShowDropdown(false);
 									}}
 								>
 									Update

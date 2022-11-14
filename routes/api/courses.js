@@ -85,11 +85,11 @@ router.post(
 				{ new: true }
 			);
 
-			await Instructor.findByIdAndUpdate(
+			const instructor = await Instructor.findByIdAndUpdate(
 				req.account.id,
 				{ $addToSet: { coursesIncharge: { course: course.id } } },
 				{ new: true }
-			);
+			).populate('coursesIncharge.course');
 
 			const announcement = new Announcement({
 				course: course.id
@@ -102,7 +102,11 @@ router.post(
 			await announcement.save();
 			await discussion.save();
 
-			res.status(201).json({ msg: 'course created', course });
+			res.status(201).json({
+				msg: 'course created',
+				account: instructor,
+				type: 'instructor'
+			});
 		} catch (err) {
 			if ((err.code === 11000 && 'code' in err.keyPattern) || 'name' in err.keyPattern) {
 				return res.status(409).json({ errors: [{ msg: 'course already exists' }] });

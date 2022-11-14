@@ -37,6 +37,7 @@ const StudyMaterialDocket = ({
 										onClick={() => {
 											setNoteDetails(note);
 											toggleUpdatePopup(!popup.isUpdate);
+											setShowDropdown(false);
 										}}
 									>
 										Update details
@@ -46,6 +47,7 @@ const StudyMaterialDocket = ({
 										onClick={() => {
 											setNoteDetails(note);
 											toggleUpdateDocPopup(!popup.isDocUpdate);
+											setShowDropdown(false);
 										}}
 									>
 										Update Doc

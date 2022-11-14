@@ -5,6 +5,8 @@
 	background-color: $color-accent-primary;
 	border-style: none;
 
+	cursor: pointer;
+
 	&:disabled {
 		background-color: darkgray;
 	}

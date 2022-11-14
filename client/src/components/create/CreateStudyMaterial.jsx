@@ -9,6 +9,7 @@ import {
 	clearDocumentId
 } from '../../reduxStore/actions/course';
 import { useForm } from '../../hooks/useForm';
+import { isEmpty } from '../../utils/validator';
 
 const CreateStudyMaterial = ({
 	createStudyMaterial,
@@ -58,6 +59,7 @@ const CreateStudyMaterial = ({
 				<div className="create__cta">
 					<button
 						className="btn btn--round"
+						disabled={isEmpty({ ...formData, documentId })}
 						onClick={(e) => {
 							e.preventDefault();
 							createStudyMaterial({ title, documentId }, courseId);

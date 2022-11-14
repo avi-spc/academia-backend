@@ -8,6 +8,7 @@ import {
 	clearDocumentId,
 	updateChoreDoc
 } from '../../reduxStore/actions/course';
+import { isEmpty } from '../../utils/validator';
 
 const UpdateDocument = ({
 	updateChoreDoc,
@@ -46,7 +47,7 @@ const UpdateDocument = ({
 				<div className="create__cta">
 					<button
 						className="btn btn--round"
-						disabled={documentId ? false : true}
+						disabled={isEmpty({ documentId })}
 						onClick={(e) => {
 							e.preventDefault();
 							updateChoreDoc(

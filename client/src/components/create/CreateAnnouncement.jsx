@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { clearDocumentId, createAnnouncement } from '../../reduxStore/actions/course';
 import { togglePopup } from '../../reduxStore/actions/popus';
 import { useForm } from '../../hooks/useForm';
+import { isEmpty } from '../../utils/validator';
 
 const CreateAnnouncement = ({ createAnnouncement, clearDocumentId, togglePopup, courseId }) => {
 	const { formData, onChange } = useForm({ title: '', message: '' });
@@ -33,6 +34,7 @@ const CreateAnnouncement = ({ createAnnouncement, clearDocumentId, togglePopup, 
 				<div className="create__cta">
 					<button
 						className="btn btn--round"
+						disabled={isEmpty(formData)}
 						onClick={(e) => {
 							e.preventDefault();
 							createAnnouncement(formData, courseId);

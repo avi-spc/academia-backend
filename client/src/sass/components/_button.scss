@@ -8,7 +8,12 @@
 	cursor: pointer;
 
 	&:disabled {
+		cursor: auto;
 		background-color: darkgray;
+
+		&:hover {
+			background-color: darkgray;
+		}
 	}
 
 	&:hover {

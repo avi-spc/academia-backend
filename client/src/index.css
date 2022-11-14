@@ -180,7 +180,10 @@ button a {
   border-style: none;
   cursor: pointer; }
   .btn:disabled {
+    cursor: auto;
     background-color: darkgray; }
+    .btn:disabled:hover {
+      background-color: darkgray; }
   .btn:hover {
     background-color: #DCBDFB; }
   .btn--capsule {

@@ -5,6 +5,7 @@ import { togglePopup } from '../../reduxStore/actions/popus';
 import { createChore, uploadDocument, discardDocument } from '../../reduxStore/actions/course';
 import { clearDocumentId } from '../../reduxStore/actions/course';
 import { useForm } from '../../hooks/useForm';
+import { isEmpty } from '../../utils/validator';
 
 const CreateChore = ({
 	uploadDocument,
@@ -71,6 +72,7 @@ const CreateChore = ({
 				<div className="create__cta">
 					<button
 						className="btn btn--round"
+						disabled={isEmpty({ ...formData, documentId })}
 						onClick={(e) => {
 							e.preventDefault();
 							createChore({ title, deadline, maxMarks, documentId }, courseId, type);

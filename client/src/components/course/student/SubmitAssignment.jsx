@@ -8,6 +8,7 @@ import {
 	clearDocumentId
 } from '../../../reduxStore/actions/course';
 import { submitAssignment } from '../../../reduxStore/actions/performance';
+import { isEmpty } from '../../../utils/validator';
 
 const SubmitAssignment = ({
 	submitAssignment,
@@ -45,7 +46,7 @@ const SubmitAssignment = ({
 				<div className="create__cta">
 					<button
 						className="btn btn--round"
-						disabled={documentId ? false : true}
+						disabled={isEmpty({ documentId })}
 						onClick={() => {
 							submitAssignment({ documentId }, courseId, assignmentId);
 							togglePopup(false);

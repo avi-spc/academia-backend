@@ -303,13 +303,15 @@ button a {
       margin-left: auto; }
   .chore__details, .chore__submission-details {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: max-content repeat(2, minmax(0, 1fr));
     align-items: center;
     grid-gap: 2.5rem 0;
     padding: 2.4rem 2.8rem;
     background-color: #242424; }
+    .chore__details label + div, .chore__submission-details label + div {
+      margin-top: 0.3rem; }
     .chore__details > div:nth-child(2), .chore__submission-details > div:nth-child(2) {
-      margin-left: 5rem; }
+      margin-left: 7rem; }
     .chore__details button,
     .chore__details a, .chore__submission-details button,
     .chore__submission-details a {

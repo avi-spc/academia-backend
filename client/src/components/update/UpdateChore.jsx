@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { toggleUpdatePopup } from '../../reduxStore/actions/popus';
 import { updateChore } from '../../reduxStore/actions/course';
 import { useForm } from '../../hooks/useForm';
+import { isEmpty } from '../../utils/validator';
 
 const CreateChore = ({ updateChore, toggleUpdatePopup, choreDetails, courseId, type }) => {
 	const { formData, onChange } = useForm({
@@ -49,6 +50,7 @@ const CreateChore = ({ updateChore, toggleUpdatePopup, choreDetails, courseId, t
 				<div className="create__cta">
 					<button
 						className="btn btn--round"
+						disabled={isEmpty(formData)}
 						onClick={(e) => {
 							e.preventDefault();
 							updateChore(

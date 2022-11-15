@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { togglePopup } from '../../../reduxStore/actions/popus';
 import { getPerformance, unsubmitProject } from '../../../reduxStore/actions/performance';
 import { getStudentsEnrolled } from '../../../reduxStore/actions/course';
+import { timeInWords } from '../../../utils/timestampFormatter';
 
 import SubmitProject from './SubmitProject';
 import TeamMember from './TeamMember';
@@ -45,13 +46,15 @@ const ChoreProject = ({
 					<div className="chore__header__title text-medium-SB">
 						{coursePerformance.course.project.title}
 					</div>
-					<div className="chore__header__timestamp text-small-R">Posted 12:04 PM</div>
+					<div className="chore__header__timestamp text-small-R">
+						{timeInWords(coursePerformance.course.project.createdAt)}
+					</div>
 				</div>
 				<div className="chore__details">
 					<div>
 						<label>Deadline</label>
 						<div className="chore__details__deadline text-large-M">
-							{coursePerformance.course.project.deadline.substring(0, 10)}
+							{timeInWords(coursePerformance.course.project.deadline)}
 						</div>
 					</div>
 					<div>
@@ -74,7 +77,7 @@ const ChoreProject = ({
 							<div>
 								<label>Submitted on</label>
 								<div className="chore__submission-details__deadline text-large-M">
-									{coursePerformance.project.createdAt.substring(0, 10)}
+									{timeInWords(coursePerformance.project.createdAt)}
 								</div>
 							</div>
 							<div>

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { togglePopup } from '../../../reduxStore/actions/popus';
 import { enrollCourse } from '../../../reduxStore/actions/performance';
 import { useForm } from '../../../hooks/useForm';
+import { isEmpty } from '../../../utils/validator';
 
 const JoinCourse = ({ enrollCourse, togglePopup }) => {
 	const { formData, onChange } = useForm({ courseAccessCode: '' });
@@ -25,6 +26,7 @@ const JoinCourse = ({ enrollCourse, togglePopup }) => {
 				<div className="create__cta">
 					<button
 						className="btn btn--round"
+						disabled={isEmpty(formData)}
 						onClick={() => {
 							enrollCourse(formData);
 							togglePopup(false);

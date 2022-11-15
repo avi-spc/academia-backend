@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { toggleUpdatePopup, toggleUpdateDocPopup } from '../../reduxStore/actions/popus';
 import { useState } from 'react';
+import { timeInWords } from '../../utils/timestampFormatter';
 
 const Chore = ({
 	toggleUpdatePopup,
@@ -22,7 +23,9 @@ const Chore = ({
 				<div className="chore__header">
 					<span className="icon icon--light material-symbols-outlined">assignment</span>
 					<div className="chore__header__title text-medium-SB">{chore.title}</div>
-					<div className="chore__header__timestamp text-small-R">Posted 12:04 PM</div>
+					<div className="chore__header__timestamp text-small-R">
+						{timeInWords(chore.createdAt)}
+					</div>
 					{location.pathname.split('/').length <= 4 && (
 						<div className="more-p-dropdown">
 							<span
@@ -68,7 +71,7 @@ const Chore = ({
 					<div>
 						<label>Deadline</label>
 						<div className="chore__details__deadline text-large-M">
-							{chore.deadline.substring(0, 10)}
+							{timeInWords(chore.deadline)}
 						</div>
 					</div>
 					<div>

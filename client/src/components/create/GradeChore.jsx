@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { gradeAssignment, gradeProject } from '../../reduxStore/actions/performance';
 import { togglePopup } from '../../reduxStore/actions/popus';
 import { useForm } from '../../hooks/useForm';
+import { isEmpty } from '../../utils/validator';
 
 const GradeChore = ({
 	gradeAssignment,
@@ -33,6 +34,7 @@ const GradeChore = ({
 				<div className="create__cta">
 					<button
 						className="btn btn--round"
+						disabled={isEmpty(formData)}
 						onClick={(e) => {
 							e.preventDefault();
 

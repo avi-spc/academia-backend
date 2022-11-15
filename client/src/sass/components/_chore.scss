@@ -29,15 +29,19 @@
 		// align-items: center;
 
 		display: grid;
-		grid-template-columns: repeat(3, minmax(0, 1fr));
+		grid-template-columns: max-content repeat(2, minmax(0, 1fr));
 		align-items: center;
 		grid-gap: 2.5rem 0;
 
 		padding: 2.4rem 2.8rem;
 		background-color: $color-surface-secondary;
 
+		label + div {
+			margin-top: 0.3rem;
+		}
+
 		& > div:nth-child(2) {
-			margin-left: 5rem;
+			margin-left: 7rem;
 		}
 
 		button,
@@ -72,7 +76,7 @@
 
 			margin: 2rem 0 4rem 0;
 
-			div{
+			div {
 				padding: 1rem 1.5rem;
 				background-color: $color-surface-tertiary;
 				border-radius: $border-radius-normal;

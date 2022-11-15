@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { updateCourse } from '../../reduxStore/actions/course';
 import { toggleUpdatePopup } from '../../reduxStore/actions/popus';
 import { useForm } from '../../hooks/useForm';
+import { isEmpty } from '../../utils/validator';
 
 const CreateCourse = ({ updateCourse, toggleUpdatePopup, courseDetails }) => {
 	const { formData, onChange } = useForm({
@@ -49,6 +50,7 @@ const CreateCourse = ({ updateCourse, toggleUpdatePopup, courseDetails }) => {
 				<div className="create__cta">
 					<button
 						className="btn btn--round"
+						disabled={isEmpty(formData)}
 						onClick={(e) => {
 							e.preventDefault();
 							updateCourse(formData, courseDetails._id);

@@ -2,6 +2,7 @@ import { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 
 import { toggleUpdatePopup, toggleUpdateDocPopup } from '../../reduxStore/actions/popus';
+import { timeInWords } from '../../utils/timestampFormatter';
 
 const StudyMaterialDocket = ({
 	popup,
@@ -20,7 +21,7 @@ const StudyMaterialDocket = ({
 					<span className="icon icon--light material-symbols-outlined">description</span>
 					<div className="study-material__header__title text-medium-SB">{note.title}</div>
 					<div className="study-material__header__timestamp text-small-R">
-						Posted 12:04 PM
+						{timeInWords(note.createdAt)}
 					</div>
 					{account.type === 'instructor' && (
 						<div className="more-p-dropdown">

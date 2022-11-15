@@ -17,8 +17,13 @@ export const enrollCourse = (accessCode) => async (dispatch) => {
 		const res = await axios.post(`/performance/${couresId}`, body, config);
 
 		dispatch({ type: GET_ACCOUNT, payload: res.data });
+		dispatch(setAlert(res.data.msg, 'success'));
 	} catch (err) {
-		console.log(err);
+		const errors = err.response.data.errors;
+
+		errors.forEach((error) => {
+			dispatch(setAlert(error.msg, 'error'));
+		});
 	}
 };
 
@@ -59,6 +64,7 @@ export const submitAssignment = (assignment, courseId, assignmentId) => async (d
 		);
 
 		dispatch({ type: GET_PERFORMANCE, payload: res.data.performance });
+		dispatch(setAlert(res.data.msg, 'success'));
 	} catch (err) {
 		console.log(err);
 	}
@@ -71,6 +77,7 @@ export const unsubmitAssignment = (courseId, assignmentId, documentId) => async 
 		);
 
 		dispatch({ type: GET_PERFORMANCE, payload: res.data.performance });
+		dispatch(setAlert(res.data.msg, 'success'));
 	} catch (err) {
 		console.log(err);
 	}

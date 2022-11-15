@@ -222,7 +222,7 @@ router.post(
 				{ new: true }
 			).populate('performance.course');
 
-			res.status(201).json({ msg: 'submitted assignment', performance });
+			res.status(201).json({ msg: 'assignment submitted', performance });
 		} catch (err) {
 			console.log(err);
 			if (err.kind === 'ObjectId' && err.path === 'assignments') {
@@ -282,7 +282,7 @@ router.delete('/assignment/:course_id/:assignment_id/:document_id', auth, async 
 			}
 		);
 
-		res.status(200).json({ msg: 'unsubmitted assignment', performance });
+		res.status(200).json({ msg: 'assignment withdrawn', performance });
 	} catch (err) {
 		if (err.kind === 'ObjectId' && err.path === 'assignments') {
 			return res.status(404).json({ errors: [{ msg: 'assignment not found' }] });
@@ -465,7 +465,7 @@ router.post(
 				{ new: true }
 			).populate('performance.course');
 
-			res.status(201).json({ msg: 'submitted project', performance });
+			res.status(201).json({ msg: 'project submitted', performance });
 		} catch (err) {
 			if (err.kind === 'ObjectId' && err.path === 'course') {
 				return res.status(404).json({ errors: [{ msg: 'course not found' }] });
@@ -538,7 +538,7 @@ router.delete('/project/:course_id/:document_id', auth, async (req, res) => {
 			{ new: true, multi: true }
 		);
 
-		res.status(200).json({ msg: 'unsubmitted project', teamLeader });
+		res.status(200).json({ msg: 'project withdrawn', teamLeader });
 	} catch (err) {
 		console.log(err);
 		if (err.kind === 'ObjectId' && err.path === 'course') {

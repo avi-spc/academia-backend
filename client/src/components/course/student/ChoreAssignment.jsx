@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import { togglePopup } from '../../../reduxStore/actions/popus';
 import { getPerformance, unsubmitAssignment } from '../../../reduxStore/actions/performance';
+import { timeInWords } from '../../../utils/timestampFormatter';
 
 import SubmitAssignment from './SubmitAssignment';
 
@@ -60,13 +61,15 @@ const ChoreAssignment = ({
 						<div className="chore__header__title text-medium-SB">
 							{assignment.title}
 						</div>
-						<div className="chore__header__timestamp text-small-R">Posted 12:04 PM</div>
+						<div className="chore__header__timestamp text-small-R">
+							{timeInWords(assignment.createdAt)}
+						</div>
 					</div>
 					<div className="chore__details">
 						<div>
 							<label>Deadline</label>
 							<div className="chore__details__deadline text-large-M">
-								{assignment.deadline.substring(0, 10)}
+								{timeInWords(assignment.deadline)}
 							</div>
 						</div>
 						<div>
@@ -89,7 +92,7 @@ const ChoreAssignment = ({
 								<div>
 									<label>Submitted on</label>
 									<div className="chore__submission-details__deadline text-large-M">
-										{submission.createdAt.substring(0, 10)}
+										{timeInWords(submission.createdAt)}
 									</div>
 								</div>
 								<div>

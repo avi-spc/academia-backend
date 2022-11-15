@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { connect } from 'react-redux';
 
 import { toggleUpdatePopup } from '../../reduxStore/actions/popus';
-
+import { timeInWords } from '../../utils/timestampFormatter';
 const Announcement = ({
 	popup,
 	toggleUpdatePopup,
@@ -17,7 +17,9 @@ const Announcement = ({
 			<div className="announcement">
 				<span className="icon icon--dark material-symbols-outlined">campaign</span>
 				<div className="announcement__title text-medium-SB">{announcement.title}</div>
-				<div className="announcement__timestamp text-small-R">Posted 12:04 PM</div>
+				{/* <div className="announcement__timestamp text-small-R">
+					{timeInWords(announcement.createdAt)}
+				</div> */}
 				{account.type === 'instructor' && (
 					<div className="more-p-dropdown">
 						<span

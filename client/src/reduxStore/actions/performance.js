@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import { GET_ACCOUNT, GET_PERFORMANCE, GET_STUDENTS } from '../types';
+import { setAlert } from './alert';
 
 export const enrollCourse = (accessCode) => async (dispatch) => {
 	const config = {
@@ -92,6 +93,7 @@ export const gradeAssignment = (marks, studentId, courseId, assignmentId) => asy
 		);
 
 		dispatch({ type: GET_PERFORMANCE, payload: res.data.performance });
+		dispatch(setAlert(res.data.msg, 'success'));
 	} catch (err) {
 		console.log(err);
 	}
@@ -158,6 +160,7 @@ export const gradeProject = (marks, studentId, courseId) => async (dispatch) => 
 		const res = await axios.put(`/performance/project/${studentId}/${courseId}`, body, config);
 
 		dispatch({ type: GET_PERFORMANCE, payload: res.data.performance });
+		dispatch(setAlert(res.data.msg, 'success'));
 	} catch (err) {
 		console.log(err);
 	}

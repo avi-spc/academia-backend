@@ -12,6 +12,7 @@ import {
 	GET_STUDENTS_ENROLLED,
 	UPLOAD_FILE
 } from '../types';
+import { setAlert } from './alert';
 
 export const createCourse = (course) => async (dispatch) => {
 	const config = {
@@ -26,6 +27,7 @@ export const createCourse = (course) => async (dispatch) => {
 		const res = await axios.post('/courses', body, config);
 
 		dispatch({ type: GET_ACCOUNT, payload: res.data });
+		dispatch(setAlert(res.data.msg, 'success'));
 	} catch (err) {
 		console.log(err);
 	}
@@ -74,6 +76,7 @@ export const createAnnouncement = (announcement, courseId) => async (dispatch) =
 		const res = await axios.post(`/announcements/${courseId}`, body, config);
 
 		dispatch({ type: GET_ANNOUNCEMENTS, payload: res.data.announcements });
+		dispatch(setAlert(res.data.msg, 'success'));
 	} catch (err) {
 		console.log(err);
 	}
@@ -92,6 +95,7 @@ export const updateAnnouncement = (announcement, courseId, announcementId) => as
 		const res = await axios.put(`/announcements/${courseId}/${announcementId}`, body, config);
 
 		dispatch({ type: GET_ANNOUNCEMENTS, payload: res.data.announcements });
+		dispatch(setAlert(res.data.msg, 'success'));
 	} catch (err) {
 		console.log(err);
 	}
@@ -121,6 +125,7 @@ export const createChore = (chore, courseId, type) => async (dispatch) => {
 		}
 
 		dispatch({ type: GET_INDIVIDUAL_COURSE, payload: res.data });
+		dispatch(setAlert(res.data.msg, 'success'));
 	} catch (err) {
 		console.log(err);
 	}
@@ -150,6 +155,7 @@ export const updateChore = (chore, courseId, choreId, type) => async (dispatch) 
 		}
 
 		dispatch({ type: GET_INDIVIDUAL_COURSE, payload: res.data });
+		dispatch(setAlert(res.data.msg, 'success'));
 	} catch (err) {
 		console.log(err);
 	}
@@ -195,6 +201,7 @@ export const updateChoreDoc =
 			}
 
 			dispatch({ type: GET_INDIVIDUAL_COURSE, payload: res.data });
+			dispatch(setAlert(res.data.msg, 'success'));
 		} catch (err) {
 			console.log(err);
 		}
@@ -213,6 +220,7 @@ export const createStudyMaterial = (studyMaterial, courseId) => async (dispatch)
 		const res = await axios.put(`/courses/material/${courseId}`, body, config);
 
 		dispatch({ type: GET_INDIVIDUAL_COURSE, payload: res.data });
+		dispatch(setAlert(res.data.msg, 'success'));
 	} catch (err) {
 		console.log(err);
 	}
@@ -231,6 +239,7 @@ export const updateStudyMaterial = (studyMaterial, courseId, noteId) => async (d
 		const res = await axios.put(`/courses/material/${courseId}/${noteId}`, body, config);
 
 		dispatch({ type: GET_INDIVIDUAL_COURSE, payload: res.data });
+		dispatch(setAlert(res.data.msg, 'success'));
 	} catch (err) {
 		console.log(err);
 	}
@@ -250,7 +259,11 @@ export const uploadDocument = (form) => async (dispatch) => {
 
 		dispatch({ type: UPLOAD_FILE, payload: res.data });
 	} catch (err) {
-		console.log(err);
+		const errors = err.response.data.errors;
+
+		errors.forEach((error) => {
+			dispatch(setAlert(error.msg, 'error'));
+		});
 	}
 };
 
@@ -289,8 +302,9 @@ export const updateCourse = (course, courseId) => async (dispatch) => {
 
 	try {
 		const res = await axios.put(`/courses/${courseId}`, body, config);
-		console.log(res);
-		// dispatch({ type: CREATE_COURSE_SUCCESS, payload: res.data });
+
+		dispatch({ type: GET_ACCOUNT, payload: res.data });
+		dispatch(setAlert(res.data.msg, 'success'));
 	} catch (err) {
 		console.log(err);
 	}

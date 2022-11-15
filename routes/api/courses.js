@@ -145,7 +145,15 @@ router.put(
 				{ new: true }
 			);
 
-			res.status(200).json({ msg: 'course updated', course });
+			const instructor = await Instructor.findById(req.account.id).populate(
+				'coursesIncharge.course'
+			);
+
+			res.status(200).json({
+				msg: 'course updated',
+				account: instructor,
+				type: req.account.type
+			});
 		} catch (err) {
 			if (err.kind === 'ObjectId') {
 				return res.status(404).json({ errors: [{ msg: 'course not found' }] });
@@ -289,7 +297,7 @@ router.put(
 				}
 			);
 
-			res.status(201).json({ msg: 'assignment doc updated', course });
+			res.status(201).json({ msg: 'assignment document updated', course });
 		} catch (err) {
 			res.status(500).json({ errors: [{ msg: 'server error' }] });
 		}
@@ -385,7 +393,7 @@ router.put(
 				{ new: true }
 			);
 
-			res.status(201).json({ msg: 'study material created', course });
+			res.status(201).json({ msg: 'notes created', course });
 		} catch (err) {
 			if (err.kind === 'ObjectId') {
 				return res.status(404).json({ errors: [{ msg: 'course not found' }] });
@@ -424,7 +432,7 @@ router.put(
 				{ new: true }
 			);
 
-			res.status(201).json({ msg: 'study material created', course });
+			res.status(201).json({ msg: 'study material updated', course });
 		} catch (err) {
 			if (err.kind === 'ObjectId') {
 				return res.status(404).json({ errors: [{ msg: 'course not found' }] });
@@ -474,7 +482,7 @@ router.put(
 				}
 			);
 
-			res.status(201).json({ msg: 'notes doc updated', course });
+			res.status(201).json({ msg: 'notes document updated', course });
 		} catch (err) {
 			res.status(500).json({ errors: [{ msg: 'server error' }] });
 		}
@@ -665,7 +673,7 @@ router.put(
 				}
 			);
 
-			res.status(201).json({ msg: 'notes doc updated', course });
+			res.status(201).json({ msg: 'project document updated', course });
 		} catch (err) {
 			res.status(500).json({ errors: [{ msg: 'server error' }] });
 		}

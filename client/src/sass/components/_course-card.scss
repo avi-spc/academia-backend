@@ -111,7 +111,7 @@
 	top: 5vh;
 	left: 50%;
 	transform: translateX(-50%);
-	z-index: 1000;
+	z-index: 5000;
 
 	& > div:not(:first-child) {
 		margin-top: 2rem;

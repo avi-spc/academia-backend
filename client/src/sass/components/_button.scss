@@ -97,23 +97,43 @@
 .btn-alternate {
 	font-family: 'Fredoka', sans-serif;
 
-	margin-top: 2rem;
-	padding: 3.3rem 0;
-	width: 100%;
-
 	color: $color-text-secondary;
 
-	background-color: $color-surface-primary;
+	background-color: $color-surface-secondary;
 	border-radius: $border-radius-medium;
 	border-style: none;
 
 	cursor: pointer;
 
 	&:hover {
-		background-color: $color-surface-secondary;
+		color: $color-text-primary;
 	}
 
 	span {
 		color: $color-text-secondary;
 	}
 }
+
+// .btn-alternate {
+// 	font-family: 'Fredoka', sans-serif;
+
+// 	margin-top: 2rem;
+// 	padding: 3.3rem 0;
+// 	width: 100%;
+
+// 	color: $color-text-secondary;
+
+// 	background-color: $color-surface-primary;
+// 	border-radius: $border-radius-medium;
+// 	border-style: none;
+
+// 	cursor: pointer;
+
+// 	&:hover {
+// 		background-color: $color-surface-secondary;
+// 	}
+
+// 	span {
+// 		color: $color-text-secondary;
+// 	}
+// }

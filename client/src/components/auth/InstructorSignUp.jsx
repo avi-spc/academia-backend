@@ -11,6 +11,7 @@ const InstructorSignUp = ({ register }) => {
 			<form className="sign-up__form--instructor" onSubmit={(e) => register(e, formData)}>
 				<input
 					type="email"
+					className="large-input"
 					name="email"
 					placeholder="email"
 					value={email}
@@ -23,6 +24,7 @@ const InstructorSignUp = ({ register }) => {
 					value={password}
 					onChange={onChange}
 				/>
+				<input type="text" placeholder="confirm password" />
 				<input
 					type="text"
 					name="name"
@@ -31,7 +33,7 @@ const InstructorSignUp = ({ register }) => {
 					onChange={onChange}
 				/>
 				<input type="text" placeholder="access code" />
-				<button className="btn btn--round-lg">Sign Up</button>
+				<button className="btn btn--round large-input">Sign Up</button>
 			</form>
 		</Fragment>
 	);

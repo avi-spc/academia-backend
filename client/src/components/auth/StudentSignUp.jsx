@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-
+import { Link } from 'react-router-dom';
 import { useForm } from '../../hooks/useForm';
 
 const StudentSignUp = ({ register }) => {
@@ -17,20 +17,22 @@ const StudentSignUp = ({ register }) => {
 					onChange={onChange}
 				/>
 				<input
-					type="password"
-					placeholder="password"
-					name="password"
-					value={password}
-					onChange={onChange}
-				/>
-				<input
 					type="text"
 					placeholder="name"
 					name="name"
 					value={name}
 					onChange={onChange}
 				/>
-				<button className="btn btn--round-lg">Sign Up</button>
+				<input
+					type="password"
+					className="large-input"
+					placeholder="password"
+					name="password"
+					value={password}
+					onChange={onChange}
+				/>
+				<input type="text" className="large-input" placeholder="confirm password" />
+				<button className="btn btn--round large-input">Sign Up</button>
 			</form>
 		</Fragment>
 	);

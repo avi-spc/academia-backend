@@ -1,14 +1,16 @@
 .sign-up,
 .sign-in {
-	display: grid;
-	grid-template-columns: 1fr;
-	justify-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: start;
 
-	padding: 8rem;
-	padding-bottom: 5rem;
+	padding: 6rem 8rem;
+
+	min-width: 70rem;
+	height: 100%;
 
 	background-color: $color-surface-secondary;
-	border-radius: $border-radius-extra-large;
+	border-radius: $border-radius-extra-large 0 0 $border-radius-extra-large;
 
 	.account-type-tabs {
 		display: grid;
@@ -16,33 +18,51 @@
 		grid-gap: 0 1rem;
 
 		text-align: center;
-		padding: 1rem;
-
-		background-color: $color-surface-primary;
-		border-radius: $border-radius-extra-large;
 
 		.tab {
 			padding: 2rem 3rem;
 
 			border-radius: $border-radius-large;
 			background-color: $color-surface-tertiary;
+			cursor: pointer;
+
+			&:hover {
+				background-color: $color-surface-primary;
+			}
+		}
+
+		.active-tab {
+			padding: 2rem 3rem;
+
+			color: $color-text-accent;
+			background-color: $color-accent-primary;
+			border-radius: $border-radius-large;
+			cursor: pointer;
+		}
+	}
+
+	a {
+		text-align: center;
+
+		button {
+			margin-top: 3rem;
 		}
 	}
 
 	form {
-		text-align: center;
-		margin: 5rem auto 0 auto;
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		grid-gap: 2rem;
 
-		input {
-			width: 100%;
+		margin-top: 5rem;
+		width: 100%;
 
-			&:not(:first-child) {
-				margin-top: 2rem;
-			}
+		.large-input {
+			grid-column: 1/-1;
 		}
 
-		button {
-			margin-top: 5rem;
+		& > button {
+			margin-top: 1rem;
 		}
 	}
 }
@@ -51,10 +71,32 @@
 	font-family: 'Raleway', sans-serif;
 	font-size: 4.8rem;
 
-	margin-bottom: 8rem;
+	margin-bottom: 5rem;
 
-	padding: 1rem 2.5rem 1.5rem 2.5rem;
+	padding-left: 1rem;
 	color: $color-text-primary;
-	background-color: $color-surface-quarternary;
-	border-radius: 10rem;
+}
+
+.auth-parent {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, max-content));
+	grid-template-rows: 83rem;
+
+	align-content: center;
+	justify-content: center;
+	align-items: center;
+
+	height: 100vh;
+	width: 100vw;
+	overflow: hidden;
+
+	border-radius: $border-radius-extra-large;
+
+	.side-image {
+		height: 100%;
+		max-width: 70rem;
+		object-fit: cover;
+
+		border-radius: 0 $border-radius-extra-large $border-radius-extra-large 0;
+	}
 }

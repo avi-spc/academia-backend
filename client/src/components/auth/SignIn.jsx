@@ -25,14 +25,20 @@ const SignIn = ({ loginAccount, auth: { isAuthenticated, loading } }) => {
 	const [accountType, setAccountType] = useState('student');
 
 	return (
-		<div className="container-small">
+		<div className="auth-parent">
 			<div className="sign-in">
 				<div className="logo">academia</div>
 				<div className="account-type-tabs text-medium-M">
-					<div className="tab" onClick={() => setAccountType('instructor')}>
+					<div
+						className={accountType === 'instructor' ? 'active-tab' : 'tab'}
+						onClick={() => setAccountType('instructor')}
+					>
 						Instructor
 					</div>
-					<div className="tab" onClick={() => setAccountType('student')}>
+					<div
+						className={accountType === 'student' ? 'active-tab' : 'tab'}
+						onClick={() => setAccountType('student')}
+					>
 						Student
 					</div>
 				</div>
@@ -41,12 +47,17 @@ const SignIn = ({ loginAccount, auth: { isAuthenticated, loading } }) => {
 				) : (
 					<InstructorSignIn login={login} />
 				)}
+				<Link to="/register">
+					<button className="btn-alternate text-normal-R">
+						Don't have an account? <span className="text-medium-SB">Sign Up</span>
+					</button>
+				</Link>
 			</div>
-			<Link to="/register">
-				<button className="btn-alternate text-medium-R">
-					Don't have an account? <span className="text-medium-SB">Sign Up</span>
-				</button>
-			</Link>
+			<img
+				src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/c25a4b4d-abf9-45fd-a5fb-87a7734647ce/df73ovd-847997c0-2c3f-416b-be10-8a3c9108fdb4.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2MyNWE0YjRkLWFiZjktNDVmZC1hNWZiLTg3YTc3MzQ2NDdjZVwvZGY3M292ZC04NDc5OTdjMC0yYzNmLTQxNmItYmUxMC04YTNjOTEwOGZkYjQucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.isWsyycF1rMzYkA0LFyEYtD2r4cRuCdbQAqKIMVbp0o"
+				className="side-image"
+				alt=""
+			/>
 		</div>
 	);
 };

@@ -10,7 +10,7 @@
 	height: 100%;
 
 	background-color: $color-surface-secondary;
-	border-radius: $border-radius-extra-large 0 0 $border-radius-extra-large;
+	border-radius: $border-radius-large 0 0 $border-radius-large;
 
 	.account-type-tabs {
 		display: grid;
@@ -97,6 +97,6 @@
 		max-width: 70rem;
 		object-fit: cover;
 
-		border-radius: 0 $border-radius-extra-large $border-radius-extra-large 0;
+		border-radius: 0 $border-radius-large $border-radius-large 0;
 	}
 }

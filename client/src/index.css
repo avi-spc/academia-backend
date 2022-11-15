@@ -149,7 +149,7 @@ button a {
   min-width: 70rem;
   height: 100%;
   background-color: #242424;
-  border-radius: 3rem 0 0 3rem; }
+  border-radius: 2.5rem 0 0 2.5rem; }
   .sign-up .account-type-tabs,
   .sign-in .account-type-tabs {
     display: grid;
@@ -214,7 +214,7 @@ button a {
     height: 100%;
     max-width: 70rem;
     object-fit: cover;
-    border-radius: 0 3rem 3rem 0; }
+    border-radius: 0 2.5rem 2.5rem 0; }
 
 .btn {
   font-family: 'Fredoka', sans-serif;

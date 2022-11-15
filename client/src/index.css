@@ -428,6 +428,37 @@ button a {
   align-items: center;
   background-color: rgba(0, 0, 0, 0.25); }
 
+.alerts-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  top: 5vh;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000; }
+  .alerts-group > div:not(:first-child) {
+    margin-top: 2rem; }
+
+.alert {
+  display: grid;
+  grid-template-columns: min-content max-content min-content;
+  grid-gap: 0 2rem;
+  justify-content: center;
+  align-items: center;
+  padding: 2.5rem;
+  border-radius: 2.5rem; }
+  .alert.error {
+    color: #c93b37;
+    background-color: #ff938b; }
+  .alert.success {
+    color: #347d39;
+    background-color: #8ddb8c; }
+  .alert__btn-close {
+    margin-left: 5rem;
+    justify-self: end;
+    cursor: pointer; }
+
 .create-course form .code {
   grid-column: 2 / span 2; }
 

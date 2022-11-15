@@ -10,6 +10,7 @@ import {
 	LOGOUT
 } from '../types';
 import { setAuthToken } from '../../utils/setAuthToken';
+import { setAlert } from './alert';
 
 export const registerAccount = (account, type) => async (dispatch) => {
 	const config = {
@@ -37,7 +38,12 @@ export const registerAccount = (account, type) => async (dispatch) => {
 		dispatch({ type: REGISTER_SUCCESS, payload: res.data });
 		dispatch(getAccount());
 	} catch (err) {
-		console.log(err);
+		const errors = err.response.data.errors;
+
+		errors.forEach((error) => {
+			dispatch(setAlert(error.msg, 'error'));
+		});
+
 		dispatch({ type: REGISTER_ERROR });
 	}
 };
@@ -86,7 +92,12 @@ export const loginAccount = (account, type) => async (dispatch) => {
 		dispatch({ type: LOGIN_SUCCESS, payload: res.data });
 		dispatch(getAccount());
 	} catch (err) {
-		console.log(err);
+		const errors = err.response.data.errors;
+
+		errors.forEach((error) => {
+			dispatch(setAlert(error.msg, 'error'));
+		});
+
 		dispatch({ type: LOGIN_ERROR });
 	}
 };

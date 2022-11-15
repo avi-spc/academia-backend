@@ -46,8 +46,8 @@ router.get('/', auth, async (req, res) => {
 router.post(
 	'/',
 	[
-		check('instituteId', 'id is required').not().isEmpty(),
-		check('password', 'password must be of 6 or more characters').not().isEmpty(),
+		check('instituteId', 'institute id is required').not().isEmpty(),
+		check('password', 'password must be of 6 or more characters').isLength({ min: 6 }),
 		check('name', 'name is required').not().isEmpty()
 	],
 	async (req, res) => {
@@ -96,7 +96,7 @@ router.post(
 router.post(
 	'/login',
 	[
-		check('instituteId', 'id is required').not().isEmpty(),
+		check('instituteId', 'institute id is required').not().isEmpty(),
 		check('password', 'password must be of 6 or more characters').not().isEmpty()
 	],
 	async (req, res) => {

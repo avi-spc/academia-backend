@@ -2,13 +2,28 @@ import { Fragment } from 'react';
 
 import { useForm } from '../../hooks/useForm';
 
-const InstructorSignUp = ({ register }) => {
-	const { formData, onChange } = useForm({ email: '', password: '', name: '' });
-	const { email, password, name } = formData;
+const InstructorSignUp = ({ register, setAlert }) => {
+	const { formData, onChange } = useForm({
+		email: '',
+		password: '',
+		name: '',
+		confirmPasswrod: ''
+	});
+	const { email, password, confirmPassword, name } = formData;
 
 	return (
 		<Fragment>
-			<form className="sign-up__form--instructor" onSubmit={(e) => register(e, formData)}>
+			<form
+				className="sign-up__form--instructor"
+				onSubmit={(e) => {
+					e.preventDefault();
+					if (password !== confirmPassword) {
+						return setAlert("passwords don't match", 'error');
+					}
+
+					register(e, formData);
+				}}
+			>
 				<input
 					type="email"
 					className="large-input"
@@ -24,7 +39,13 @@ const InstructorSignUp = ({ register }) => {
 					value={password}
 					onChange={onChange}
 				/>
-				<input type="text" placeholder="confirm password" />
+				<input
+					type="password"
+					placeholder="confirm password"
+					name="confirmPassword"
+					value={confirmPassword}
+					onChange={onChange}
+				/>
 				<input
 					type="text"
 					name="name"

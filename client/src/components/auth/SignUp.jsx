@@ -3,10 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { registerAccount } from '../../reduxStore/actions/auth';
+import { setAlert } from '../../reduxStore/actions/alert';
 import StudentSignUp from './StudentSignUp';
 import InstructorSignUp from './InstructorSignUp';
 
-const SignUp = ({ registerAccount, auth: { isAuthenticated, loading } }) => {
+const SignUp = ({ registerAccount, setAlert, auth: { isAuthenticated, loading } }) => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -42,9 +43,9 @@ const SignUp = ({ registerAccount, auth: { isAuthenticated, loading } }) => {
 					</div>
 				</div>
 				{accountType === 'student' ? (
-					<StudentSignUp register={register} />
+					<StudentSignUp register={register} setAlert={setAlert} />
 				) : (
-					<InstructorSignUp register={register} />
+					<InstructorSignUp register={register} setAlert={setAlert} />
 				)}
 				<Link to="/">
 					<button className="btn-alternate text-normal-R">
@@ -66,8 +67,4 @@ const mapStateToProps = (state) => ({
 	auth: state.auth
 });
 
-export default connect(mapStateToProps, { registerAccount })(SignUp);
-
-{
-	/*  */
-}
+export default connect(mapStateToProps, { registerAccount, setAlert })(SignUp);

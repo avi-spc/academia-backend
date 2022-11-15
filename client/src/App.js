@@ -19,6 +19,7 @@ import ProjectDocket from './components/course/ProjectDocket';
 import ChoreAssignment from './components/course/student/ChoreAssignment';
 import ChoreProject from './components/course/student/ChoreProject';
 import StudyMaterialDocket from './components/course/StudyMaterialDocket';
+import Alert from './components/Alert';
 
 const App = () => {
 	useEffect(() => {
@@ -29,6 +30,7 @@ const App = () => {
 		<div className="App">
 			<Provider store={store}>
 				<Router>
+					<Alert />
 					<Routes>
 						<Route path="/" element={<SignIn />} />
 						<Route path="/register" element={<SignUp />} />

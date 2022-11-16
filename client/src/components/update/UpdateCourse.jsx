@@ -5,10 +5,10 @@ import { toggleUpdatePopup } from '../../reduxStore/actions/popus';
 import { useForm } from '../../hooks/useForm';
 import { isEmpty } from '../../utils/validator';
 
-const CreateCourse = ({ updateCourse, toggleUpdatePopup, courseDetails }) => {
+const UpdateCourse = ({ updateCourse, toggleUpdatePopup, courseDetails }) => {
 	const { formData, onChange } = useForm({
 		code: courseDetails.code,
-		credits: courseDetails.credits,
+		credits: courseDetails.credits.toString(),
 		name: courseDetails.name
 	});
 	const { code, credits, name } = formData;
@@ -70,4 +70,4 @@ const CreateCourse = ({ updateCourse, toggleUpdatePopup, courseDetails }) => {
 
 const mapStateToProps = (state) => ({});
 
-export default connect(null, { updateCourse, toggleUpdatePopup })(CreateCourse);
+export default connect(null, { updateCourse, toggleUpdatePopup })(UpdateCourse);

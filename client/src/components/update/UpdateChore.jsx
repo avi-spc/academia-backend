@@ -4,12 +4,13 @@ import { toggleUpdatePopup } from '../../reduxStore/actions/popus';
 import { updateChore } from '../../reduxStore/actions/course';
 import { useForm } from '../../hooks/useForm';
 import { isEmpty } from '../../utils/validator';
+import { formatDate } from '../../utils/timestampFormatter';
 
-const CreateChore = ({ updateChore, toggleUpdatePopup, choreDetails, courseId, type }) => {
+const UpdateChore = ({ updateChore, toggleUpdatePopup, choreDetails, courseId, type }) => {
 	const { formData, onChange } = useForm({
 		title: choreDetails.title,
 		deadline: choreDetails.deadline,
-		maxMarks: choreDetails.maxMarks
+		maxMarks: choreDetails.maxMarks.toString()
 	});
 	const { title, deadline, maxMarks } = formData;
 
@@ -32,10 +33,10 @@ const CreateChore = ({ updateChore, toggleUpdatePopup, choreDetails, courseId, t
 					</div>
 					<label>Deadline</label>
 					<input
-						type="text"
+						type="date"
 						className="deadline"
 						name="deadline"
-						value={deadline}
+						value={formatDate(deadline)}
 						onChange={onChange}
 					/>
 					<label>Points</label>
@@ -73,4 +74,4 @@ const CreateChore = ({ updateChore, toggleUpdatePopup, choreDetails, courseId, t
 	);
 };
 
-export default connect(null, { updateChore, toggleUpdatePopup })(CreateChore);
+export default connect(null, { updateChore, toggleUpdatePopup })(UpdateChore);

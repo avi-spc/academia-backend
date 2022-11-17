@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../../utils/axiosInstance';
 
 import { GET_ACCOUNT, GET_PERFORMANCE, GET_STUDENTS } from '../types';
 import { setAlert } from './alert';

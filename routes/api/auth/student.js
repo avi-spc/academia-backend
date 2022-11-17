@@ -77,8 +77,14 @@ router.post(
 				}
 			};
 
-			jwt.sign(payload, config.get('jwtSecret'), { expiresIn: 360000 }, (err, token) =>
-				err ? res.json({ err }) : res.status(201).json({ msg: 'student created', token })
+			jwt.sign(
+				payload,
+				process.env.JWT_SECRET || config.get('jwtSecret'),
+				{ expiresIn: 360000 },
+				(err, token) =>
+					err
+						? res.json({ err })
+						: res.status(201).json({ msg: 'student created', token })
 			);
 		} catch (err) {
 			if (err.code === 11000 && 'instituteId' in err.keyPattern) {
@@ -125,8 +131,14 @@ router.post(
 				}
 			};
 
-			jwt.sign(payload, config.get('jwtSecret'), { expiresIn: 360000 }, (err, token) =>
-				err ? res.json({ err }) : res.status(201).json({ msg: 'student created', token })
+			jwt.sign(
+				payload,
+				process.env.JWT_SECRET || config.get('jwtSecret'),
+				{ expiresIn: 360000 },
+				(err, token) =>
+					err
+						? res.json({ err })
+						: res.status(201).json({ msg: 'student created', token })
 			);
 		} catch (err) {
 			res.status(500).json({ errors: [{ msg: 'server error' }] });

@@ -14,25 +14,27 @@ const Navbar = ({ logout, auth: { account } }) => {
 	}, [location]);
 
 	return (
-		<div className="navbar-parent">
-			<div className="navbar">
-				<Link to="/">
-					<div className="navbar__logo">academia</div>
-				</Link>
-				<div className="navbar__profile">
-					<span className="account-name text-medium-SB">{account.name}</span>
-					<div
-						className="navbar__account"
-						onClick={() => setShowProfileDropdown(!showProfileDropdown)}
-					></div>
-					{showProfileDropdown && (
-						<div className="navbar__logout text-medium-SB" onClick={logout}>
-							Logout
-						</div>
-					)}
+		account && (
+			<div className="navbar-parent">
+				<div className="navbar">
+					<Link to="/">
+						<div className="navbar__logo">academia</div>
+					</Link>
+					<div className="navbar__profile">
+						<span className="account-name text-medium-SB">{account.name}</span>
+						<div
+							className="navbar__account"
+							onClick={() => setShowProfileDropdown(!showProfileDropdown)}
+						></div>
+						{showProfileDropdown && (
+							<div className="navbar__logout text-medium-SB" onClick={logout}>
+								Logout
+							</div>
+						)}
+					</div>
 				</div>
 			</div>
-		</div>
+		)
 	);
 };
 

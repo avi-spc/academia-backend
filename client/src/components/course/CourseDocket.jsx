@@ -14,10 +14,10 @@ const CourseDocket = ({ togglePopup, getPerformance, popup, auth: { account } })
 	const [courseDetails, setCourseDetails] = useState(null);
 
 	useEffect(() => {
-		if (account.type === 'student') {
+		if (account && account.type === 'student') {
 			getPerformance();
 		}
-	}, []);
+	}, [account]);
 
 	return (
 		account && (

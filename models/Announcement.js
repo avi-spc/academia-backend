@@ -6,14 +6,19 @@ const AnnouncementSchema = new mongoose.Schema({
 	},
 	announcements: [
 		{
-			title: {
-				type: String,
-				required: true
-			},
-			message: {
-				type: String,
-				required: true
-			}
+			type: new mongoose.Schema(
+				{
+					title: {
+						type: String,
+						required: true
+					},
+					message: {
+						type: String,
+						required: true
+					}
+				},
+				{ timestamps: true }
+			)
 		}
 	]
 });

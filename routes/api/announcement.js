@@ -71,7 +71,7 @@ router.put(
 					course: req.params.course_id,
 					announcements: { $elemMatch: { _id: req.params.announcement_id } }
 				},
-				{ $set: { 'announcements.$': { title, message } } },
+				{ $set: { 'announcements.$.title': title, 'announcements.$.message': message } },
 				{ new: true }
 			);
 
@@ -80,6 +80,8 @@ router.put(
 			if (err.kind === 'ObjectId') {
 				return res.status(404).json({ errors: [{ msg: 'course not found' }] });
 			}
+
+			console.log(err);
 
 			res.status(500).json({ errors: [{ msg: 'server error' }] });
 		}
